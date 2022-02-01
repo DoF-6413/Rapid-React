@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 import edu.wpi.first.wpilibj2.command.*;
+import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,8 +30,14 @@ public class RobotContainer {
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick (Constants.secondaryJoystickPort);
 
+  public Joystick LeftStick;
+  public Joystick RightStick;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+ 
+
     // Configure the button bindings
     configureButtonBindings();
     m_drivetrainSubsystem.setDefaultCommand(
@@ -55,6 +62,8 @@ public class RobotContainer {
    
     
   }
+
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
