@@ -18,5 +18,8 @@ public final class Constants {
     public static int secondaryJoystickPort = 1;
     // defining axis
     public static int joystickAxis = 2;
+
+    public static int[] rightDeviceID = new int[]{0, 1, 2}; //CAN ID configured using Spark MAX Client
+    public static int[] leftDeviceID = new int[]{3, 4, 5}; 
     
 }

@@ -25,7 +25,8 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    public final Drivetrain m_drivetrainSubsystem = 
+    final Drivetrain m_drivetrainSubsystem = new Drivetrain();
+    final DrivetrainCommand m_drivetrainCommand = new DrivetrainCommand(m_drivetrainSubsystem);
     // Configure the button bindings
     configureButtonBindings();
 
