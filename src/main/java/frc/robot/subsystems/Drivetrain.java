@@ -6,9 +6,10 @@ public class Drivetrain extends SubsystemBase {
     public Drivetrain() { 
     
     }
-    public void printStatus() {
-        System.out.println("tanisha said pineapples are crazy"); 
-
+    public void printStatus(double leftStickValues)  
+    {
+        System.out.println(leftStickValues); 
+    
     }
 }
 
