@@ -25,8 +25,10 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    public final Drivetrain m_drivetrainSubsystem = 
     // Configure the button bindings
     configureButtonBindings();
+
   }
 
   /**
@@ -36,8 +38,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    Joystick LeftStick = new Joystick(0);
-    Joystick RightStick = new Joystick (1);
+    Joystick LeftStick = new Joystick(Constants.initialJoystickPort);
+    Joystick RightStick = new Joystick (Constants.secondaryJoystickPort);
     System.out.println(LeftStick);
     System.out.println(RightStick);
   }
