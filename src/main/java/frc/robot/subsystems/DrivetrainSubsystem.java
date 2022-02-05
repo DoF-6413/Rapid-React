@@ -10,7 +10,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
-public class Drivetrain extends SubsystemBase {
+public class DrivetrainSubsystem extends SubsystemBase {
 
     //Declare left motors
     private CANSparkMax leftLead;
@@ -24,27 +24,26 @@ public class Drivetrain extends SubsystemBase {
   
     private DifferentialDrive diffDrive;
 
-    public Drivetrain() { 
+    public DrivetrainSubsystem() { 
         //Initializes left motors in default constructor
         leftLead = new CANSparkMax(Constants.leftDeviceID[0], MotorType.kBrushless);
         leftFollow1 = new CANSparkMax(Constants.leftDeviceID[1], MotorType.kBrushless);
         leftFollow2 = new CANSparkMax(Constants.leftDeviceID[2], MotorType.kBrushless);
         
         //Initializes left motors in default constructor
-        rightLead = new CANSparkMax(Constants.leftDeviceID[0], MotorType.kBrushless);
-        rightFollow1 = new CANSparkMax(Constants.leftDeviceID[1], MotorType.kBrushless);
-        rightFollow2 = new CANSparkMax(Constants.leftDeviceID[2], MotorType.kBrushless);
+        rightLead = new CANSparkMax(Constants.rightDeviceID[0], MotorType.kBrushless);
+        rightFollow1 = new CANSparkMax(Constants.rightDeviceID[1], MotorType.kBrushless);
+        rightFollow2 = new CANSparkMax(Constants.rightDeviceID[2], MotorType.kBrushless);
 
         //Set left follow motors
         leftFollow1.follow(leftLead);
         leftFollow2.follow(leftLead);
 
         //WPI assumes that the left and right are opposite, this allows the motors to both move forward when applying positive output
-        //rightLead.setInverted(false);
+        rightLead.setInverted(true);
         //Set right follow motors
         rightFollow1.follow(rightLead);
         rightFollow2.follow(rightLead);
-
         diffDrive = new DifferentialDrive(leftLead, rightLead);
     }
 
@@ -54,15 +53,16 @@ public class Drivetrain extends SubsystemBase {
      * @param rightStick  Value from -1.0 to 1.0 representing the right rate
      */
     public void setRaw(double leftStick, double rightStick) {
-
-        diffDrive.tankDrive(-leftStick, -rightStick);
+        System.out.println("Joystick Left input = " + leftStick);
+        System.out.println("Joystick Right input = " + rightStick); 
+        diffDrive.tankDrive(leftStick, rightStick);
     }
     //diffDrive.tankDrive(-leftStick.getY(), -rightStick.getY());
     //parameters to pass into setRaw method
 
-    public void printStatus() {
-        System.out.println("tanisha said pineapples are crazy"); 
-
+    public void printStatus(Double joystickLeftInput, Double joystickRightInput) {
+        System.out.println("Joystick Left input = " + joystickLeftInput);
+        System.out.println("Joystick Right input = " + joystickRightInput); 
     }
 
 }
