@@ -14,12 +14,15 @@ package frc.robot;
  */
 public final class Constants {
     // defining joystick ports
-    public static int initialJoystickPort = 0;
-    public static int secondaryJoystickPort = 1;
+    final public static int initialJoystickPort = 0;
+    final public static int secondaryJoystickPort = 1;
     // defining axis
-    public static int joystickAxis = 1;
+    final public static int joystickAxis = 1;
 
-    public static int[] leftDeviceID = new int[]{1, 2, 3}; //CAN ID configured using Spark MAX Client
-    public static int[] rightDeviceID = new int[]{4, 5, 6}; 
-    
+    final public static int[] leftDeviceID = new int[]{1, 2, 3}; //CAN ID configured using Spark MAX Client
+    final public static int[] rightDeviceID = new int[]{4, 5, 6}; 
+
+    //encoder values
+    final public static int wheelDiameter = 4; 
+    final public static double tick2feet = 1.0/42 * 4 * Math.PI / 12;
 }

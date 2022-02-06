@@ -52,6 +52,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightFollow1.follow(rightLead);
         rightFollow2.follow(rightLead);
         diffDrive = new DifferentialDrive(leftLead, rightLead);
+        encoderLeftLead.setPositionConversionFactor(Constants.tick2feet);
+        encoderRightLead.setPositionConversionFactor(Constants.tick2feet);
     }
 
      /**
