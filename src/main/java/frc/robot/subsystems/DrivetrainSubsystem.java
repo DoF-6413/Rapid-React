@@ -11,7 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
@@ -70,10 +70,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
     //diffDrive.tankDrive(-leftStick.getY(), -rightStick.getY());
     //parameters to pass into setRaw method
 
-    public void printStatus(Double joystickLeftInput, Double joystickRightInput) {
-        System.out.println("Joystick Left input = " + joystickLeftInput);
-        System.out.println("Joystick Right input = " + joystickRightInput); 
-    }
+     public void printStatus(Double joystickLeftInput, Double joystickRightInput) {
+        SmartDashboard.putNumber("Joystick Left input = ", joystickLeftInput);
+         SmartDashboard.putNumber("Joystick Right input = ", joystickRightInput); 
+     }
     public void printEncoderStatus() {
         SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
         SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition()); 
