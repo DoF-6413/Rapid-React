@@ -33,8 +33,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    System.out.println("leftStick" + m_leftStick.getRawAxis(Constants.joystickAxis));
-   
     m_drivetrainSubsystem.setDefaultCommand(
     new RunCommand(()-> 
     m_drivetrainSubsystem.setRaw(m_leftStick.getRawAxis(Constants.joystickAxis), m_rightStick.getRawAxis(Constants.joystickAxis)), m_drivetrainSubsystem

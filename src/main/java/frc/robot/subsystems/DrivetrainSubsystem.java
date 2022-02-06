@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import com.revrobotics.RelativeEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
@@ -16,12 +19,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private CANSparkMax leftLead;
     private CANSparkMax leftFollow1;
     private CANSparkMax leftFollow2;
-  
+    // Encoder left lead is used for values on the left side of the robot because they are all connected 
+  private RelativeEncoder encoderLeftLead;
     //Declare right motors
     private CANSparkMax rightLead;
     private CANSparkMax rightFollow1;
     private CANSparkMax rightFollow2;
-  
+    // Encoder right lead is used for values on the right side of the robot because they are all connected 
+  private RelativeEncoder encoderRightLead;
     private DifferentialDrive diffDrive;
 
     public DrivetrainSubsystem() { 
@@ -29,12 +34,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
         leftLead = new CANSparkMax(Constants.leftDeviceID[0], MotorType.kBrushless);
         leftFollow1 = new CANSparkMax(Constants.leftDeviceID[1], MotorType.kBrushless);
         leftFollow2 = new CANSparkMax(Constants.leftDeviceID[2], MotorType.kBrushless);
+
+        encoderLeftLead = leftLead.getEncoder();
         
         //Initializes left motors in default constructor
         rightLead = new CANSparkMax(Constants.rightDeviceID[0], MotorType.kBrushless);
         rightFollow1 = new CANSparkMax(Constants.rightDeviceID[1], MotorType.kBrushless);
         rightFollow2 = new CANSparkMax(Constants.rightDeviceID[2], MotorType.kBrushless);
-
+        encoderRightLead = rightLead.getEncoder();
         //Set left follow motors
         leftFollow1.follow(leftLead);
         leftFollow2.follow(leftLead);
@@ -56,6 +63,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         System.out.println("Joystick Left input = " + leftStick);
         System.out.println("Joystick Right input = " + rightStick); 
         diffDrive.tankDrive(leftStick, rightStick);
+        printEncoderStatus();
     }
     //diffDrive.tankDrive(-leftStick.getY(), -rightStick.getY());
     //parameters to pass into setRaw method
@@ -63,6 +71,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public void printStatus(Double joystickLeftInput, Double joystickRightInput) {
         System.out.println("Joystick Left input = " + joystickLeftInput);
         System.out.println("Joystick Right input = " + joystickRightInput); 
+    }
+    public void printEncoderStatus() {
+        SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
+        SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition()); 
     }
 
 }
