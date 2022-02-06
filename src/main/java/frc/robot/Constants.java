@@ -24,5 +24,5 @@ public final class Constants {
 
     //encoder values
     final public static int wheelDiameter = 4; 
-    final public static double tick2feet = 1.0/42 * 4 * Math.PI / 12;
+    final public static double tick2feet = 1.0/42. * 4. * 6.11 * Math.PI / 12.;
 }
