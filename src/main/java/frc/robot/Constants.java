@@ -23,6 +23,6 @@ public final class Constants {
     final public static int[] rightDeviceID = new int[]{4, 5, 6}; 
 
     //encoder values
-    final public static int wheelDiameter = 4; 
-    final public static double tick2feet = 1.0/42. * 4. * 6.11 * Math.PI / 12.;
+    final public static double wheelDiameter = 4.; 
+    final public static double tick2feet = 1.0/42. * wheelDiameter * 6.11 * Math.PI / 12.;
 }

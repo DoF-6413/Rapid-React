@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //CANSPark imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,13 +22,18 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private CANSparkMax leftFollow1;
     private CANSparkMax leftFollow2;
     // Encoder left lead is used for values on the left side of the robot because they are all connected 
-  private RelativeEncoder encoderLeftLead;
     //Declare right motors
     private CANSparkMax rightLead;
     private CANSparkMax rightFollow1;
     private CANSparkMax rightFollow2;
     // Encoder right lead is used for values on the right side of the robot because they are all connected 
-  private RelativeEncoder encoderRightLead;
+    
+    private RelativeEncoder encoderLeftLead;
+    private RelativeEncoder encoderRightLead;
+
+    private SparkMaxPIDController LeftPidController;
+    private SparkMaxPIDController RightPidController;
+
     private DifferentialDrive diffDrive;
 
     public DrivetrainSubsystem() { 
@@ -34,14 +41,18 @@ public class DrivetrainSubsystem extends SubsystemBase {
         leftLead = new CANSparkMax(Constants.leftDeviceID[0], MotorType.kBrushless);
         leftFollow1 = new CANSparkMax(Constants.leftDeviceID[1], MotorType.kBrushless);
         leftFollow2 = new CANSparkMax(Constants.leftDeviceID[2], MotorType.kBrushless);
-
+        
         encoderLeftLead = leftLead.getEncoder();
+        LeftPidController = leftLead.getPIDController();
         
         //Initializes left motors in default constructor
         rightLead = new CANSparkMax(Constants.rightDeviceID[0], MotorType.kBrushless);
         rightFollow1 = new CANSparkMax(Constants.rightDeviceID[1], MotorType.kBrushless);
         rightFollow2 = new CANSparkMax(Constants.rightDeviceID[2], MotorType.kBrushless);
+       
         encoderRightLead = rightLead.getEncoder();
+        RightPidController = leftLead.getPIDController();
+
         //Set left follow motors
         leftFollow1.follow(leftLead);
         leftFollow2.follow(leftLead);
@@ -56,6 +67,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         //Coverts Tics to Feet for Encoder Readout
         encoderLeftLead.setPositionConversionFactor(Constants.tick2feet);
         encoderRightLead.setPositionConversionFactor(Constants.tick2feet);
+            
     }
 
      /**
