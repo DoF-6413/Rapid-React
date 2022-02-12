@@ -29,10 +29,6 @@ public final class Constants {
 
     final public static int[] intakeDeviceID = new int []{8, 9, 10}; // Intake Motors, Number 8 and 10 for Arm, 9 for IntakeSpin
 
-    //encoder values
-    final public static int wheelDiameter = 4; 
-    final public static double tick2feet = 1.0/42. * 4. * 6.11 * Math.PI / 12.;
-
     //Assigned to Left Joystick Trigger
     final public static int intakeTrigger = 1;
 
@@ -46,4 +42,10 @@ public final class Constants {
     final public static int xboxB = 2;
     final public static int xboxX = 3;
     final public static int xboxY = 4;
+    final public static double wheelDiameter = 4.; 
+    final public static double tick2feet = 1.0/42. * wheelDiameter * 6.11 * Math.PI / 12.;
+
+    //CAn ID for Shooter
+    final public static int shooterID = 7;
+    final public static int shooterButton = 4;
 }

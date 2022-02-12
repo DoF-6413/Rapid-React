@@ -14,7 +14,6 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
 public class DrivetrainSubsystem extends SubsystemBase {
 
     //Declare left motors
