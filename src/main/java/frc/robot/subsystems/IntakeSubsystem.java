@@ -9,28 +9,20 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-    private CANSparkMax actuator;
-    private CANSparkMax leadSpinner;
-    private CANSparkMax followmotor;
+    private CANSparkMax actuator1;
+    private CANSparkMax actuator2;
+    private CANSparkMax spinner;
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+    //Initializing intake motors
     public IntakeSubsystem() {
-      actuator =new CANSparMax(constants.)   
+      actuator1 = new CANSparkMax(Constants.actuator1Port, MotorType.kBrushless);   
+      actuator2 = new CANSparkMax(Constants.actuator2Port, MotorType.kBrushless);
+      spinner = new CANSparkMax(Constants.spinner, MotorType.kBrushless);
 
 
 
@@ -42,5 +34,14 @@ public class IntakeSubsystem extends SubsystemBase {
 
     }
 
-}
+
+    public void print() {
+      System.out.println("Button Pressed Input");
+
+
+    }
+
+
+
+  }
 

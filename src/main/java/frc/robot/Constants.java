@@ -25,4 +25,14 @@ public final class Constants {
     //encoder values
     final public static int wheelDiameter = 4; 
     final public static double tick2feet = 1.0/42. * 4. * 6.11 * Math.PI / 12.;
+
+    //defining Intake ports and motor
+    //Not finalized
+    public static final int actuator1Port = 4; 
+    public static final int actuator2Port = 4; 
+    public static final int spinner = 4;
+
+    public static final int intakeButton = 3;
+
+
 }
