@@ -64,8 +64,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
      * @param rightStick  Value from -1.0 to 1.0 representing the right rate
      */
     public void setRaw(double leftStick, double rightStick) {
-        System.out.println("Joystick Left input = " + leftStick);
-        System.out.println("Joystick Right input = " + rightStick); 
         diffDrive.tankDrive(leftStick, rightStick);
         printEncoderStatus();
     }

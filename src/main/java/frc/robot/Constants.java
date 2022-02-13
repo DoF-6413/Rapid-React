@@ -22,17 +22,14 @@ public final class Constants {
     final public static int[] leftDeviceID = new int[]{1, 2, 3}; //CAN ID configured using Spark MAX Client
     final public static int[] rightDeviceID = new int[]{4, 5, 6}; 
 
+    final public static int[] intakeDeviceID = new int []{8, 9, 10}; // Intake Motors, Number 8 and 10 for Arm, 9 for IntakeSpin
+
     //encoder values
     final public static int wheelDiameter = 4; 
     final public static double tick2feet = 1.0/42. * 4. * 6.11 * Math.PI / 12.;
 
-    //defining Intake ports and motor
-    //Not finalized
-    public static final int actuator1Port = 4; 
-    public static final int actuator2Port = 4; 
-    public static final int spinner = 4;
-
-    public static final int intakeButton = 3;
+    //Assigned to Left Joystick Trigger
+    final public static int intakeTrigger = 1;
 
 
 }

@@ -7,10 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutoCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -27,7 +25,6 @@ import edu.wpi.first.wpilibj.DriverStation;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   private final AutoCommand m_autoCommand = new AutoCommand();
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
@@ -46,16 +43,17 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
+    //Sets deafault Drivetrain for Subsystem
     m_drivetrainSubsystem.setDefaultCommand(
     new RunCommand(()-> 
     m_drivetrainSubsystem.setRaw(m_leftStick.getRawAxis(Constants.joystickAxis), m_rightStick.getRawAxis(Constants.joystickAxis)), m_drivetrainSubsystem
     )
     );
     
-
-    JoystickButton intakeButton = new JoystickButton(m_rightStick, Constants.intakeButton);
-    intakeButton.whenActive(()-> m_intakeSubsystem.print());
-   
+//Runs Intake Motors when Left Trgger is Pressed
+    JoystickButton intakeTrigger = new JoystickButton(m_leftStick, Constants.intakeTrigger); //Definies Joystick Button
+    intakeTrigger.whenHeld(new RunCommand(() -> m_intakeSubsystem.spinMotor())); //When button is pressed intake motor spins
+    intakeTrigger.whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor())); //When button is released motor stops
   }
 
 

@@ -3,45 +3,42 @@ import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-//CANSPark imports
+//CANSpark imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-    private CANSparkMax actuator1;
-    private CANSparkMax actuator2;
-    private CANSparkMax spinner;
-
-
-
+  //Defines Intake Motor Variables
+  //Uncomment intake Acuators when we write that code
+    //private CANSparkMax intakeActuatorLead;
+    //private CANSparkMax intakeActuatorFollow;
+    private CANSparkMax intakeSpinner;
 
 
 
     //Initializing intake motors
+    //Defining what each inake motor is and their ID's
     public IntakeSubsystem() {
-      actuator1 = new CANSparkMax(Constants.actuator1Port, MotorType.kBrushless);   
-      actuator2 = new CANSparkMax(Constants.actuator2Port, MotorType.kBrushless);
-      spinner = new CANSparkMax(Constants.spinner, MotorType.kBrushless);
-
-
-
-
-
-
-
-
+      //Defines motors used for dropping and raising intake system (arms);uncomment when we write code for Acuators
+      //intakeActuatorLead = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);   
+      //intakeActuatorFollow = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
+      intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
 
     }
 
+//Spins Intake Motor
+  public void spinMotor(){
 
-    public void print() {
-      System.out.println("Button Pressed Input");
+    intakeSpinner.set(0.1); // runs the motor at 10% power
 
+}
+//Stops Intake Motor
+public void stopMotor(){
 
-    }
+  intakeSpinner.set(0) ; //stops the motor (puts it at 0% power)
 
+}
 
-
-  }
-
+// TODO: Create a function that moves the aucuator 90 degrees to drop intake system
+}
