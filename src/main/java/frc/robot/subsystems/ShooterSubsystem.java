@@ -52,7 +52,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void spinMotor(){
 
-      motor.set(TalonFXControlMode.PercentOutput, 0.5) ; // runs the motor at 50% power
+      motor.set(TalonFXControlMode.PercentOutput, 0.25) ; // runs the motor at 25% power
 
   }
 
