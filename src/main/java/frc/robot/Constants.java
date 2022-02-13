@@ -47,5 +47,5 @@ public final class Constants {
 
     //CAn ID for Shooter
     final public static int shooterID = 7;
-    final public static int shooterButton = 4;
+    final public static int shooterButton = 1;
 }
