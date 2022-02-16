@@ -48,4 +48,6 @@ public final class Constants {
     //CAn ID for Shooter
     final public static int shooterID = 7;
     final public static int shooterButton = 1;
+
+    //final public static double FalconTurnsPerRotation = 3600;
 }

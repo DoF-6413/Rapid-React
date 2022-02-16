@@ -27,7 +27,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
 //  System.out.println(motor.getSelectedSensorPosition()); // prints the position of the selected sensor
-//  System.out.println(motor.getSelectedSensorVelocity()); // prints the velocity recorded by the selected sensor
+//  ; // prints the velocity recorded by the selected sensor
 //  System.out.println(motor.getMotorOutputPercent()); // prints the percent output of the motor (0.5)
 //  System.out.println(motor.getStatorCurrent()); // prints the output current of the motor
 
@@ -41,7 +41,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-  
+    System.out.println(motor.getSelectedSensorVelocity());
     // This method will be called once per scheduler run
   }
 
