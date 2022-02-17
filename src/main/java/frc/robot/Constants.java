@@ -31,5 +31,7 @@ public final class Constants {
     //Assigned to Left Joystick Trigger
     final public static int intakeTrigger = 1;
 
+    //Sets Intake Speed (Currently 50%)
+    final public static double intakeSpeed = 0.5;
 
 }
