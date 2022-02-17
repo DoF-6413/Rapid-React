@@ -31,7 +31,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     // private SparkMaxPIDController RightPidController;
 
     private DifferentialDrive diffDrive;
-
     public DrivetrainSubsystem() { 
         //Initializes left motors in default constructor
         leftLead = new CANSparkMax(Constants.leftDeviceID[0], MotorType.kBrushless);
