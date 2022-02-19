@@ -4,14 +4,10 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-//inputs for Limit Switch
-import edu.wpi.first.wpilibj.DigitalSource;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 //CANSpark imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.RelativeEncoder;
 
 public class IntakeSubsystem extends SubsystemBase {
 
@@ -21,36 +17,18 @@ public class IntakeSubsystem extends SubsystemBase {
     private CANSparkMax intakeRightActuator;
     private CANSparkMax intakeSpinner;
 
-  //Defines Encoders for Actuator Motors
-  private RelativeEncoder leftActuatorEncoder;
-  private RelativeEncoder rightActuatorEncoder;
 
-  //Defines Limit Switches
-  private DigitalInput input;
 
     //Initializing intake motors
     //Defining what each inake motor is and their ID's
     public IntakeSubsystem() {
+      intakeRightActuator.follow(intakeLeftActuator);
       //Defines motors used for dropping and raising intake system (arms);uncomment when we write code for Acuators
       //intakeActuatorLead = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);   
       //intakeActuatorFollow = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
       intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
       intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless) ;
       intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless) ;
-
-      //Sets Intake Acuator Encoders to read Values from the Speed Controllers
-      leftActuatorEncoder = intakeLeftActuator.getEncoder();
-      rightActuatorEncoder = intakeRightActuator.getEncoder();
-
-      //GO CRAZY (Bannanas)
-      rightActuatorEncoder.getPosition();
-      leftActuatorEncoder.getPosition();
-
-      //Displays Actuator Encoder Positions 
-      SmartDashboard.putNumber("Left Actuator Encoder", leftActuatorEncoder.getPosition());
-      SmartDashboard.putNumber("Right Actuator Encoder", rightActuatorEncoder.getPosition());
-
-      input = new DigitalInput(0);
     }
 
 //Spins Intake Motor
@@ -67,17 +45,8 @@ public void stopMotor(){
 }
 
 public void setOrigin(){
-  if (input.get()){
-    // lock into up position
-    intakeLeftActuator.set(0);
-    intakeRightActuator.set(0);
-    leftActuatorEncoder.setPosition(0);
-    rightActuatorEncoder.setPosition(0);
-  }else{
-    // slowely move up
-    intakeLeftActuator.set(0.1);
-    intakeRightActuator.set(-0.1);
-  }
+  intakeLeftActuator.set(Constants.slowSpeed);
+  
 }
 // TODO: Create a function that moves the aucuator 90 degrees to drop intake system
 }

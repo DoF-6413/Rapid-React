@@ -34,4 +34,5 @@ public final class Constants {
     //Sets Intake Speed (Currently 50%)
     final public static double intakeSpeed = 0.5;
 
+    final public static double slowSpeed = 0.1;
 }
