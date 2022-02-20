@@ -52,5 +52,11 @@ public final class Constants {
     //final public static double FalconTurnsPerRotation = 3600;
 
     //Sets shooter speed (Currently 10%)
-    final public static double shooterSpeed = 0.10;
+    final public static double shooterSpeed = .90;
+
+    //Falcon 500 RPM Equation
+    final public static double velocityToRPM(double velocity)
+    {
+        return velocity*600/2048;
+    }
 }

@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Talon FX Imports
 import com.ctre.phoenix.motorcontrol.can.*;
@@ -43,8 +44,12 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
     System.out.println(leftShooterMotor.getSelectedSensorVelocity());
     System.out.println(rightShooterMotor.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("Right RPM= ", rightShooterMotor.getSelectedSensorVelocity()*600/2048);
+    SmartDashboard.putNumber("Left RPM= ", leftShooterMotor.getSelectedSensorVelocity()*600/2048);
     // This method will be called once per scheduler run
   }
+
+  //rpm = velocity*600/2048
 
   @Override
   public void simulationPeriodic() {
