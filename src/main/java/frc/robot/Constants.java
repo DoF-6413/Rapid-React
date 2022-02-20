@@ -46,8 +46,11 @@ public final class Constants {
     final public static double tick2feet = 1.0/42. * wheelDiameter * 6.11 * Math.PI / 12.;
 
     //CAn ID for Shooter
-    final public static int shooterID = 7;
+    final public static int[] shooterID = new int[]{7, 11};
     final public static int shooterButton = 1;
 
     //final public static double FalconTurnsPerRotation = 3600;
+
+    //Sets shooter speed (Currently 10%)
+    final public static double shooterSpeed = 0.10;
 }

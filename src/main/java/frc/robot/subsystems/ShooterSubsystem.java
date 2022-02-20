@@ -20,8 +20,8 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 public class ShooterSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   // Example usage of a TalonFX motor controller
- TalonFX motor = new TalonFX(Constants.shooterID); // creates a new TalonFX with ID 0
-
+ TalonFX leftShooterMotor = new TalonFX(Constants.shooterID[0]); // creates a new TalonFX with ID 0
+ TalonFX rightShooterMotor = new TalonFX(Constants.shooterID[1]);
 
 
 
@@ -41,7 +41,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println(motor.getSelectedSensorVelocity());
+    System.out.println(leftShooterMotor.getSelectedSensorVelocity());
+    System.out.println(rightShooterMotor.getSelectedSensorVelocity());
     // This method will be called once per scheduler run
   }
 
@@ -51,14 +52,13 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void spinMotor(){
-
-      motor.set(TalonFXControlMode.PercentOutput, 0.25) ; // runs the motor at 25% power
-
+      leftShooterMotor.set(TalonFXControlMode.PercentOutput, Constants.shooterSpeed) ; // runs the motor at 25% power
+      rightShooterMotor.set(TalonFXControlMode.PercentOutput, -Constants.shooterSpeed) ;
   }
 
   public void stopMotor(){
-
-    motor.set(TalonFXControlMode.PercentOutput, 0) ; // runs the motor at 0% power
+    leftShooterMotor.set(TalonFXControlMode.PercentOutput, 0) ; // runs the motor at 0% power
+    rightShooterMotor.set(TalonFXControlMode.PercentOutput, 0) ; // runs the motor at 0% power
 
 }
 
