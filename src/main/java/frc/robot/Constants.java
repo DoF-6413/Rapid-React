@@ -16,7 +16,8 @@ public final class Constants {
     // defining joystick ports
     final public static int initialJoystickPort = 0;
     final public static int secondaryJoystickPort = 1;
-    //
+    //defining xbox port
+    final public static int xboxPort = 2;
     // defining axis
     final public static int joystickAxis = 1;
 
