@@ -33,6 +33,9 @@ public class RobotContainer {
   public Joystick LeftStick;
   public Joystick RightStick;
 
+  // XBOX Contoller Defs (For intake and Climber)
+
+
   //Intake Subsystem
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
 

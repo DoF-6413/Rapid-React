@@ -16,6 +16,7 @@ public final class Constants {
     // defining joystick ports
     final public static int initialJoystickPort = 0;
     final public static int secondaryJoystickPort = 1;
+    //
     // defining axis
     final public static int joystickAxis = 1;
 
@@ -35,4 +36,5 @@ public final class Constants {
     final public static double intakeSpeed = 0.5;
 
     final public static double slowSpeed = 0.1;
+
 }

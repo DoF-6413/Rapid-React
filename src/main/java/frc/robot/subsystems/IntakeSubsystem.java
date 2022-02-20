@@ -46,7 +46,13 @@ public void stopMotor(){
 
 public void setOrigin(){
   intakeLeftActuator.set(Constants.slowSpeed);
+  intakeRightActuator.set(-Constants.slowSpeed);
   
+}
+
+public void goDown(){
+  intakeLeftActuator.set(-Constants.slowSpeed);
+  intakeRightActuator.set(Constants.slowSpeed);
 }
 // TODO: Create a function that moves the aucuator 90 degrees to drop intake system
 }
