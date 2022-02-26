@@ -33,6 +33,7 @@ public class RobotContainer {
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
 
+  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem);
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
   public XboxController m_xbox = new XboxController(Constants.xboxPort);
@@ -113,9 +114,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  // public Command getAutonomousCommand() {
-  // // An ExampleCommand will run in autonomous
-  // // new AutoCommand(DrivetrainSubsystem, 5);
-  // return m_autoCommand;
-  // }
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+   // new AutoCommand(DrivetrainSubsystem, 5);
+    return m_autoCommand;
+  }
 }
