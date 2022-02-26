@@ -71,4 +71,7 @@ public final class Constants {
     
     final public static double kShooterTolerance = 1.0;
     final public static double kShooterDerivativeTolerance = 0.01;
+    // auto values
+    // units in feet
+    final public static double moveDistanceFromTarmac = 5; 
 }

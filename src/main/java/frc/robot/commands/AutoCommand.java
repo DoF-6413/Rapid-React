@@ -14,17 +14,13 @@ import pabeles.concurrency.ConcurrencyOps.NewInstance;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoCommand extends SequentialCommandGroup {
   /** Creates a new OttoCommand. */
-
-  public static DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
-  public AutoCommand() {
+  public AutoCommand(DrivetrainSubsystem drive) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    final double leftStick = 0.1;
-    final double rightStick = 0.1;
     addCommands(
       new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
-      new InstantCommand(()-> m_drivetrainSubsystem.setRaw( leftStick, rightStick)),
-      new InstantCommand(() -> m_drivetrainSubsystem.printEncoderStatus()));
+      new MoveCommand(drive)
+    );
   }
 }
 

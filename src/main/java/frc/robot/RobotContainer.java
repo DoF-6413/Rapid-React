@@ -31,8 +31,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
-  private final AutoCommand m_autoCommand = new AutoCommand();
-
+  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem);
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick (Constants.secondaryJoystickPort);
   public XboxController m_xbox = new XboxController (Constants.xboxPort);
@@ -131,6 +130,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
+   // new AutoCommand(DrivetrainSubsystem, 5);
     return m_autoCommand;
   }
 }

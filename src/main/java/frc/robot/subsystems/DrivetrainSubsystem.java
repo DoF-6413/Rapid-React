@@ -47,7 +47,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
        
         encoderRightLead = rightLead.getEncoder();
         //RightPidController = leftLead.getPIDController();
-
         //Set left follow motors
         leftFollow1.follow(leftLead);
         leftFollow2.follow(leftLead);
@@ -86,5 +85,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition()); 
     }
 
+    public double getAvgEncocderDistance() {
+        return (encoderLeftLead.getPosition() + encoderRightLead.getPosition())/2.0 ;
+    }
+
+    public void resetEncoderValue() {
+        encoderLeftLead.setPosition(0);
+        encoderRightLead.setPosition(0);
+    }
 }
 
