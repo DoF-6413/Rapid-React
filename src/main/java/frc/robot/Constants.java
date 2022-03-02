@@ -65,7 +65,10 @@ public final class Constants {
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SHOOTER
     // CONSTANTS~~~~~~~~~~~~~~~~~~~~~~~~~
-    final public static double kP = 0;
-    final public static double kI = 0;
-    final public static double kD = 0;
+    final public static double kP = 0.5;
+    final public static double kI = 15;
+    final public static double kD = 45;
+    
+    final public static double kShooterTolerance = 1.0;
+    final public static double kShooterDerivativeTolerance = 0.01;
 }

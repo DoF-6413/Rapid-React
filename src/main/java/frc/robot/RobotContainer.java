@@ -37,7 +37,7 @@ public class RobotContainer {
   public Joystick m_rightStick = new Joystick (Constants.secondaryJoystickPort);
   public XboxController m_xbox = new XboxController (Constants.xboxPort);
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
- 
+  
 
   public Joystick LeftStick;
   public Joystick RightStick;
@@ -88,10 +88,13 @@ public class RobotContainer {
     //   m_intakeSubsystem.stopMotor(); //When button is released motor stops
     // }
   
-    
-    // //     XboxButton intakeTrigger = new XboxButton(m_leftStick, Constants.intakeTrigger); //Definies Joystick Button
-    // // intakeTrigger.whenHeld(new RunCommand(() -> )); 
-    // // intakeTrigger.whenReleased(new RunCommand(() -> )); 
+    new JoystickButton(m_rightStick, Constants.shooterButton).whenPressed(new InstantCommand(() -> m_shooterSubsystem.enable(), m_shooterSubsystem)).whenReleased(new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem));
+
+    // JoystickButton shooterTrigger2 = new JoystickButton(m_rightStick, 2);
+
+    SmartDashboard.putData(m_shooterSubsystem);
+  }
+
 
     // if (m_xbox.getBButton()) 
     //   {
@@ -105,7 +108,7 @@ public class RobotContainer {
     //   {
     //     m_intakeSubsystem.stopActuators();
     //   }
-    }
+    
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
