@@ -21,7 +21,8 @@ public final class Constants {
     //defining xbox port
     final public static int xboxPort = 2;
     // defining axis
-    final public static int joystickAxis = 1;
+    final public static int joystickYAxis = 1;
+    final public static int joystickXAxis = 0;
 
     final public static int[] leftDeviceID = new int[]{1, 2, 3}; //CAN ID configured using Spark MAX Client
     final public static int[] rightDeviceID = new int[]{4, 5, 6}; 
@@ -37,7 +38,7 @@ public final class Constants {
 
     //Sets Intake Speed (Currently 50%)
     final public static double intakeSpeed = 0.5;
-
+    final public static double reverseIntakeSpeed = -0.5;
     final public static double slowSpeed = 0.1;
 
     //Xbox Buttons

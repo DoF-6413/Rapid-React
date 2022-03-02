@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutoCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -51,15 +52,20 @@ public class RobotContainer {
     //Sets deafault Drivetrain for Subsystem
     m_drivetrainSubsystem.setDefaultCommand(
     new RunCommand(()-> 
-    m_drivetrainSubsystem.setRaw(m_leftStick.getRawAxis(Constants.joystickAxis), m_rightStick.getRawAxis(Constants.joystickAxis)), m_drivetrainSubsystem
+    m_drivetrainSubsystem.setRaw(m_leftStick.getRawAxis(Constants.joystickXAxis), m_rightStick.getRawAxis(Constants.joystickYAxis)), m_drivetrainSubsystem
     )
     );
     
 
     //Intake but not Timed Robot Style :/
-  new JoystickButton(m_xbox, Constants.xboxA ).whenPressed(new RunCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem)).
+  //Trigger ButtonA = 
+  new JoystickButton(m_xbox, Constants.xboxA ).whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem)).
   whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
-
+  //Trigger ButtonB = 
+  new JoystickButton(m_xbox, Constants.xboxB ).whenPressed(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem)).
+  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
+  //ButtonA.and(ButtonB).whenInactive(()-> m_intakeSubsystem.stopMotor());
+  //.whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
   new JoystickButton(m_xbox, Constants.xboxX ).whenPressed(new RunCommand(() -> m_intakeSubsystem.goDown(), m_intakeSubsystem));
 
   new JoystickButton(m_xbox, Constants.xboxY ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem));

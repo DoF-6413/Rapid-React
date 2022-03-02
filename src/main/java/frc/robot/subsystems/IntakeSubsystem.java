@@ -37,6 +37,12 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeSpinner.set(Constants.intakeSpeed); // runs the motor at the speed set in constants% power
 
 }
+//Reverses Intake Motor
+public void reverseMotor(){
+
+  intakeSpinner.set(Constants.reverseIntakeSpeed); // runs the motor at the speed set in constants% power
+
+}
 //Stops Intake Motor
 public void stopMotor(){
 
