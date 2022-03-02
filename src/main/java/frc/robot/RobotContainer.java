@@ -7,13 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutoCommand;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-
-
 import edu.wpi.first.wpilibj2.command.*;
 
 import javax.lang.model.util.ElementScanner6;
@@ -30,6 +27,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   private final AutoCommand m_autoCommand = new AutoCommand();
+
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick (Constants.secondaryJoystickPort);
   public XboxController m_xbox = new XboxController (Constants.xboxPort);
@@ -57,33 +55,43 @@ public class RobotContainer {
     )
     );
     
+
+    //Intake but not Timed Robot Style :/
+  new JoystickButton(m_xbox, Constants.xboxA ).whenPressed(new RunCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem)).
+  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
+
+  new JoystickButton(m_xbox, Constants.xboxX ).whenPressed(new RunCommand(() -> m_intakeSubsystem.goDown(), m_intakeSubsystem));
+
+  new JoystickButton(m_xbox, Constants.xboxY ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem));
+
+
 //Runs Intake Motors when Left Trgger is Pressed
-    if (m_xbox.getAButton())
-    {
-      m_intakeSubsystem.spinMotor();//When button is pressed intake motor spins
-    }
-    else
-    {
-      m_intakeSubsystem.stopMotor(); //When button is released motor stops
-    }
+    // if (m_xbox.getAButton())
+    // {
+    //   m_intakeSubsystem.spinMotor();//When button is pressed intake motor spins
+    // }
+    // else
+    // {
+    //   m_intakeSubsystem.stopMotor(); //When button is released motor stops
+    // }
   
     
-    //     XboxButton intakeTrigger = new XboxButton(m_leftStick, Constants.intakeTrigger); //Definies Joystick Button
-    // intakeTrigger.whenHeld(new RunCommand(() -> )); 
-    // intakeTrigger.whenReleased(new RunCommand(() -> )); 
+    // //     XboxButton intakeTrigger = new XboxButton(m_leftStick, Constants.intakeTrigger); //Definies Joystick Button
+    // // intakeTrigger.whenHeld(new RunCommand(() -> )); 
+    // // intakeTrigger.whenReleased(new RunCommand(() -> )); 
 
-    if (m_xbox.getBButton()) 
-      {
-      m_intakeSubsystem.setOrigin();
-      }
-    else if (m_xbox.getXButton()) 
-      {
-        m_intakeSubsystem.goDown();
-      }
-    else 
-      {
-        m_intakeSubsystem.stopActuators();
-      }
+    // if (m_xbox.getBButton()) 
+    //   {
+    //   m_intakeSubsystem.setOrigin();
+    //   }
+    // else if (m_xbox.getXButton()) 
+    //   {
+    //     m_intakeSubsystem.goDown();
+    //   }
+    // else 
+    //   {
+    //     m_intakeSubsystem.stopActuators();
+    //   }
     }
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
