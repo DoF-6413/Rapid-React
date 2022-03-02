@@ -22,13 +22,13 @@ public class IntakeSubsystem extends SubsystemBase {
     //Initializing intake motors
     //Defining what each inake motor is and their ID's
     public IntakeSubsystem() {
-      intakeRightActuator.follow(intakeLeftActuator);
       //Defines motors used for dropping and raising intake system (arms);uncomment when we write code for Acuators
       //intakeActuatorLead = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);   
       //intakeActuatorFollow = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
       intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
       intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless) ;
       intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless) ;
+      intakeRightActuator.follow(intakeLeftActuator);
     }
 
 //Spins Intake Motor
