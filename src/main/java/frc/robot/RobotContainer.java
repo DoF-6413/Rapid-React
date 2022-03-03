@@ -6,10 +6,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutoCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.Button.*;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.*;
@@ -32,6 +36,8 @@ public class RobotContainer {
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick (Constants.secondaryJoystickPort);
   public XboxController m_xbox = new XboxController (Constants.xboxPort);
+  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  
 
   public Joystick LeftStick;
   public Joystick RightStick;
@@ -41,6 +47,7 @@ public class RobotContainer {
 
   //Intake Subsystem
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -81,10 +88,13 @@ public class RobotContainer {
     //   m_intakeSubsystem.stopMotor(); //When button is released motor stops
     // }
   
-    
-    // //     XboxButton intakeTrigger = new XboxButton(m_leftStick, Constants.intakeTrigger); //Definies Joystick Button
-    // // intakeTrigger.whenHeld(new RunCommand(() -> )); 
-    // // intakeTrigger.whenReleased(new RunCommand(() -> )); 
+    new JoystickButton(m_rightStick, Constants.shooterButton).whenPressed(new InstantCommand(() -> m_shooterSubsystem.enable(), m_shooterSubsystem)).whenReleased(new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem));
+
+    // JoystickButton shooterTrigger2 = new JoystickButton(m_rightStick, 2);
+
+    SmartDashboard.putData(m_shooterSubsystem);
+  }
+
 
     // if (m_xbox.getBButton()) 
     //   {
@@ -98,7 +108,7 @@ public class RobotContainer {
     //   {
     //     m_intakeSubsystem.stopActuators();
     //   }
-    }
+    
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
