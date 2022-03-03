@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
-
-import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DrivetrainSubsystem extends SubsystemBase {
@@ -30,8 +27,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private RelativeEncoder encoderLeftLead;
     private RelativeEncoder encoderRightLead;
 
-    private SparkMaxPIDController LeftPidController;
-    private SparkMaxPIDController RightPidController;
+    // private SparkMaxPIDController LeftPidController;
+    // private SparkMaxPIDController RightPidController;
 
     private DifferentialDrive diffDrive;
 
@@ -42,7 +39,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         leftFollow2 = new CANSparkMax(Constants.leftDeviceID[2], MotorType.kBrushless);
         
         encoderLeftLead = leftLead.getEncoder();
-        LeftPidController = leftLead.getPIDController();
+       // LeftPidController = leftLead.getPIDController();
         
         //Initializes left motors in default constructor
         rightLead = new CANSparkMax(Constants.rightDeviceID[0], MotorType.kBrushless);
@@ -50,7 +47,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightFollow2 = new CANSparkMax(Constants.rightDeviceID[2], MotorType.kBrushless);
        
         encoderRightLead = rightLead.getEncoder();
-        RightPidController = leftLead.getPIDController();
+        //RightPidController = leftLead.getPIDController();
 
         //Set left follow motors
         leftFollow1.follow(leftLead);
