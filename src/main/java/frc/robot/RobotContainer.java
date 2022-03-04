@@ -4,8 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.*;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutoCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -18,9 +19,12 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.*;
 
+import frc.robot.subsystems.IndexerSubsystem;
+
 import javax.lang.model.util.ElementScanner6;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.GenericHID;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -31,6 +35,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
   private final AutoCommand m_autoCommand = new AutoCommand();
 
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
@@ -73,12 +78,14 @@ public class RobotContainer {
   whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
   //ButtonA.and(ButtonB).whenInactive(()-> m_intakeSubsystem.stopMotor());
   //.whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
-  new JoystickButton(m_xbox, Constants.xboxX ).whenPressed(new RunCommand(() -> m_intakeSubsystem.goDown(), m_intakeSubsystem));
+  new JoystickButton(m_xbox, Constants.xboxX ).whenPressed(new RunCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem)).
+  whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
   new JoystickButton(m_xbox, Constants.xboxY ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem));
 
-
-//Runs Intake Motors when Left Trgger is Pressed
+  // new JoystickButton(m_xbox, XboxController.Axis.kRightTrigger.value).whenActive(new InstantCommand(() -> m_indexerSubsystem.spinMotor())).
+  // whenInactive(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+//Runs Intake Motors when  Trgger is Pressed
     // if (m_xbox.getAButton())
     // {
     //   m_intakeSubsystem.spinMotor();//When button is pressed intake motor spins

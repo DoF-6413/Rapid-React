@@ -22,13 +22,14 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 public class ShooterSubsystem extends PIDSubsystem {
   /** Creates a new ExampleSubsystem. */
   // Example usage of a TalonFX motor controller
- private TalonFX leftShooterMotor = new TalonFX(Constants.shooterID[0]); // creates a new TalonFX with ID 0
+  private TalonFX leftShooterMotor = new TalonFX(Constants.shooterID[0]); // creates a new TalonFX with ID 0
+  private double m_setpoint = 2000;
   private TalonFX rightShooterMotor = new TalonFX(Constants.shooterID[1]);
-  private double m_setpoint = 4000;
   private double m_tempsetpoint;
+
   public ShooterSubsystem() {
     super(new PIDController(Constants.kP, Constants.kI, Constants.kD));
- 
+    //getController().setTolerance​(100);
 
     SmartDashboard.putNumber("setpoint", m_setpoint);
     
@@ -36,11 +37,11 @@ public class ShooterSubsystem extends PIDSubsystem {
     // Set right follow motors
     rightShooterMotor.follow(leftShooterMotor);
     setSetpoint(m_setpoint);
-
-   m_tempsetpoint =  SmartDashboard.getNumber("setpoint", 0);
-  SmartDashboard.putNumber("Temp", m_tempsetpoint);
+    
+    m_tempsetpoint =  SmartDashboard.getNumber("setpoint", 0);
+    SmartDashboard.putNumber("Temp", m_tempsetpoint);
   }
-
+  
   @Override
   public void useOutput(double output, double setpoint) {
   m_setpoint = setpoint;
