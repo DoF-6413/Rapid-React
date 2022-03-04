@@ -27,7 +27,7 @@ public class ShooterSubsystem extends PIDSubsystem {
     rightShooterMotor.follow(leftShooterMotor);
     setSetpoint(m_setpoint);
   }
-
+  
   @Override
   public void useOutput(double output, double setpoint) {
     m_setpoint = setpoint;
