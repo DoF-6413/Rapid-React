@@ -33,6 +33,8 @@ public final class Constants {
 
     final public static int[] intakeDeviceID = new int []{8, 9, 10}; // Intake Motors, Number 8 and 10 for Arm, 9 for IntakeSpin
 
+    final public static int[] shooterID = new int[] { 7, 11 };
+    final public static int IndexerID = 12;
     //Assigned to Left Joystick Trigger
     final public static int intakeTrigger = 1;
 
@@ -49,14 +51,18 @@ public final class Constants {
     final public static double wheelDiameter = 4.; 
     final public static double tick2feet = 1.0/42. * wheelDiameter * 6.11 * Math.PI / 12.;
 
+
     // CAn ID for Shooter
-    final public static int[] shooterID = new int[] { 7, 11 };
+
     final public static int shooterButton = 1;
 
     // final public static double FalconTurnsPerRotation = 3600;
 
     // Sets shooter speed (Currently 90%)
     final public static double shooterSpeed = .90;
+
+    // Sets indexer speed (Currently 50%)
+    final public static double indexerSpeed = -0.20;
 
     // Falcon 500 RPM Equation
     final public static double velocityToRPM(double velocity) {
