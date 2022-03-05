@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import com.revrobotics.CANSparkMax.*;
 public class DrivetrainSubsystem extends SubsystemBase {
 
     //Declare left motors
@@ -31,7 +32,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     // private SparkMaxPIDController RightPidController;
 
     private DifferentialDrive diffDrive;
-
     public DrivetrainSubsystem() { 
         //Initializes left motors in default constructor
         leftLead = new CANSparkMax(Constants.leftDeviceID[0], MotorType.kBrushless);
@@ -48,7 +48,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
        
         encoderRightLead = rightLead.getEncoder();
         //RightPidController = leftLead.getPIDController();
-
         //Set left follow motors
         leftFollow1.follow(leftLead);
         leftFollow2.follow(leftLead);
@@ -63,7 +62,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
         //Coverts Tics to Feet for Encoder Readout
         encoderLeftLead.setPositionConversionFactor(Constants.tick2feet);
         encoderRightLead.setPositionConversionFactor(Constants.tick2feet);
-            
+
+        leftLead.setIdleMode(CANSparkMax.IdleMode.kBrake); //setIdleMode​(CANSparkMax.IdleMode.kBrake)
+        leftFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        leftFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
+        rightLead.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        rightFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        rightFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
     }
 
      /**
@@ -85,6 +91,16 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public void printEncoderStatus() {
         SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
         SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition()); 
+    }
+
+    public double getAvgEncocderDistance() {
+       double averageEncoderDistance = (encoderLeftLead.getPosition() + encoderRightLead.getPosition())/2.0 ;
+       System.out.println ("averageEncoderDistance" + averageEncoderDistance);
+       return averageEncoderDistance;
+    }
+    public void resetEncoderValue() {
+        encoderLeftLead.setPosition(0);
+        encoderRightLead.setPosition(0);
     }
 
 }

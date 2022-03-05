@@ -82,10 +82,12 @@ public class RobotContainer {
   whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_indexerSubsystem));
   //ButtonA.and(ButtonB).whenInactive(()-> m_intakeSubsystem.stopMotor());
   //.whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
-  new JoystickButton(m_xbox, XboxController.Button.kX.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem));
+  new JoystickButton(m_xbox, XboxController.Button.kX.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem)).
+  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
   //.whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
-  new JoystickButton(m_xbox, XboxController.Button.kY.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.goDown(), m_intakeSubsystem));
+  new JoystickButton(m_xbox, XboxController.Button.kY.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.goDown(), m_intakeSubsystem)).
+  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
   new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value ).whenPressed(new InstantCommand(() ->  m_shooterSubsystem.enable(), m_shooterSubsystem)).
   whenPressed(new InstantCommand(() ->  m_shooterSubsystem.LowerHub(), m_shooterSubsystem)).
