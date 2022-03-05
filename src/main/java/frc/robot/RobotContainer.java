@@ -73,10 +73,14 @@ public class RobotContainer {
     //Intake but not Timed Robot Style :/
   //Trigger ButtonA = 
   new JoystickButton(m_xbox, XboxController.Button.kA.value ).whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem)).
-  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
+  whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem)).
+  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem)).
+  whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
   //Trigger ButtonB = 
   new JoystickButton(m_xbox, XboxController.Button.kB.value ).whenPressed(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem)).
-  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
+  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem)).
+  whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem)).
+  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_indexerSubsystem));
   //ButtonA.and(ButtonB).whenInactive(()-> m_intakeSubsystem.stopMotor());
   //.whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
   new JoystickButton(m_xbox, XboxController.Button.kX.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem));
@@ -84,46 +88,21 @@ public class RobotContainer {
 
   new JoystickButton(m_xbox, XboxController.Button.kY.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.goDown(), m_intakeSubsystem));
 
-  new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value ).whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem)).
-  whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+  new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value ).whenPressed(new InstantCommand(() ->  m_shooterSubsystem.enable(), m_shooterSubsystem)).
+  whenPressed(new InstantCommand(() ->  m_shooterSubsystem.LowerHub(), m_shooterSubsystem)).
+  whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)));
 
-  // new JoystickButton(m_xbox, XboxController.Button.kA.value ).whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem)).
-  // whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+  new JoystickButton(m_xbox, XboxController.Button.kRightBumper.value ).whenPressed(new InstantCommand(() ->  m_shooterSubsystem.enable(), m_shooterSubsystem)).
+  whenPressed(new InstantCommand(() ->  m_shooterSubsystem.UpperHub(), m_shooterSubsystem)).
+  whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)));
 
-  new JoystickButton(m_xbox, XboxController.Axis.kLeftTrigger.value).whileActiveContinuous(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem));
-  
-  //.whileInactive(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
-//Runs Intake Motors when  Trgger is Pressed
-    // if (m_xbox.getAButton())
-    // {
-    //   m_intakeSubsystem.spinMotor();//When button is pressed intake motor spins
-    // }
-    // else
-    // {
-    //   m_intakeSubsystem.stopMotor(); //When button is released motor stops
-    // }
-  
-    new JoystickButton(m_rightStick, Constants.shooterButton).whenPressed(new InstantCommand(() -> m_shooterSubsystem.enable(), m_shooterSubsystem)).whenReleased(new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem));
+  // new JoystickButton(m_rightStick, Constants.shooterButton).whenPressed(new InstantCommand(() -> m_shooterSubsystem.enable(), m_shooterSubsystem)).whenReleased(new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem));
 
     // JoystickButton shooterTrigger2 = new JoystickButton(m_rightStick, 2);
 
     SmartDashboard.putData(m_shooterSubsystem);
   }
 
-
-    // if (m_xbox.getBButton()) 
-    //   {
-    //   m_intakeSubsystem.setOrigin();
-    //   }
-    // else if (m_xbox.getXButton()) 
-    //   {
-    //     m_intakeSubsystem.goDown();
-    //   }
-    // else 
-    //   {
-    //     m_intakeSubsystem.stopActuators();
-    //   }
-    
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link

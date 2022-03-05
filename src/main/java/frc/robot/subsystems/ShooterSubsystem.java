@@ -47,7 +47,7 @@ public class ShooterSubsystem extends PIDSubsystem {
     SmartDashboard.putNumber("setpoints", setpoint);
     SmartDashboard.putNumber("output", leftShooterMotor.getSelectedSensorVelocity() * 600 / 2048);
     
-    // SmartDashboard.getNumber("setpoints", m_tempsetpoint);
+    // SmartDashboard.getNumber("setpoints", m_tempsetpoint);d
     // setpoint = m_tempsetpoint;
 
 
@@ -83,10 +83,13 @@ public class ShooterSubsystem extends PIDSubsystem {
     // This method will be called once per scheduler run during simulation
   }
 
-  public void spinMotor() {
-    leftShooterMotor.set(TalonFXControlMode.PercentOutput, Constants.shooterSpeed); // runs the motor at 25% power
+  public void LowerHub() {
+    m_setpoint = 2000; // runs the motor at deez nuts power
   }
 
+  public void UpperHub() {
+    m_setpoint = 5000; // runs the motor at your mom power
+  }
   public void stopMotor() {
     leftShooterMotor.set(TalonFXControlMode.PercentOutput, 0); // runs the motor at 0% power
 
