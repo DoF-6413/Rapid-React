@@ -47,7 +47,8 @@ public final class Constants {
     final public static double intakeSpeed = 0.5;
     final public static double reverseIntakeSpeed = -0.5;
     final public static double slowSpeed = 0.1;
- 
+    final public static double slowSpeed2 = 0.1;
+
     //FACTS
     final public static double wheelDiameter = 4.; 
     final public static double tick2feet = 1.0/42. * wheelDiameter * 6.11 * Math.PI / 12.;

@@ -23,10 +23,10 @@ public class IntakeSubsystem extends SubsystemBase {
       //Defines motors used for dropping and raising intake system (arms);uncomment when we write code for Acuators
       //intakeActuatorLead = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);   
       //intakeActuatorFollow = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
-      intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
+      intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
       intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless) ;
-      intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless) ;
-      intakeRightActuator.follow(intakeLeftActuator);
+      intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless) ;
+      //intakeRightActuator.setInverted(true);
     }
 
 //Spins Intake Motor
@@ -50,13 +50,12 @@ public void stopMotor(){
 
 public void setOrigin(){
   intakeLeftActuator.set(Constants.slowSpeed);
-  intakeRightActuator.set(-Constants.slowSpeed);
-  
+  intakeRightActuator.set(Constants.slowSpeed2);
 }
 
 public void goDown(){
-  intakeLeftActuator.set(-Constants.slowSpeed);
-  intakeRightActuator.set(Constants.slowSpeed);
+  intakeLeftActuator.set(Constants.slowSpeed);
+  intakeRightActuator.set(Constants.slowSpeed2);
 }
 
 public void stopActuators(){

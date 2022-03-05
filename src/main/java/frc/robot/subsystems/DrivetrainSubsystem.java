@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import com.revrobotics.CANSparkMax.*;
 public class DrivetrainSubsystem extends SubsystemBase {
 
     //Declare left motors
@@ -61,7 +62,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
         //Coverts Tics to Feet for Encoder Readout
         encoderLeftLead.setPositionConversionFactor(Constants.tick2feet);
         encoderRightLead.setPositionConversionFactor(Constants.tick2feet);
-            
+
+        leftLead.setIdleMode(CANSparkMax.IdleMode.kBrake); //setIdleMode​(CANSparkMax.IdleMode.kBrake)
+        leftFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        leftFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
+        rightLead.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        rightFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        rightFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
     }
 
      /**
