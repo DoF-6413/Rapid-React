@@ -12,16 +12,23 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 
 public class IndexerSubsystem extends SubsystemBase {
   /** Creates a new IndexerSubsystem. */
-  public IndexerSubsystem() {}
-  private TalonSRX leftShooterMotor = new TalonSRX(Constants.IndexerID);
-
+  public IndexerSubsystem() {
+    indexMotor.setInverted(true);
+  }
+  private TalonSRX indexMotor = new TalonSRX(Constants.IndexerID);
+ 
   public void spinMotor() {
-    leftShooterMotor.set(TalonSRXControlMode.PercentOutput, Constants.indexerSpeed);
+    indexMotor.set(TalonSRXControlMode.PercentOutput, Constants.indexerSpeed);
+  }
+
+  public void spinBack() {
+    indexMotor.set(TalonSRXControlMode.PercentOutput, -Constants.indexerSpeed);
   }
 
   public void stopMotor() {
-    leftShooterMotor.set(TalonSRXControlMode.PercentOutput, 0); 
+    indexMotor.set(TalonSRXControlMode.PercentOutput, 0); 
   }
+  
   
   @Override
   public void periodic() {

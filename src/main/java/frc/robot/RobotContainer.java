@@ -71,20 +71,27 @@ public class RobotContainer {
 
     //Intake but not Timed Robot Style :/
   //Trigger ButtonA = 
-  new JoystickButton(m_xbox, Constants.xboxA ).whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem)).
+  new JoystickButton(m_xbox, XboxController.Button.kA.value ).whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem)).
   whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
   //Trigger ButtonB = 
-  new JoystickButton(m_xbox, Constants.xboxB ).whenPressed(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem)).
+  new JoystickButton(m_xbox, XboxController.Button.kB.value ).whenPressed(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem)).
   whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
   //ButtonA.and(ButtonB).whenInactive(()-> m_intakeSubsystem.stopMotor());
   //.whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
-  new JoystickButton(m_xbox, Constants.xboxX ).whenPressed(new RunCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem)).
+  new JoystickButton(m_xbox, XboxController.Button.kX.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem));
+  //.whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+
+  new JoystickButton(m_xbox, XboxController.Button.kY.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.goDown(), m_intakeSubsystem));
+
+  new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value ).whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem)).
   whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
-  new JoystickButton(m_xbox, Constants.xboxY ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem));
+  // new JoystickButton(m_xbox, XboxController.Button.kA.value ).whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem)).
+  // whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
-  // new JoystickButton(m_xbox, XboxController.Axis.kRightTrigger.value).whenActive(new InstantCommand(() -> m_indexerSubsystem.spinMotor())).
-  // whenInactive(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+  new JoystickButton(m_xbox, XboxController.Axis.kLeftTrigger.value).whileActiveContinuous(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem));
+  
+  //.whileInactive(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 //Runs Intake Motors when  Trgger is Pressed
     // if (m_xbox.getAButton())
     // {
