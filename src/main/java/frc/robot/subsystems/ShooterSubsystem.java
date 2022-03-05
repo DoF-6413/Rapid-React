@@ -29,17 +29,16 @@ public class ShooterSubsystem extends PIDSubsystem {
 
   public ShooterSubsystem() {
     super(new PIDController(Constants.kP, Constants.kI, Constants.kD));
-    //getController().setTolerance​(100);
+    getController().setTolerance(50);
 
-    SmartDashboard.putNumber("setpoint", m_setpoint);
+    // SmartDashboard.putNumber("setpoint", m_setpoint);
     
     rightShooterMotor.setInverted(true);
     // Set right follow motors
     rightShooterMotor.follow(leftShooterMotor);
     setSetpoint(m_setpoint);
     
-    m_tempsetpoint =  SmartDashboard.getNumber("setpoint", 0);
-    SmartDashboard.putNumber("Temp", m_tempsetpoint);
+    // m_tempsetpoint =  SmartDashboard.getNumber("setpoint", 0);
   }
   
   @Override
@@ -47,12 +46,17 @@ public class ShooterSubsystem extends PIDSubsystem {
   m_setpoint = setpoint;
     SmartDashboard.putNumber("setpoints", setpoint);
     SmartDashboard.putNumber("output", leftShooterMotor.getSelectedSensorVelocity() * 600 / 2048);
-    System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    
+    // SmartDashboard.getNumber("setpoints", m_tempsetpoint);
+    // setpoint = m_tempsetpoint;
+
+
     System.out.println("setpoint" + setpoint);
     System.out.println("output" + leftShooterMotor.getSelectedSensorVelocity() * 600 / 2048);
     
     leftShooterMotor.set(TalonFXControlMode.PercentOutput, setpoint/6380  );
   //setpoint/6300 * 100
+  //  System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
   }
 
   @Override
