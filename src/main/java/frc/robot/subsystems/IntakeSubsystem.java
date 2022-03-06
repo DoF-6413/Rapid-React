@@ -53,7 +53,7 @@ public void setOrigin(){
 }
 
 public void goDown(){
-  intakeLeftActuator.set(0.10);
+  intakeLeftActuator.set(-0.10);
   intakeRightActuator.set(0.10);
 }
 
