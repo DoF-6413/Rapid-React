@@ -76,4 +76,7 @@ public final class Constants {
     // auto values
     // units in feet
     final public static double moveDistanceFromTarmac = 5; 
+
+    final public static double lowerHubSpeed = 2000;
+    final public static double upperHubSpeed = 5000;
 }

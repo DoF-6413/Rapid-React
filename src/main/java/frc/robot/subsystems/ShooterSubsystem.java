@@ -84,11 +84,11 @@ public class ShooterSubsystem extends PIDSubsystem {
   }
 
   public void LowerHub() {
-    m_setpoint = 2000; // runs the motor at deez nuts power
+    setSetpoint(Constants.lowerHubSpeed); // runs the motor at deez nuts power
   }
 
   public void UpperHub() {
-    m_setpoint = 5000; // runs the motor at your mom power
+    setSetpoint(Constants.upperHubSpeed); // runs the motor at your mom power
   }
   public void stopMotor() {
     leftShooterMotor.set(TalonFXControlMode.PercentOutput, 0); // runs the motor at 0% power
