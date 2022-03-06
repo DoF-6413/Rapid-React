@@ -75,7 +75,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
      * @param leftStick  Value from -1.0 to 1.0 representing the left rate
      * @param rightStick Value from -1.0 to 1.0 representing the right rate
      */
-    public void setRaw(double leftStick, double rightStick) {
+    public void setRaw(double rightStick, double leftStick) {
         diffDrive.arcadeDrive(-rightStick, leftStick);
         printEncoderStatus();
     }

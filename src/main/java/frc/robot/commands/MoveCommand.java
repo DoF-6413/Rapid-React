@@ -27,7 +27,7 @@ public class MoveCommand extends CommandBase {
   @Override
   public void execute() {
     if (m_DrivetrainSubsystem.getAvgEncocderDistance() < Constants.moveDistanceFromTarmac)
-      m_DrivetrainSubsystem.setRaw(0.50, 0.50);
+      m_DrivetrainSubsystem.setRaw(0.5, 0);
     else  m_DrivetrainSubsystem.setRaw(0.00, 0.00);
   }
   
