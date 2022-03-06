@@ -26,7 +26,6 @@ public class IntakeSubsystem extends SubsystemBase {
       intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
       intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless) ;
       intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless) ;
-      //intakeRightActuator.setInverted(true);
     }
 
 //Spins Intake Motor
@@ -49,8 +48,8 @@ public void stopMotor(){
 }
 
 public void setOrigin(){
-  intakeLeftActuator.set(Constants.slowSpeed);
-  intakeRightActuator.set(Constants.slowSpeed2);
+  intakeLeftActuator.set(.10);
+  intakeRightActuator.set(-0.10);
 }
 
 public void goDown(){
