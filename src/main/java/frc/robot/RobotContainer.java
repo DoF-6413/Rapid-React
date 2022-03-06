@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj2.command.*;
+import frc.robot.commands.*;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -33,11 +36,12 @@ public class RobotContainer {
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
 
-  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem);
-  public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
-  public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
-  public XboxController m_xbox = new XboxController(Constants.xboxPort);
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem, m_shooterSubsystem);
+  public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
+  public Joystick m_rightStick = new Joystick (Constants.secondaryJoystickPort);
+  public XboxController m_xbox = new XboxController (Constants.xboxPort);
+  
 
   public Joystick LeftStick;
   public Joystick RightStick;

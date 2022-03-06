@@ -66,4 +66,7 @@ public final class Constants {
 
     final public static double lowerHubSpeed = 2000;
     final public static double upperHubSpeed = 5000;
+
+    // shooter run times seconds
+    final public static double waitTimeForShooter = 15; 
 }

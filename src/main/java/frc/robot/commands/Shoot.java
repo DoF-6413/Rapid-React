@@ -4,25 +4,24 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.DrivetrainSubsystem;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.ShooterSubsystem;
-import pabeles.concurrency.ConcurrencyOps.NewInstance; 
-
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Constants;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoCommand extends SequentialCommandGroup {
-  /** Creates a new OttoCommand. */
-  public AutoCommand(DrivetrainSubsystem drive, ShooterSubsystem shoot) {
+public class Shoot extends SequentialCommandGroup {
+  /** Creates a new Shoot. */
+  public Shoot(ShooterSubsystem shoot) {
     // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand()); 
-    addCommands(
-      new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
-      new MoveCommand(drive),
-      new Shoot(shoot)
-    );
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands( 
+      new InstantCommand( () -> shoot.setSetpoint(2000)),
+      new InstantCommand(() -> shoot.enable()),
+      new WaitCommand(Constants.waitTimeForShooter),
+      new InstantCommand(() -> shoot.disable())
+      ); 
   }
 }
-

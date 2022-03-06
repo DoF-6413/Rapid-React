@@ -96,7 +96,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public double getAvgEncocderDistance() {
-        return (encoderLeftLead.getPosition() + encoderRightLead.getPosition()) / 2.0;
+        double averageEncoderDistance = (encoderLeftLead.getPosition() + encoderRightLead.getPosition())/2.0 ;
+        System.out.println ("averageEncoderDistance" + averageEncoderDistance);
+        return averageEncoderDistance;
     }
 
     public void resetEncoderValue() {
