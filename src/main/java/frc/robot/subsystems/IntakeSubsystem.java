@@ -53,8 +53,8 @@ public void setOrigin(){
 }
 
 public void goDown(){
-  intakeLeftActuator.set(Constants.slowSpeed);
-  intakeRightActuator.set(Constants.slowSpeed2);
+  intakeLeftActuator.set(0.10);
+  intakeRightActuator.set(0.10);
 }
 
 public void stopActuators(){
