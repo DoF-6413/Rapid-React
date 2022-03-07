@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.button.Button.*;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.*;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import frc.robot.subsystems.IndexerSubsystem;
 
@@ -35,7 +36,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
-  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem);
+  //private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
 
 
@@ -78,17 +79,23 @@ public class RobotContainer {
   whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
   //Trigger ButtonB = 
   new JoystickButton(m_xbox, XboxController.Button.kB.value ).whenPressed(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem)).
-  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem)).
   whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem)).
-  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_indexerSubsystem));
+  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem)).
+  whenReleased(new RunCommand(()-> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
   //ButtonA.and(ButtonB).whenInactive(()-> m_intakeSubsystem.stopMotor());
   //.whenReleased(new RunCommand(()-> m_intakeSubsystem.stopMotor(), m_intakeSubsystem));
   
-  new JoystickButton(m_xbox, XboxController.Button.kX.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem)).
-  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
+  // new JoystickButton(m_xbox, XboxController.Button.kX.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setOrigin(), m_intakeSubsystem)).
+  // whenReleased(new RunCommand(()-> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
   
 
-  new JoystickButton(m_xbox, XboxController.Button.kY.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.goDown(), m_intakeSubsystem)).
+  // new JoystickButton(m_xbox, XboxController.Button.kY.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.goDown(), m_intakeSubsystem)).
+  // whenReleased(new RunCommand(()-> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
+
+  new JoystickButton(m_xbox, XboxController.Button.kX.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorUp(Constants.slowSpeed), m_intakeSubsystem)).
+  whenReleased(new RunCommand(()-> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
+
+  new JoystickButton(m_xbox, XboxController.Button.kY.value ).whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorDown(Constants.slowSpeed), m_intakeSubsystem)).
   whenReleased(new RunCommand(()-> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
   new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value ).whenPressed(new InstantCommand(() ->  m_shooterSubsystem.enable(), m_shooterSubsystem)).
@@ -126,9 +133,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-   // new AutoCommand(DrivetrainSubsystem, 5);
-    return m_autoCommand;
-  }
+  // public Command getAutonomousCommand() {
+  //   // An ExampleCommand will run in autonomous
+  //  // new AutoCommand(DrivetrainSubsystem, 5);
+  //   return m_autoCommand;
+  // }
 }

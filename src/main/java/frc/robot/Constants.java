@@ -46,7 +46,7 @@ public final class Constants {
     //Sets Intake Speed (Currently 50%)
     final public static double intakeSpeed = 0.5;
     final public static double reverseIntakeSpeed = -0.5;
-    final public static double slowSpeed = 0.1;
+    final public static double slowSpeed = 0.25;
     final public static double slowSpeed2 = 0.1;
 
     //FACTS
@@ -58,7 +58,7 @@ public final class Constants {
     final public static double shooterSpeed = .90;
 
     // Sets indexer speed (Currently 20%)
-    final public static double indexerSpeed = 0.20;
+    final public static double indexerSpeed = 0.50;
 
     // Falcon 500 RPM Equation
     final public static double velocityToRPM(double velocity) {

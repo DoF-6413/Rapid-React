@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 //CANSpark imports
 import com.revrobotics.CANSparkMax;
@@ -15,6 +16,8 @@ public class IntakeSubsystem extends SubsystemBase {
     private CANSparkMax intakeRightActuator;
     private CANSparkMax intakeSpinner;
 
+    DigitalInput toplimitSwitch = new DigitalInput(0);
+    DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
 
     //Initializing intake motors
@@ -23,21 +26,21 @@ public class IntakeSubsystem extends SubsystemBase {
       //Defines motors used for dropping and raising intake system (arms);uncomment when we write code for Acuators
       //intakeActuatorLead = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);   
       //intakeActuatorFollow = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
-      intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
       intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless) ;
       intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless) ;
+      intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
     }
 
 //Spins Intake Motor
   public void spinMotor(){
 
-    intakeSpinner.set(Constants.intakeSpeed); // runs the motor at the speed set in constants% power
+    intakeSpinner.set(0.5); // runs the motor at the speed set in constants% power
 
 }
 //Reverses Intake Motor
 public void reverseMotor(){
 
-  intakeSpinner.set(Constants.reverseIntakeSpeed); // runs the motor at the speed set in constants% power
+  intakeSpinner.set(-0.5); // runs the motor at the speed set in constants% power
 
 }
 //Stops Intake Motor
@@ -62,5 +65,29 @@ public void stopActuators(){
   intakeRightActuator.set(0);
 }
 
+public void setActuatorUp(double speed) {
+      if (toplimitSwitch.get()) {
+          // We are going up and top limit is tripped so stop
+          intakeLeftActuator.set(0);
+          intakeRightActuator.set(0);
+      } else {
+          // We are going up but top limit is not tripped so go at commanded speed
+          intakeLeftActuator.set(speed);
+          intakeRightActuator.set(-speed);
+      }
+    }
+
+public void setActuatorDown(double speed) {
+      if (bottomlimitSwitch.get()) {
+          // We are going down and bottom limit is tripped so stop
+          intakeLeftActuator.set(0);
+          intakeRightActuator.set(0);
+      } else {
+          // We are going down but bottom limit is not tripped so go at commanded speed
+          intakeLeftActuator.set(-speed);
+          intakeRightActuator.set(speed);
+      }
+  }
 // TODO: Create a function that moves the aucuator 90 degrees to drop intake system
 }
+
