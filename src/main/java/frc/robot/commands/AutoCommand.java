@@ -6,17 +6,25 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.DrivetrainSubsystem;
+import pabeles.concurrency.ConcurrencyOps.NewInstance; 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoCommand extends SequentialCommandGroup {
   /** Creates a new OttoCommand. */
+
+  public static DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   public AutoCommand() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    final double leftStick = 0.1;
+    final double rightStick = 0.1;
     addCommands(
-      new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL"))
-    );
+      new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
+      new InstantCommand(()-> m_drivetrainSubsystem.setRaw(leftStick, rightStick)),
+      new InstantCommand(() -> m_drivetrainSubsystem.printEncoderStatus()));
   }
 }
+
