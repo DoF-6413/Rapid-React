@@ -26,7 +26,6 @@ public class AutoCommand extends SequentialCommandGroup {
       new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
       new MoveCommand(drive, 4, true),
       parallel( new Shoot(shoot), new IndexerCommand(Index)),
-      new WaitCommand(6),
       new MoveCommand(drive, -8, false)
     );
   }

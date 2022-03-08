@@ -71,5 +71,5 @@ public final class Constants {
     final public static double waitTimeForShooter = 15; 
 
    
-    final public static double waitTimeForIndexer = 2;
+    final public static double waitTimeForIndexer = 1;
 }
