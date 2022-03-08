@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 public class IndexerSubsystem extends SubsystemBase {
   /** Creates a new IndexerSubsystem. */
   public IndexerSubsystem() {
-    indexMotor.setInverted(true);
+
   }
 
   private TalonSRX indexMotor = new TalonSRX(Constants.IndexerID);

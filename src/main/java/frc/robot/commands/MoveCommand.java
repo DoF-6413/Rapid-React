@@ -10,11 +10,15 @@ import frc.robot.Constants;
 
 public class MoveCommand extends CommandBase {
   /** Creates a new MoveCommand. */
-
+  public int toDistance;
+  public boolean goesForward;
   private final DrivetrainSubsystem m_DrivetrainSubsystem;
-  public MoveCommand(DrivetrainSubsystem drivetrainSubsystem) {
+
+  public MoveCommand(DrivetrainSubsystem drivetrainSubsystem, Integer Distance, boolean Forwards) {
     m_DrivetrainSubsystem = drivetrainSubsystem;
     addRequirements(m_DrivetrainSubsystem);
+    toDistance = Distance;
+    goesForward = Forwards;
   }
 
   // Called when the command is initially scheduled.
@@ -26,18 +30,45 @@ public class MoveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_DrivetrainSubsystem.getAvgEncocderDistance() < Constants.moveDistanceFromTarmac)
-      m_DrivetrainSubsystem.setRaw(0.5, 0);
-    else  m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+    if (goesForward) {
+      goForward(toDistance);
+    } else if (!goesForward) {
+     goBackwards(toDistance);
+    } else {
+      m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+
+    }
+    // if (goesForward) {
+    //   if (m_DrivetrainSubsystem.getAvgEncocderDistance() < toDistance)
+    //     m_DrivetrainSubsystem.setRaw(-0.5, 0);
+    //   else{
+    //     m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+    //   }
+    // } else if (!goesForward) {
+    //   if (m_DrivetrainSubsystem.getAvgEncocderDistance() > toDistance)
+    //     m_DrivetrainSubsystem.setRaw(0.5, 0);
+    // } else {
+    //   m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+
+    // }
   }
-  
+
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (m_DrivetrainSubsystem.getAvgEncocderDistance() >= Constants.moveDistanceFromTarmac);
+    return (m_DrivetrainSubsystem.getAvgEncocderDistance() >= toDistance);
+  }
+
+  public void goForward(int distance){
+System.out.println("FORWARD" + distance);
+  }
+
+  public void goBackwards(int distance){
+System.out.println("BACKWARDS" + distance);
   }
 }

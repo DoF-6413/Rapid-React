@@ -37,7 +37,7 @@ public class RobotContainer {
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
 
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem, m_shooterSubsystem);
+  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick (Constants.secondaryJoystickPort);
   public XboxController m_xbox = new XboxController (Constants.xboxPort);

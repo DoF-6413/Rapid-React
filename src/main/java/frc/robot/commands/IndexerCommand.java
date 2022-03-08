@@ -6,22 +6,23 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
+
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Shoot extends SequentialCommandGroup {
+public class IndexerCommand extends SequentialCommandGroup {
   /** Creates a new Shoot. */
-  public Shoot(ShooterSubsystem shoot) {
+  public double moveDistanceFromTarmac;
+  public IndexerCommand(IndexerSubsystem Index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      new InstantCommand( () -> shoot.setSetpoint(2000)),
-      new InstantCommand(() -> shoot.enable()),
-      new WaitCommand(5),
-      new InstantCommand(() -> shoot.disable())
+      new InstantCommand(() -> Index.spinMotor()),
+      new WaitCommand(Constants.waitTimeForIndexerPT2),
+      new InstantCommand(() -> Index.stopMotor())
       ); 
   }
 }
