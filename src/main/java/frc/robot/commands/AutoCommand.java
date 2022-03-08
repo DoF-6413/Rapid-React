@@ -23,7 +23,7 @@ public class AutoCommand extends SequentialCommandGroup {
     final double rightStick = 0.1;
     addCommands(
       new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
-      new InstantCommand(()-> m_drivetrainSubsystem.setRaw( leftStick, rightStick)),
+      new InstantCommand(()-> m_drivetrainSubsystem.setRaw(leftStick, rightStick)),
       new InstantCommand(() -> m_drivetrainSubsystem.printEncoderStatus()));
   }
 }
