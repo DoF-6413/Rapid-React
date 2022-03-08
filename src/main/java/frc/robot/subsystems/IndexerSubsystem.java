@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 
@@ -15,8 +14,9 @@ public class IndexerSubsystem extends SubsystemBase {
   public IndexerSubsystem() {
     indexMotor.setInverted(true);
   }
+
   private TalonSRX indexMotor = new TalonSRX(Constants.IndexerID);
- 
+
   public void spinMotor() {
     indexMotor.set(TalonSRXControlMode.PercentOutput, Constants.indexerSpeed);
   }
@@ -26,10 +26,9 @@ public class IndexerSubsystem extends SubsystemBase {
   }
 
   public void stopMotor() {
-    indexMotor.set(TalonSRXControlMode.PercentOutput, 0); 
+    indexMotor.set(TalonSRXControlMode.PercentOutput, 0);
   }
-  
-  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
