@@ -6,22 +6,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Shoot extends SequentialCommandGroup {
+public class PickupCommmand extends SequentialCommandGroup {
   /** Creates a new Shoot. */
-  public Shoot(ShooterSubsystem shoot) {
+  public PickupCommmand(IntakeSubsystem Intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      new InstantCommand( () -> shoot.setSetpoint(4250)),
-      new InstantCommand(() -> shoot.enable()),
-      new WaitCommand(2.5),
-      new InstantCommand(() -> shoot.disable())
+      new InstantCommand( () -> Intake.spinMotor()),
+      new WaitCommand(4),
+      new InstantCommand( () -> Intake.stopMotor())
       ); 
   }
 }

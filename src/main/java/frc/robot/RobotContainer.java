@@ -35,9 +35,10 @@ public class RobotContainer {
   // private final AutoCommand m_autoCommand = new
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
+  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
 
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
+  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem );
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick (Constants.secondaryJoystickPort);
   public XboxController m_xbox = new XboxController (Constants.xboxPort);
@@ -48,8 +49,8 @@ public class RobotContainer {
 
   // XBOX Contoller Defs (For intake and Climber)
 
-  // Intake Subsystem
-  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+
+  //Intake Subsystem
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.

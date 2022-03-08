@@ -11,6 +11,7 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import pabeles.concurrency.ConcurrencyOps.NewInstance; 
 import frc.robot.subsystems.IndexerSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
@@ -19,14 +20,15 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoCommand extends SequentialCommandGroup {
   /** Creates a new OttoCommand. */
-  public AutoCommand(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index) {
+  public AutoCommand(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index, IntakeSubsystem intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand()); 
     addCommands(
       new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
-      new MoveCommand(drive, 4, true),
       parallel( new Shoot(shoot), new IndexerCommand(Index)),
-      new MoveCommand(drive, -8, false)
+      //new MoveCommand(drive, 4, true),
+      new MoveCommand(drive, -4, false),
+      new PickupCommmand(intake)
     );
   }
 }
