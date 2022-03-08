@@ -12,6 +12,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import pabeles.concurrency.ConcurrencyOps.NewInstance; 
 import frc.robot.subsystems.IndexerSubsystem;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -24,8 +25,7 @@ public class AutoCommand extends SequentialCommandGroup {
     addCommands(
       new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
       new MoveCommand(drive, 4, true),
-      new Shoot(shoot),
-      new IndexerCommand(Index),
+      parallel( new Shoot(shoot), new IndexerCommand(Index)),
       new WaitCommand(6),
       new MoveCommand(drive, -8, false)
     );

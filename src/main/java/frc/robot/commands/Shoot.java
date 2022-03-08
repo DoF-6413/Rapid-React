@@ -20,7 +20,7 @@ public class Shoot extends SequentialCommandGroup {
     addCommands( 
       new InstantCommand( () -> shoot.setSetpoint(2000)),
       new InstantCommand(() -> shoot.enable()),
-      new WaitCommand(5),
+      new WaitCommand(6),
       new InstantCommand(() -> shoot.disable())
       ); 
   }

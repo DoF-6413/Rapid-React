@@ -30,27 +30,27 @@ public class MoveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (goesForward) {
-      goForward(toDistance);
-    } else if (!goesForward) {
-     goBackwards(toDistance);
-    } else {
-      m_DrivetrainSubsystem.setRaw(0.00, 0.00);
-
-    }
     // if (goesForward) {
-    //   if (m_DrivetrainSubsystem.getAvgEncocderDistance() < toDistance)
-    //     m_DrivetrainSubsystem.setRaw(-0.5, 0);
-    //   else{
-    //     m_DrivetrainSubsystem.setRaw(0.00, 0.00);
-    //   }
+    //   goForward(toDistance);
     // } else if (!goesForward) {
-    //   if (m_DrivetrainSubsystem.getAvgEncocderDistance() > toDistance)
-    //     m_DrivetrainSubsystem.setRaw(0.5, 0);
+    //  goBackwards(toDistance);
     // } else {
     //   m_DrivetrainSubsystem.setRaw(0.00, 0.00);
 
     // }
+    if (goesForward) {
+      if (m_DrivetrainSubsystem.getAvgEncocderDistance() < toDistance)
+        m_DrivetrainSubsystem.setRaw(-0.5, 0);
+      else{
+        m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+      }
+    } else if (!goesForward) {
+      if (m_DrivetrainSubsystem.getAvgEncocderDistance() > toDistance)
+        m_DrivetrainSubsystem.setRaw(0.5, 0);
+    } else {
+      m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -61,8 +61,9 @@ public class MoveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (m_DrivetrainSubsystem.getAvgEncocderDistance() >= toDistance);
+   return goesForward ?  (m_DrivetrainSubsystem.getAvgEncocderDistance() >= toDistance) : (m_DrivetrainSubsystem.getAvgEncocderDistance() <= toDistance);
   }
+
 
   public void goForward(int distance){
 System.out.println("FORWARD" + distance);
