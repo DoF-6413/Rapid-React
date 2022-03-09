@@ -7,11 +7,16 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Axis;
+import frc.robot.commands.AutoCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj2.command.*;
+import frc.robot.commands.*;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -31,11 +36,14 @@ public class RobotContainer {
   // private final AutoCommand m_autoCommand = new
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
+  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
 
+  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem, m_shooterSubsystem,
+      m_indexerSubsystem, m_intakeSubsystem);
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
   public XboxController m_xbox = new XboxController(Constants.xboxPort);
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
 
   public Joystick LeftStick;
   public Joystick RightStick;
@@ -43,7 +51,6 @@ public class RobotContainer {
   // XBOX Contoller Defs (For intake and Climber)
 
   // Intake Subsystem
-  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -54,8 +61,8 @@ public class RobotContainer {
     configureButtonBindings();
     // Sets deafault Drivetrain for Subsystem
     m_drivetrainSubsystem.setDefaultCommand(
-        new RunCommand(() -> m_drivetrainSubsystem.setRaw(m_leftStick.getRawAxis(Constants.joystickXAxis),
-            m_rightStick.getRawAxis(Constants.joystickYAxis)), m_drivetrainSubsystem));
+        new RunCommand(() -> m_drivetrainSubsystem.setRaw(m_rightStick.getRawAxis(Constants.joystickYAxis),
+            m_leftStick.getRawAxis(Constants.joystickXAxis)), m_drivetrainSubsystem));
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
@@ -112,9 +119,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  // public Command getAutonomousCommand() {
-  // // An ExampleCommand will run in autonomous
-  // // new AutoCommand(DrivetrainSubsystem, 5);
-  // return m_autoCommand;
-  // }
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    // new AutoCommand(DrivetrainSubsystem, 5);
+    return m_autoCommand;
+  }
 }

@@ -75,7 +75,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
      * @param leftStick  Value from -1.0 to 1.0 representing the left rate
      * @param rightStick Value from -1.0 to 1.0 representing the right rate
      */
-    public void setRaw(double leftStick, double rightStick) {
+    public void setRaw(double rightStick, double leftStick) {
         diffDrive.arcadeDrive(-rightStick, leftStick);
         printEncoderStatus();
     }
@@ -96,7 +96,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public double getAvgEncocderDistance() {
-        return (encoderLeftLead.getPosition() + encoderRightLead.getPosition()) / 2.0;
+        double averageEncoderDistance = (encoderLeftLead.getPosition() + encoderRightLead.getPosition())/2.0 ;
+        System.out.println ("averageEncoderDistance" + averageEncoderDistance);
+        return averageEncoderDistance;
     }
 
     public void resetEncoderValue() {

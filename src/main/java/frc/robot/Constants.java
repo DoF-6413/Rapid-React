@@ -45,7 +45,7 @@ public final class Constants {
     final public static double shooterSpeed = .90;
 
     // Sets indexer speed (Currently 20%)
-    final public static double indexerSpeed = 0.50;
+    final public static double indexerSpeed = -.20;
 
     // Falcon 500 RPM Equation
     final public static double velocityToRPM(double velocity) {
@@ -66,4 +66,10 @@ public final class Constants {
 
     final public static double lowerHubSpeed = 2000;
     final public static double upperHubSpeed = 5000;
+
+    // shooter run times seconds
+    final public static double waitTimeForShooter = 15; 
+
+   
+    final public static double waitTimeForIndexer = 1;
 }
