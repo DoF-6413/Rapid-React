@@ -18,7 +18,9 @@ public class Shoot extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      new InstantCommand( () -> shoot.setSetpoint(4250)),
+      new InstantCommand( () -> shoot.setSetpoint(2300)),
+      //change to 2300 for low goal
+      //change to 4250 for high goal
       new InstantCommand(() -> shoot.enable()),
       new WaitCommand(2.5),
       new InstantCommand(() -> shoot.disable())

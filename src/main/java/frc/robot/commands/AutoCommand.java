@@ -25,10 +25,13 @@ public class AutoCommand extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand()); 
     addCommands(
       new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
+      //comment out above for high goal
+      new MoveCommand(drive, 3, true),
       parallel( new Shoot(shoot), new IndexerCommand(Index)),
-      //new MoveCommand(drive, 4, true),
-      new MoveCommand(drive, -4, false),
-      new PickupCommmand(intake)
+      new MoveCommand(drive, -8, false)
+      // change above to -8 for low goal
+      // change above to -4 for high hoal
+      //new PickupCommmand(intake)
     );
   }
 }
