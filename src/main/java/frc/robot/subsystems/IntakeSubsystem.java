@@ -20,6 +20,8 @@ public class IntakeSubsystem extends SubsystemBase {
   DigitalInput toplimitSwitch = new DigitalInput(0);
   DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
+  boolean down;
+
   // Initializing intake motors
   // Defining what each inake motor is and their ID's
   public IntakeSubsystem() {
@@ -28,6 +30,9 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);
     intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
     intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
+
+    intakeLeftActuator.setSmartCurrentLimit(10);
+    intakeRightActuator.setSmartCurrentLimit(10);
   }
 
   // Spins Intake Motor
@@ -73,10 +78,12 @@ public class IntakeSubsystem extends SubsystemBase {
       // We are going down and bottom limit is tripped so stop
       intakeLeftActuator.set(0);
       intakeRightActuator.set(0);
+      down = true;
     } else {
       // We are going down but bottom limit is not tripped so go at commanded speed
       intakeLeftActuator.set(-speed);
       intakeRightActuator.set(speed);
+      down = false;
     }
   }
   // TODO: Create a function that moves the aucuator 90 degrees to drop intake

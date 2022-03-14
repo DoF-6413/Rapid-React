@@ -20,7 +20,7 @@ public class IndexerCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      new WaitCommand(Constants.waitTimeForIndexer),
+      new WaitCommand(1),
       new InstantCommand(() -> Index.spinMotor()),
       new WaitCommand(Constants.waitTimeForIndexer),
       new InstantCommand(() -> Index.stopMotor())

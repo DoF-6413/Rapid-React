@@ -23,8 +23,7 @@ public final class Constants {
 
     final public static int[] shooterID = new int[] { 7, 11 };
     final public static int IndexerID = 12;
-
-    // Assigned to Left Joystick Trigger
+    //Assigned to Left Joystick Trigger
     final public static int intakeTrigger = 1;
 
     // Assigned to Right Joystick Trigger
@@ -33,7 +32,7 @@ public final class Constants {
     // Sets Intake Speed (Currently 50%)
     final public static double intakeSpeed = 0.5;
     final public static double reverseIntakeSpeed = -0.5;
-    final public static double slowSpeed = 0.25;
+    final public static double slowSpeed = 0.50;
     final public static double slowSpeed2 = 0.1;
 
     // FACTS
@@ -71,5 +70,5 @@ public final class Constants {
     final public static double waitTimeForShooter = 15; 
 
    
-    final public static double waitTimeForIndexer = 1;
+    final public static double waitTimeForIndexer = 2;
 }

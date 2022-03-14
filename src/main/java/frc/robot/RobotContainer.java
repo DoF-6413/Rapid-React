@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
-import frc.robot.commands.AutoCommand;
+import frc.robot.commands.AutoIntake;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -39,7 +39,7 @@ public class RobotContainer {
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
 
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem, m_shooterSubsystem,
+  private final AutoIntake m_autoCommand = new AutoIntake(m_drivetrainSubsystem, m_shooterSubsystem,
       m_indexerSubsystem, m_intakeSubsystem);
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
