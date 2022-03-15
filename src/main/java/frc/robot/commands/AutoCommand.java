@@ -28,7 +28,7 @@ public class AutoCommand extends SequentialCommandGroup {
       new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
       //comment out above for high goal
       //new MoveCommand(drive, 3, true),
-      parallel( new Shoot(shoot), new IndexerCommand(Index)),
+      parallel( new ShootHigh(shoot), new IndexerCommand(Index)),
       new MoveCommand(drive, -4, false)
       // change above to -8 for low goal
       // change above to -4 for high hoal
