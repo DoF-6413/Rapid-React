@@ -6,24 +6,25 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ShootHigh extends SequentialCommandGroup {
+public class regurgitate extends SequentialCommandGroup {
   /** Creates a new Shoot. */
-  public ShootHigh(ShooterSubsystem shoot) {
+  public regurgitate(IntakeSubsystem intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      new InstantCommand( () -> shoot.setSetpoint(4250)),
+      parallel( new InstantCommand( () -> intake.setActuatorUp(0.1)), new InstantCommand( () -> intake.reverseMotor())),
+      new WaitCommand(1),
+      new InstantCommand( () -> intake.stopActuators()),
+      new WaitCommand(3),
+      new InstantCommand( () -> intake.stopMotor())
       //change to 2300 for low goal
       //change to 4250 for high goal
-      new InstantCommand(() -> shoot.enable()),
-      new WaitCommand(4),
-      new InstantCommand(() -> shoot.disable())
       ); 
   }
 }

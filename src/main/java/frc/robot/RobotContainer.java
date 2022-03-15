@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.AutoIntake;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -18,7 +19,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.IndexerSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 /**
@@ -33,6 +34,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   // private final AutoCommand m_autoCommand = new
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
@@ -63,6 +65,18 @@ public class RobotContainer {
     m_drivetrainSubsystem.setDefaultCommand(
         new RunCommand(() -> m_drivetrainSubsystem.setRaw(m_rightStick.getRawAxis(Constants.joystickYAxis),
             m_leftStick.getRawAxis(Constants.joystickXAxis)), m_drivetrainSubsystem));
+//Left Trigger on Joystick = Make the climber go up
+        new JoystickButton(m_leftStick, 1)
+        .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem));
+//        .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+//Right Trigger on Joystick = Make the climber go down
+new JoystickButton(m_rightStick, 1)
+        .whenPressed(new RunCommand(() -> m_climberSubsystem.goDown(), m_climberSubsystem));
+  //      .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+  new JoystickButton(m_rightStick, 2)
+  .whenPressed(new regurgitate(m_intakeSubsystem)).
+  whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem)).
+  whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)

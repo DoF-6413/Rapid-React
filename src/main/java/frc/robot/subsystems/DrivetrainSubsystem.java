@@ -28,6 +28,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private RelativeEncoder encoderLeftLead;
     private RelativeEncoder encoderRightLead;
 
+    double RightStick;
+    double LeftStick;
+
     private DifferentialDrive diffDrive;
 
     public DrivetrainSubsystem() {
@@ -76,9 +79,34 @@ public class DrivetrainSubsystem extends SubsystemBase {
      * @param rightStick Value from -1.0 to 1.0 representing the right rate
      */
     public void setRaw(double rightStick, double leftStick) {
-        diffDrive.arcadeDrive(-rightStick, leftStick);
+
+        // if(rightStick > 0){
+        // RightStick = -(rightStick*rightStick);
+        // } else if (rightStick < 0){
+        // RightStick = (rightStick*rightStick);
+        // }
+
+        // if(leftStick > 0){
+        // LeftStick = (leftStick*leftStick);
+        // } else if (rightStick < 0){
+        // LeftStick = -(leftStick*leftStick);
+        // }
+
+        diffDrive.arcadeDrive(-(rightStick), (leftStick));
         printEncoderStatus();
     }
+
+/**
+ * ,
+ */
+
+
+
+
+
+
+
+
     /*
      * to switch to tank drive uncomment this and place inside of set raw
      * diffDrive.tankDrive(-leftStick.getY(), -rightStick.getY());

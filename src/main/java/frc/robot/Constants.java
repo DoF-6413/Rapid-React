@@ -23,7 +23,9 @@ public final class Constants {
 
     final public static int[] shooterID = new int[] { 7, 11 };
     final public static int IndexerID = 12;
-    //Assigned to Left Joystick Trigger
+    final public static int ClimberID = 13;
+
+    // Assigned to Left Joystick Trigger
     final public static int intakeTrigger = 1;
 
     // Assigned to Right Joystick Trigger
@@ -64,7 +66,7 @@ public final class Constants {
     final public static double moveDistanceFromTarmac = 5;
 
     final public static double lowerHubSpeed = 2300;
-    final public static double upperHubSpeed = 5000;
+    final public static double upperHubSpeed = 4000;
 
     // shooter run times seconds
     final public static double waitTimeForShooter = 15; 
