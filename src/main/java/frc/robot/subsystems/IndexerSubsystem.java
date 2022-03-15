@@ -18,11 +18,11 @@ public class IndexerSubsystem extends SubsystemBase {
   private TalonSRX indexMotor = new TalonSRX(Constants.IndexerID);
 
   public void spinMotor() {
-    indexMotor.set(TalonSRXControlMode.PercentOutput, Constants.indexerSpeed);
+    indexMotor.set(TalonSRXControlMode.PercentOutput, 0.8);
   }
 
   public void spinBack() {
-    indexMotor.set(TalonSRXControlMode.PercentOutput, -Constants.indexerSpeed);
+    indexMotor.set(TalonSRXControlMode.PercentOutput, -0.8);
   }
 
   public void stopMotor() {

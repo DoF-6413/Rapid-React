@@ -22,7 +22,7 @@ public class ClimberSubsystem extends SubsystemBase {
       climberMotor.set(TalonFXControlMode.PercentOutput, 0);
     }
     else {
-      climberMotor.set(TalonFXControlMode.PercentOutput, 0.50);
+      climberMotor.set(TalonFXControlMode.PercentOutput, 0.80);
     }
     climberPosition();
   }

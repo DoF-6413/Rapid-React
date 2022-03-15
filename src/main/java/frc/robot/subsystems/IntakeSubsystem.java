@@ -91,7 +91,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void setActuatorDown(double speed) {
     if (bottomlimitSwitch.get()||
-    SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -39) {
+    SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -38) {
       // We are going down and bottom limit is tripped so stop
 
       intakeLeftActuator.set(0);
