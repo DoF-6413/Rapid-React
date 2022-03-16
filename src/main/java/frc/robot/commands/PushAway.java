@@ -19,7 +19,7 @@ public class PushAway extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
       new InstantCommand( () -> Intake.spinMotor()),
-      new WaitCommand(4),
+      new WaitCommand(Constants.fourSeconds),
       new InstantCommand( () -> Intake.stopMotor())
       ); 
   }

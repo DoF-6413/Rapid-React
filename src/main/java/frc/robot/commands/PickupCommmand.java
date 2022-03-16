@@ -19,7 +19,7 @@ public class PickupCommmand extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
       new InstantCommand( () -> Intake.spinMotor()),
-      new WaitCommand(1),
+      new WaitCommand(Constants.oneSecond),
       new InstantCommand( () -> Intake.stopMotor())
       ); 
   }

@@ -19,9 +19,9 @@ public class regurgitate extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
       parallel( new InstantCommand( () -> intake.setActuatorUp(0.1)), new InstantCommand( () -> intake.reverseMotor())),
-      new WaitCommand(1),
+      new WaitCommand(Constants.oneSecond),
       new InstantCommand( () -> intake.stopActuators()),
-      new WaitCommand(3),
+      new WaitCommand(Constants.threeSeconds),
       new InstantCommand( () -> intake.stopMotor())
       //change to 2300 for low goal
       //change to 4250 for high goal

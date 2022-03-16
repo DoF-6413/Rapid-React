@@ -70,7 +70,9 @@ public final class Constants {
 
     // shooter run times seconds
     final public static double waitTimeForShooter = 15; 
-
-   
-    final public static double waitTimeForIndexer = 2;
+    final public static double oneSecond = 1;
+    final public static double twoSeconds = 2;
+    final public static double twoAndHalfSeconds = 2.5;
+    final public static double threeSeconds = 3;
+    final public static double fourSeconds = 4;
 }

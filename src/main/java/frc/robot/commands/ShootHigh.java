@@ -22,7 +22,7 @@ public class ShootHigh extends SequentialCommandGroup {
       //change to 2300 for low goal
       //change to 4250 for high goal
       new InstantCommand(() -> shoot.enable()),
-      new WaitCommand(4),
+      new WaitCommand(Constants.fourSeconds),
       new InstantCommand(() -> shoot.disable())
       ); 
   }

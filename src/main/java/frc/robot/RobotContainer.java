@@ -76,7 +76,9 @@ public class RobotContainer {
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
-  public RobotContainer() {
+  public RobotContainer(
+   ) {
+     
 
     // Configure the button bindings
     configureButtonBindings();
@@ -133,12 +135,12 @@ new JoystickButton(m_rightStick, 1)
         .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)));
 
     SmartDashboard.putData(m_shooterSubsystem);
-    m_chooser.setDefaultOption("Auto with Intake", m_autoHighIntake);
-    m_chooser.addOption("Auto High Goal", m_autoLowGoal);
-    m_chooser.addOption("Auto High Goal", m_autoHighGoal);
-    m_chooser.addOption("Auto Low Goal", m_autoLowGoal);
-    m_chooser.addOption("Auto just Move", m_autoMove);
-    m_chooser.addOption("Auto Push Away", m_autoPush);
+    m_chooser.setDefaultOption("High Intake", m_autoHighIntake);
+    m_chooser.addOption("Low Intake", m_autoLowIntake);
+    m_chooser.addOption("High Goal", m_autoHighGoal);
+    m_chooser.addOption("Low Goal", m_autoLowGoal);
+    m_chooser.addOption("Just Move", m_autoMove);
+    m_chooser.addOption("Push Away", m_autoPush);
       SmartDashboard.putData(m_chooser);
   }
 
