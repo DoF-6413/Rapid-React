@@ -70,6 +70,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightLead.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
+        //leftLead.setOpenLoopRampRate(0.5);
+        //rightLead.setOpenLoopRampRate(0.5);
     }
 
     /**

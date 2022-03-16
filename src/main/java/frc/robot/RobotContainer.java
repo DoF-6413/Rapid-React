@@ -52,7 +52,10 @@ public class RobotContainer {
   // XBOX Contoller Defs (For intake and Climber)
 
   // different Autos
-  private final Command m_autoIntake = new AutoIntake(m_drivetrainSubsystem, m_shooterSubsystem,
+  private final Command m_autoHighIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
+  m_indexerSubsystem, m_intakeSubsystem);
+
+  private final Command m_autoLowIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
   m_indexerSubsystem, m_intakeSubsystem);
 
   private final Command m_autoHighGoal = new AutoHighGoal(m_drivetrainSubsystem, m_shooterSubsystem,
@@ -130,7 +133,8 @@ new JoystickButton(m_rightStick, 1)
         .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)));
 
     SmartDashboard.putData(m_shooterSubsystem);
-    m_chooser.setDefaultOption("Auto with Intake", m_autoIntake);
+    m_chooser.setDefaultOption("Auto with Intake", m_autoHighIntake);
+    m_chooser.addOption("Auto High Goal", m_autoLowGoal);
     m_chooser.addOption("Auto High Goal", m_autoHighGoal);
     m_chooser.addOption("Auto Low Goal", m_autoLowGoal);
     m_chooser.addOption("Auto just Move", m_autoMove);

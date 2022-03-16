@@ -18,9 +18,9 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoIntake extends SequentialCommandGroup {
+public class AutoHighIntake extends SequentialCommandGroup {
   /** Creates a new OttoCommand. */
-  public AutoIntake(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index, IntakeSubsystem intake) {
+  public AutoHighIntake(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index, IntakeSubsystem intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand()); 
     addCommands(
@@ -30,7 +30,8 @@ public class AutoIntake extends SequentialCommandGroup {
       //new MoveCommand(drive, 4, true),
       parallel(new PickupCommmand(intake)), 
       new MoveCommand(drive, 3, true),
-      parallel( new ShootHigh(shoot), new IndexerCommand(Index))
+      parallel( new ShootHigh(shoot), new IndexerCommand(Index)),
+      new MoveCommand(drive, -7, false)
     );
   }
 }
