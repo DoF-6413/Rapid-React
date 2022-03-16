@@ -12,15 +12,19 @@ import frc.robot.Constants;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PickupCommmand extends SequentialCommandGroup {
+public class regurgitate extends SequentialCommandGroup {
   /** Creates a new Shoot. */
-  public PickupCommmand(IntakeSubsystem Intake) {
+  public regurgitate(IntakeSubsystem intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      new InstantCommand( () -> Intake.spinMotor()),
+      parallel( new InstantCommand( () -> intake.setActuatorUp(0.1)), new InstantCommand( () -> intake.reverseMotor())),
       new WaitCommand(Constants.oneSecond),
-      new InstantCommand( () -> Intake.stopMotor())
+      new InstantCommand( () -> intake.stopActuators()),
+      new WaitCommand(Constants.threeSeconds),
+      new InstantCommand( () -> intake.stopMotor())
+      //change to 2300 for low goal
+      //change to 4250 for high goal
       ); 
   }
 }

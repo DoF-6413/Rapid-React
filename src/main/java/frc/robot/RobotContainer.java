@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
-import frc.robot.commands.AutoCommand;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -18,8 +18,9 @@ import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.IndexerSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -33,14 +34,14 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   // private final AutoCommand m_autoCommand = new
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
 
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final AutoCommand m_autoCommand = new AutoCommand(m_drivetrainSubsystem, m_shooterSubsystem,
-      m_indexerSubsystem, m_intakeSubsystem);
+  
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
   public XboxController m_xbox = new XboxController(Constants.xboxPort);
@@ -50,12 +51,34 @@ public class RobotContainer {
 
   // XBOX Contoller Defs (For intake and Climber)
 
+  // different Autos
+  private final Command m_autoHighIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
+  m_indexerSubsystem, m_intakeSubsystem);
+
+  private final Command m_autoLowIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
+  m_indexerSubsystem, m_intakeSubsystem);
+
+  private final Command m_autoHighGoal = new AutoHighGoal(m_drivetrainSubsystem, m_shooterSubsystem,
+  m_indexerSubsystem, m_intakeSubsystem);
+
+  private final Command m_autoLowGoal = new AutoLowGoal(m_drivetrainSubsystem, m_shooterSubsystem,
+  m_indexerSubsystem, m_intakeSubsystem);
+
+  private final Command m_autoMove = new AutoMove(m_drivetrainSubsystem, m_intakeSubsystem);
+
+  private final Command m_autoPush = new AutoPush(m_drivetrainSubsystem, m_intakeSubsystem);
   // Intake Subsystem
+  public SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+//   m_chooser.setDefaultOption("Simple Auto", m_autoIntake);
+//     m_chooser.addOption("Complex Auto", m_autoHighGoal);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
-  public RobotContainer() {
+  public RobotContainer(
+   ) {
+     
 
     // Configure the button bindings
     configureButtonBindings();
@@ -63,19 +86,33 @@ public class RobotContainer {
     m_drivetrainSubsystem.setDefaultCommand(
         new RunCommand(() -> m_drivetrainSubsystem.setRaw(m_rightStick.getRawAxis(Constants.joystickYAxis),
             m_leftStick.getRawAxis(Constants.joystickXAxis)), m_drivetrainSubsystem));
-
-    // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
-    new JoystickButton(m_xbox, XboxController.Button.kA.value)
+//Left Trigger on Joystick = Make the climber go up
+        new JoystickButton(m_leftStick, 1)
         .whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
         .whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
         .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
         .whenReleased(new RunCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+//        .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+//Right Trigger on Joystick = Make the climber go down
+new JoystickButton(m_rightStick, 1)
+.whenPressed(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem))
+.whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
+.whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
+.whenReleased(new RunCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+  //      .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+  new JoystickButton(m_rightStick, 2)
+  .whenPressed(new regurgitate(m_intakeSubsystem)).
+  whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem)).
+  whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
+
+    // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
+    new JoystickButton(m_xbox, XboxController.Button.kA.value)
+    .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem));
+        
     // Trigger ButtonB = Spins Intake and Indexer backwards (Away from Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kB.value)
-        .whenPressed(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem))
-        .whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
-        .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
-        .whenReleased(new RunCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+    .whenPressed(new RunCommand(() -> m_climberSubsystem.goDown(), m_climberSubsystem));
+        
     // Trigger ButtonX = Brings Actuator Up and Will Stop When Released or When
     // Limit Switch Get Hits
     new JoystickButton(m_xbox, XboxController.Button.kX.value)
@@ -98,6 +135,13 @@ public class RobotContainer {
         .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)));
 
     SmartDashboard.putData(m_shooterSubsystem);
+    m_chooser.setDefaultOption("High Intake", m_autoHighIntake);
+    m_chooser.addOption("Low Intake", m_autoLowIntake);
+    m_chooser.addOption("High Goal", m_autoHighGoal);
+    m_chooser.addOption("Low Goal", m_autoLowGoal);
+    m_chooser.addOption("Just Move", m_autoMove);
+    m_chooser.addOption("Push Away", m_autoPush);
+      SmartDashboard.putData(m_chooser);
   }
 
   /**
@@ -122,6 +166,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     // new AutoCommand(DrivetrainSubsystem, 5);
-    return m_autoCommand;
+    return m_chooser.getSelected();
   }
 }

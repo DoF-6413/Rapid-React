@@ -23,6 +23,7 @@ public final class Constants {
 
     final public static int[] shooterID = new int[] { 7, 11 };
     final public static int IndexerID = 12;
+    final public static int ClimberID = 13;
 
     // Assigned to Left Joystick Trigger
     final public static int intakeTrigger = 1;
@@ -33,7 +34,7 @@ public final class Constants {
     // Sets Intake Speed (Currently 50%)
     final public static double intakeSpeed = 0.5;
     final public static double reverseIntakeSpeed = -0.5;
-    final public static double slowSpeed = 0.25;
+    final public static double slowSpeed = 0.50;
     final public static double slowSpeed2 = 0.1;
 
     // FACTS
@@ -45,8 +46,8 @@ public final class Constants {
     final public static double shooterSpeed = .90;
 
     // Sets indexer speed (Currently 20%)
-    final public static double indexerSpeed = -.20;
-
+    final public static double indexerSpeed = .60;
+// switched to positive march 11
     // Falcon 500 RPM Equation
     final public static double velocityToRPM(double velocity) {
         return velocity * 600 / 2048;
@@ -64,12 +65,14 @@ public final class Constants {
     // units in feet
     final public static double moveDistanceFromTarmac = 5;
 
-    final public static double lowerHubSpeed = 2000;
-    final public static double upperHubSpeed = 5000;
+    final public static double lowerHubSpeed = 2300;
+    final public static double upperHubSpeed = 4000;
 
     // shooter run times seconds
     final public static double waitTimeForShooter = 15; 
-
-   
-    final public static double waitTimeForIndexer = 1;
+    final public static double oneSecond = 1;
+    final public static double twoSeconds = 2;
+    final public static double twoAndHalfSeconds = 2.5;
+    final public static double threeSeconds = 3;
+    final public static double fourSeconds = 4;
 }
