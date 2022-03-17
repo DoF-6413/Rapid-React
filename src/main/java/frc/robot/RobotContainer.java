@@ -55,7 +55,7 @@ public class RobotContainer {
   private final Command m_autoHighIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
   m_indexerSubsystem, m_intakeSubsystem);
 
-  private final Command m_autoLowIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
+  private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem,
   m_indexerSubsystem, m_intakeSubsystem);
 
   private final Command m_autoHighGoal = new AutoHighGoal(m_drivetrainSubsystem, m_shooterSubsystem,
