@@ -38,8 +38,12 @@ public class ClimberSubsystem extends SubsystemBase {
     climberPosition();
   }
 
+  public void goDownManual(){
+    climberMotor.set(TalonFXControlMode.PercentOutput, -0.20);
+  }
+
   public void stop() {
-    //climberMotor.set(TalonFXControlMode.PercentOutput, 0); // runs the motor at 0% power
+    climberMotor.set(TalonFXControlMode.PercentOutput, 0); // runs the motor at 0% power
     climberPosition();
   }
 

@@ -105,6 +105,12 @@ new JoystickButton(m_rightStick, 1)
   whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem)).
   whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
+  //Manual Down so after match can bring down without relying on encoder values
+new JoystickButton(m_leftStick, 7)
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(), m_climberSubsystem)).
+whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+
+
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
     .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem));
