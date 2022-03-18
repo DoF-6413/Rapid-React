@@ -67,6 +67,8 @@ public class RobotContainer {
   private final Command m_autoMove = new AutoMove(m_drivetrainSubsystem, m_intakeSubsystem);
 
   private final Command m_autoPush = new AutoPush(m_drivetrainSubsystem, m_intakeSubsystem);
+
+  private final Command m_testActuatorUp = new testActuatorUp(m_intakeSubsystem);
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -147,6 +149,8 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     m_chooser.addOption("Low Goal", m_autoLowGoal);
     m_chooser.addOption("Just Move", m_autoMove);
     m_chooser.addOption("Push Away", m_autoPush);
+    m_chooser.addOption("Test Arm Up", m_testActuatorUp);
+    
       SmartDashboard.putData(m_chooser);
   }
 
