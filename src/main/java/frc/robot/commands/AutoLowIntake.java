@@ -31,6 +31,7 @@ public class AutoLowIntake extends SequentialCommandGroup {
       parallel(new PickupCommmand(intake)), 
       new MoveCommand(drive, 6, true),
       parallel( new ShootLow(shoot), new IndexerCommand(Index)),
+      new ActuatorUp(intake),
       new MoveCommand(drive, -10, false)
     );
   }

@@ -26,7 +26,7 @@ public class IntakeSubsystem extends SubsystemBase {
   DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
   boolean down;
-
+  boolean up;
   // Initializing intake motors
   // Defining what each inake motor is and their ID's
   public IntakeSubsystem() {
@@ -81,10 +81,12 @@ public class IntakeSubsystem extends SubsystemBase {
       // We are going up and top limit is tripped so stop
       intakeLeftActuator.set(0);
       intakeRightActuator.set(0);
+      up = true;
     } else {
       // We are going up but top limit is not tripped so go at commanded speed
       intakeLeftActuator.set(speed);
       intakeRightActuator.set(-speed);
+      up = false;
     }
     armPosition();
   }
