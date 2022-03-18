@@ -76,11 +76,12 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setActuatorUp(double speed) {
-    if (toplimitSwitch.get() || 
-    SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -1) {
+    if (false)
+    //   toplimitSwitch.get() || 
+    // SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -1)
+     {
       // We are going up and top limit is tripped so stop
-      intakeLeftActuator.set(0);
-      intakeRightActuator.set(0);
+      stopActuators();
       up = true;
     } else {
       // We are going up but top limit is not tripped so go at commanded speed
@@ -96,14 +97,13 @@ public class IntakeSubsystem extends SubsystemBase {
     SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -38) {
       // We are going down and bottom limit is tripped so stop
 
-      intakeLeftActuator.set(0);
-      intakeRightActuator.set(0);
-      down = true;
+      stopActuators();
+       down = true;
     } else {
       // We are going down but bottom limit is not tripped so go at commanded speed
       intakeLeftActuator.set(-speed);
       intakeRightActuator.set(speed);
-      down = false;
+       down = false;
     }
     armPosition();
   }

@@ -5,6 +5,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
 
@@ -17,7 +19,11 @@ public class testActuatorUp extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new ActuatorDown(intake),
+      new WaitCommand(1.5),
       new ActuatorUp(intake)
+      // new WaitCommand(Constants.threeSeconds),
+     
     );
   }
 }
