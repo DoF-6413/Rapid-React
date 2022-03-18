@@ -12,41 +12,46 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class TurnCommand extends CommandBase {
   public double toDistance;
-  public double angle;
+  public boolean goesClockwise;
   private final DrivetrainSubsystem m_DrivetrainSubsystem;
 
-  public TurnCommand(DrivetrainSubsystem drivetrainSubsystem, Integer Angle) {
+  public TurnCommand(DrivetrainSubsystem drivetrainSubsystem, Integer Angle, boolean Direction) {
     m_DrivetrainSubsystem = drivetrainSubsystem;
     addRequirements(m_DrivetrainSubsystem);
-    angle = Angle;
+    toDistance = Angle * Constants.turningRadius ;
+    goesClockwise = Direction;
+    
   }
 
-  // Called when the command is nitially scheduled.
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_DrivetrainSubsystem.resetEncoderValue();
-    if (angle > 180){
-     angle = 360 - angle;
-     toDistance = -(angle * Constants.turningRadius) ;
-    } else {
-      toDistance = angle * Constants.turningRadius;
-    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (angle <= 180) {
+    // if (goesForward) {
+    //   goForward(toDistance);
+    // } else if (!goesForward) {
+    //  goBackwards(toDistance);
+    // } else {
+    //   m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+
+    // }
+    if (goesClockwise) {
       if (m_DrivetrainSubsystem.LeftEncoderDistance() < toDistance)
         m_DrivetrainSubsystem.setRaw(0.00, 0.5);
       else{
         m_DrivetrainSubsystem.setRaw(0.00, 0.00);
       }
-    } else if (angle > 180) {
+    } else if (!goesClockwise) {
       if (m_DrivetrainSubsystem.LeftEncoderDistance() > toDistance)
         m_DrivetrainSubsystem.setRaw(0.00, -0.5);
     } else {
       m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+
     }
   }
 
@@ -58,12 +63,12 @@ public class TurnCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-   return angle <= 180 ?  (m_DrivetrainSubsystem.LeftEncoderDistance() >= toDistance) : (m_DrivetrainSubsystem.LeftEncoderDistance() <= toDistance);
+   return goesClockwise ?  (m_DrivetrainSubsystem.LeftEncoderDistance() >= toDistance) : (m_DrivetrainSubsystem.LeftEncoderDistance() <= toDistance);
   }
 
 
   public void goClockwise(int distance){
-System.out.println("Right" + distance);
+System.out.println("Left" + distance);
   }
 
   public void goCounterClockwise(int distance){
