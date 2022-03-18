@@ -78,4 +78,13 @@ public final class Constants {
 
     // indexer wait time to optimize shooter control in teleop
     final public static double indexerWaitTime = 0.25;
+    //MATH
+    final public static double wheelToWheel = 27;
+    final public static double turningRadius = wheelToWheel/2;
+    final public static double circOfWheelToWheel = wheelToWheel/12 /2 * 2 * Math.PI;
+
+    // final public static double oneEightyTurn = circOfWheelToWheel/2;
+    // final public static double ninetyTurn = circOfWheelToWheel/4;
+    // final public static double fortyFiveTurn = circOfWheelToWheel/8;
+
 }
