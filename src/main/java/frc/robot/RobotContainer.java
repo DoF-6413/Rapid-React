@@ -71,6 +71,7 @@ public class RobotContainer {
   private final Command m_wHighIntake = new WAutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
 
   private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
+  private final Command m_spin = new Spin(m_drivetrainSubsystem);
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -112,6 +113,10 @@ new JoystickButton(m_rightStick, 1)
   //Manual Down so after match can bring down without relying on encoder values
 new JoystickButton(m_leftStick, 7)
 .whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(), m_climberSubsystem)).
+whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+
+new JoystickButton(m_leftStick, 12)
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(), m_climberSubsystem)).
 whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
 
@@ -160,7 +165,7 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     m_chooser.addOption("Low Goal", m_autoLowGoal);
     m_chooser.addOption("Just Move", m_autoMove);
     m_chooser.addOption("Push Away", m_autoPush);
-   
+    m_chooser.addOption("Spin", m_spin);
       SmartDashboard.putData(m_chooser);
   }
 
