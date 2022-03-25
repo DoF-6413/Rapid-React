@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -13,16 +14,17 @@ import frc.robot.subsystems.ShooterSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Spin extends SequentialCommandGroup {
   /** Creates a new AutoMove. */
-  public Spin(DrivetrainSubsystem drive) {
+  public Spin(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new TurnCommand(drive, 270),
       new MoveCommand(drive, 5, true),
       new TurnCommand(drive, 90),
-      new MoveCommand(drive, 8, true)
-     // new TurnCommand(drive, 90)
-      //new MoveCommand(drive, 3, true)
+      new MoveCommand(drive, 8, true),
+     new TurnCommand(drive, 90),
+      new MoveCommand(drive, 2, true),
+      parallel( new ShootHigh(shoot), new IndexerCommand(Index))
  
     );
   }

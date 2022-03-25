@@ -71,7 +71,7 @@ public class RobotContainer {
   private final Command m_wHighIntake = new WAutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
 
   private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
-  private final Command m_spin = new Spin(m_drivetrainSubsystem);
+  private final Command m_spin = new Spin(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
