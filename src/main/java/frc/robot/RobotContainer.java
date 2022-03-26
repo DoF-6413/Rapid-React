@@ -67,6 +67,7 @@ public class RobotContainer {
   private final Command m_autoMove = new AutoMove(m_drivetrainSubsystem, m_intakeSubsystem);
 
   private final Command m_autoPush = new AutoPush(m_drivetrainSubsystem, m_intakeSubsystem);
+
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -123,35 +124,30 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     // Limit Switch Get Hits
     new JoystickButton(m_xbox, XboxController.Button.kX.value)
         .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorUp(Constants.slowSpeed), m_intakeSubsystem))
-        .whenReleased(new RunCommand(() -> m_intakeSubsystem.setActuatorDown(Constants.slowSpeed), m_intakeSubsystem));
+        .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
     // Trigger ButtonY = Bring Actuator Down and Will Stop When Released or When
     
 // individual actuators up and down
     // Limit Switches Get Hits
-    //new JoystickButton(m_xbox, XboxController.Button.kY.value)
-       // .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorDown(Constants.slowSpeed), m_intakeSubsystem))
-        //.whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
+    new JoystickButton(m_xbox, XboxController.Button.kY.value)
+       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorDown(Constants.slowSpeed), m_intakeSubsystem))
+        .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
     // Trigger Button Left Bumper (L1) = Runs Shooter Subsystem at 2000 R P M
     new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value)
-    .whenPressed(new ShootTeleopLow(m_shooterSubsystem, m_indexerSubsystem))
+    .whenHeld(new ShootTeleopLow(m_shooterSubsystem, m_indexerSubsystem))
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
-       
-    //.whenPressed(new InstantCommand(() -> m_shooterSubsystem.enable(), m_shooterSubsystem))
-       // .whenPressed(new InstantCommand(() -> m_shooterSubsystem.LowerHub(), m_shooterSubsystem))
-      //  .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)));
-      
+  
+  
     // Trigger Button Right Bumper (R1) = Runs Shooter Subsystem at 5000 R P M
+
     new JoystickButton(m_xbox, XboxController.Button.kRightBumper.value)
-    .whenPressed(new ShootTeleopHigh(m_shooterSubsystem, m_indexerSubsystem))
+    .whenHeld(new ShootTeleopHigh(m_shooterSubsystem, m_indexerSubsystem))
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
-      //  .whenPressed(new InstantCommand(() -> m_shooterSubsystem.enable(), m_shooterSubsystem))
-      //  .whenPressed(new InstantCommand(() -> m_shooterSubsystem.UpperHub(), m_shooterSubsystem))
-      //  .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)));
-
+     
     SmartDashboard.putData(m_shooterSubsystem);
     m_chooser.setDefaultOption("High Intake", m_autoHighIntake);
     m_chooser.addOption("Low Intake", m_autoLowIntake);

@@ -21,7 +21,10 @@ public class IndexerTeleop extends SequentialCommandGroup {
     addCommands(
       new InstantCommand(() -> index.spinBack()),
       new WaitCommand(Constants.indexerWaitTime),
-      new InstantCommand(() -> index.spinMotor())
+      new InstantCommand(() -> index.spinMotor()),
+      new WaitCommand(Constants.oneSecond),
+      new InstantCommand(()-> index.stopMotor())
+    // this continues running in low hub
     );
   }
 }
