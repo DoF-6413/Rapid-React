@@ -17,8 +17,7 @@ public class ShootTeleopLow extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new IndexerTeleop(index), 
-      parallel(new ShootLow(shoot))
+      parallel(new IndexerTeleop(index), new ShootLow(shoot))
     );
   }
 }
