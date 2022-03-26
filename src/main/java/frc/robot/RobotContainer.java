@@ -55,7 +55,7 @@ public class RobotContainer {
   private final Command m_autoHighIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
   m_indexerSubsystem, m_intakeSubsystem);
 
-  private final Command m_autoLowIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
+  private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem,
   m_indexerSubsystem, m_intakeSubsystem);
 
   private final Command m_autoHighGoal = new AutoHighGoal(m_drivetrainSubsystem, m_shooterSubsystem,
@@ -104,6 +104,12 @@ new JoystickButton(m_rightStick, 1)
   .whenPressed(new regurgitate(m_intakeSubsystem)).
   whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem)).
   whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
+
+  //Manual Down so after match can bring down without relying on encoder values
+new JoystickButton(m_leftStick, 7)
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(), m_climberSubsystem)).
+whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
