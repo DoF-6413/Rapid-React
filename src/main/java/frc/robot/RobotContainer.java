@@ -20,6 +20,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.GyroSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
@@ -35,6 +36,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
   // private final AutoCommand m_autoCommand = new
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
@@ -150,7 +152,8 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
-     
+    new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_gyroSubsystem));
+
     SmartDashboard.putData(m_shooterSubsystem);
     m_chooser.setDefaultOption("Mid High Intake", m_autoHighIntake);
     m_chooser.addOption("Mid Low Intake", m_autoLowIntake);
@@ -162,6 +165,8 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     m_chooser.addOption("Push Away", m_autoPush);
    
       SmartDashboard.putData(m_chooser);
+
+
   }
 
   /**
