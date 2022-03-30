@@ -55,7 +55,7 @@ public class RobotContainer {
   private final Command m_autoHighIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
   m_indexerSubsystem, m_intakeSubsystem);
 
-  private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem,
+  private final Command m_wAutoLowIntake = new WAutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem,
   m_indexerSubsystem, m_intakeSubsystem);
 
   private final Command m_autoHighGoal = new AutoHighGoal(m_drivetrainSubsystem, m_shooterSubsystem,
@@ -68,6 +68,9 @@ public class RobotContainer {
 
   private final Command m_autoPush = new AutoPush(m_drivetrainSubsystem, m_intakeSubsystem);
 
+  private final Command m_wHighIntake = new WAutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
+
+  private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -149,12 +152,15 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
 
      
     SmartDashboard.putData(m_shooterSubsystem);
-    m_chooser.setDefaultOption("High Intake", m_autoHighIntake);
-    m_chooser.addOption("Low Intake", m_autoLowIntake);
+    m_chooser.setDefaultOption("Mid High Intake", m_autoHighIntake);
+    m_chooser.addOption("Mid Low Intake", m_autoLowIntake);
+    m_chooser.addOption("Wall Low Intake", m_wAutoLowIntake);
+    m_chooser.addOption("Wall High Intake", m_wHighIntake);
     m_chooser.addOption("High Goal", m_autoHighGoal);
     m_chooser.addOption("Low Goal", m_autoLowGoal);
     m_chooser.addOption("Just Move", m_autoMove);
     m_chooser.addOption("Push Away", m_autoPush);
+   
       SmartDashboard.putData(m_chooser);
   }
 
