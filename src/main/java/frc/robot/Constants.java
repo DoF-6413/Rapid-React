@@ -75,4 +75,7 @@ public final class Constants {
     final public static double twoAndHalfSeconds = 2.5;
     final public static double threeSeconds = 3;
     final public static double fourSeconds = 4;
+
+    // indexer wait time to optimize shooter control in teleop
+    final public static double indexerWaitTime = 0.25;
 }
