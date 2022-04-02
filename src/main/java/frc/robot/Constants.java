@@ -78,4 +78,13 @@ public final class Constants {
 
     // indexer wait time to optimize shooter control in teleop
     final public static double indexerWaitTime = 0.25;
+
+    final public static boolean K_GYRO_REVERSED = false;
+
+    /* Drivetrain PID */
+  public static final double K_CHASSIS_TURN_P = 0;
+  public static final double K_CHASSIS_TURN_I = 0;
+  public static final double K_CHASSIS_TURN_D = 0;
+  public static final double K_TURN_TOLERANCE_DEG = 0;
+  public static final double K_TURN_RATE_TOLERANCE_DEG_PER_SEC = 0;
 }
