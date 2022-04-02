@@ -11,17 +11,23 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class GyroSubsystem extends SubsystemBase {
   AHRS gyro;
-  gyro = new AHRS(SPI.Port.kMXP); 
   /** Creates a new ExampleSubsystem. */
   public GyroSubsystem() {
+    gyro = new AHRS(SPI.Port.kMXP); 
     
   }
+  
+  
+  
+  
   
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Raw Gyro Y", gyro.getRawGyroY());
+    SmartDashboard.putNumber("ROLL", gyro.getRoll());
     SmartDashboard.putNumber("Raw Gyro X", gyro.getRawGyroX());
+    SmartDashboard.putNumber("PITCH", gyro.getPitch());
     SmartDashboard.putNumber("Raw Gyro Z", gyro.getRawGyroZ());
     SmartDashboard.putNumber("YAW", gyro.getYaw());
     SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
@@ -33,6 +39,7 @@ public class GyroSubsystem extends SubsystemBase {
   }
 
   public void resetYaw () {
-    gyro.zeroYaw();
+    gyro.reset();
+    
   }
 }
