@@ -19,7 +19,6 @@ import frc.robot.commands.AutoCommands.*;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.GyroSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;

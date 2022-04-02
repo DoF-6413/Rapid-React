@@ -26,7 +26,7 @@ public class TurnAuto extends PIDCommand {
       // Set reference to target
       targetAngleDegrees,
       // Pipe output to turn robot
-      output -> drivetrainSubsystem.setRaw(0, output), // divide by 180 to maybe scale angle to be between minus 1 and 1
+      output -> drivetrainSubsystem.setRaw(0, output/180), // divide by 180 to maybe scale angle to be between minus 1 and 1
       // Require the drive
       drivetrainSubsystem);
       
