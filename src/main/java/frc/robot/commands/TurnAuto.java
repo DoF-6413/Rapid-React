@@ -9,16 +9,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import edu.wpi.first.math.controller.PIDController;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.GyroSubsystem;
 
 public class TurnAuto extends PIDCommand {
   /** Creates a new TurnAuto. */
 
-  public TurnAuto(DrivetrainSubsystem drivetrainSubsystem, double targetAngleDegrees) {
+  public TurnAuto(DrivetrainSubsystem drivetrainSubsystem, GyroSubsystem gyroSubsystem, double targetAngleDegrees) {
     // Use addRequirements() here to declare subsystem dependencies.
     super(
       new PIDController(Constants.K_CHASSIS_TURN_P, Constants.K_CHASSIS_TURN_I, Constants.K_CHASSIS_TURN_D),
       // Close loop on heading
-      drivetrainSubsystem::getAngle,
+      gyroSubsystem::getAngle,
       // Set reference to target
       targetAngleDegrees,
       // Pipe output to turn robot

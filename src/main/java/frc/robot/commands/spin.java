@@ -6,17 +6,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.GyroSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class spin extends SequentialCommandGroup {
   /** Creates a new AutoMove. */
-  public spin(DrivetrainSubsystem drive) {
+  public spin(DrivetrainSubsystem drive, GyroSubsystem gyro) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new TurnAuto(drive, 90)
+      new TurnAuto(drive, gyro, 90)
     );
   }
 }

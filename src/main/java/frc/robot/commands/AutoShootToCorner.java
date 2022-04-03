@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.GyroSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import pabeles.concurrency.ConcurrencyOps.NewInstance; 
 import frc.robot.subsystems.IndexerSubsystem;
@@ -27,21 +28,21 @@ public class AutoShootToCorner extends SequentialCommandGroup {
   *Finally it turns and drives back to the corner of our alliance hangar and low shoots the balls into the corner
   */
 
-  public AutoShootToCorner(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index, IntakeSubsystem intake) {
+  public AutoShootToCorner(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index, IntakeSubsystem intake, GyroSubsystem gyro) {
     addCommands(
       new ActuatorDown(intake),
       new MoveCommand(drive, -3, false),
       new PickupCommmand(intake),
       new MoveCommand(drive, 3, true),
       parallel( new ShootHigh(shoot), new IndexerCommand(Index)),
-      new TurnAuto(drive, 34),
+      new TurnAuto(drive, gyro, 34),
       new MoveCommand(drive, -4, false),
       new PickupCommmand(intake),
-      new TurnAuto(drive, -118),
+      new TurnAuto(drive, gyro, -118),
       new MoveCommand(drive, -8, false),
       new PickupCommmand(intake),
       new MoveCommand(drive, -2, false),
-      new TurnAuto(drive, 23),
+      new TurnAuto(drive, gyro, 23),
       new MoveCommand(drive, 10, true),
       parallel( new ShootLow(shoot), new IndexerCommand(Index))
     );
