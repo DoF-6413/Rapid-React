@@ -3,9 +3,9 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.SPI;
+//import frc.robot.subsystems.GyroSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 
@@ -38,7 +38,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private DifferentialDrive diffDrive;
 
     private final DifferentialDriveOdometry m_odometry;
-    AHRS gyro;
+    
+    private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
     
     public DrivetrainSubsystem() {
         // Initializes left motors in default constructor
@@ -81,7 +82,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
         //leftLead.setOpenLoopRampRate(0.5);
         //rightLead.setOpenLoopRampRate(0.5);
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(this.getHeading()));
-        gyro = new AHRS(SPI.Port.kMXP);
         
         
     }
@@ -160,18 +160,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         encoderRightLead.setPosition(0);
     }
 
-    public void resetYaw () {
-        gyro.reset();
-        
-      }
-    
-      /**
-       * Get heading of the robot (no domain).
-       * @return the angle of the gyro in degrees.
-       */
-      public double getAngle (){
-        return gyro.getAngle();
-      }
+   
     
       /**
        * Get gyro heading between -180 to 180.
@@ -180,7 +169,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
        */
       public double getHeading()
       {
-        return Math.IEEEremainder(gyro.getAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
+        return Math.IEEEremainder(m_gyroSubsystem.getAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
       }
     
       /**
@@ -195,4 +184,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
       {
         diffDrive.arcadeDrive(-power, turn, false);
       }
+
+      
 }

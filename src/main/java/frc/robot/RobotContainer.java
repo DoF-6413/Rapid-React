@@ -3,18 +3,15 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import frc.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Axis;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
 import frc.robot.commands.AutoCommands.*;
@@ -40,7 +37,7 @@ public class RobotContainer {
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-
+  private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
@@ -157,7 +154,7 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
-    new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_drivetrainSubsystem.resetYaw(), m_drivetrainSubsystem));
+    new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
 
     SmartDashboard.putData(m_shooterSubsystem);
     m_chooser.setDefaultOption("Mid High Intake", m_autoHighIntake);
