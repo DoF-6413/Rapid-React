@@ -57,12 +57,14 @@ public class TurnCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_DrivetrainSubsystem.setRaw(0.00, 0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     SmartDashboard.putNumber("Distance", toDistance);
+    SmartDashboard.putNumber("leftternary: ", m_DrivetrainSubsystem.LeftEncoderDistance());
     return toDistance > 0 ? (m_DrivetrainSubsystem.LeftEncoderDistance() >= toDistance)
         : (m_DrivetrainSubsystem.LeftEncoderDistance() <= toDistance) ;
 

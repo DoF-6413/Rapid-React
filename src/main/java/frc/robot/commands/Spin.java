@@ -23,9 +23,10 @@ public class Spin extends SequentialCommandGroup {
       new TurnCommand(drive, 90),
       new MoveCommand(drive, 8, true),
      new TurnCommand(drive, 90),
-      new MoveCommand(drive, 2, true),
-      parallel( new ShootHigh(shoot), new IndexerCommand(Index))
+      new MoveCommand(drive, 2, true)
+      //parallel( new ShootHigh(shoot), new IndexerCommand(Index))
  
     );
   }
+
 }
