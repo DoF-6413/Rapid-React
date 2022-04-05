@@ -34,18 +34,7 @@ public class TurnCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // if (angle <= 180) {
-    //   if (m_DrivetrainSubsystem.LeftEncoderDistance() < toDistance)
-    //     m_DrivetrainSubsystem.setRaw(0.00, 0.5);
-    //   else{
-    //     m_DrivetrainSubsystem.setRaw(0.00, 0.00);
-    //   }
-    // } else if (angle > 180) {
-    //   if (m_DrivetrainSubsystem.LeftEncoderDistance() > toDistance)
-    //     m_DrivetrainSubsystem.setRaw(0.00, -0.5);
-    // } else {
-    //   m_DrivetrainSubsystem.setRaw(0.00, 0.00);
-    // }
+  
    if  (toDistance < 0){  
      m_DrivetrainSubsystem.setRaw(0.00, -0.5);
   }else{ 
@@ -70,18 +59,4 @@ public class TurnCommand extends CommandBase {
 
   }
 
-  public void goClockwise(int distance) {
-    System.out.println("Right" + distance);
-  }
-
-  public void goCounterClockwise(int distance) {
-    System.out.println("Left" + distance);
-  }
 }
-
-// 27 wheel to wheel
-// 27/12/2*2*pi
-// 7.07 circumference
-// To turn 360 degrees go 7.07 in specific direction
-// 180 = 3.53
-//

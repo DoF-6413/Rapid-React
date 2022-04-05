@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
+//import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 
 public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new Climber. */
