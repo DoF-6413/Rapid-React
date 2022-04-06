@@ -45,6 +45,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final DifferentialDriveOdometry m_odometry;
     
     private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
+    private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
     
     public DrivetrainSubsystem() {
         // Initializes left motors in default constructor
@@ -170,5 +171,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         diffDrive.arcadeDrive(-power, turn, false);
       }
 
-      
+      public void setShooterPosition(){
+
+      }
 }
