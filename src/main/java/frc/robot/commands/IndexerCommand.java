@@ -16,14 +16,20 @@ import frc.robot.Constants;
 public class IndexerCommand extends SequentialCommandGroup {
   /** Creates a new Shoot. */
   public double moveDistanceFromTarmac;
+  private IndexerSubsystem m_IndexerSubsystem;
   public IndexerCommand(IndexerSubsystem Index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    m_IndexerSubsystem = Index;
     addCommands( 
       new WaitCommand(Constants.oneSecond),
       new InstantCommand(() -> Index.spinMotor()),
       new WaitCommand(Constants.twoSeconds),
       new InstantCommand(() -> Index.stopMotor())
       ); 
+  }
+  @Override
+  public void end(boolean interrupted) {
+    m_IndexerSubsystem.stopMotor();
   }
 }
