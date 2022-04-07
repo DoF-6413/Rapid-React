@@ -18,12 +18,12 @@ import frc.robot.subsystems.ShooterSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class DemoAutoRoutine extends SequentialCommandGroup {
+public class TestAuto extends SequentialCommandGroup {
   /** Creates a new AutoMove. */
   private ShooterSubsystem m_Shooter;
   private DrivetrainSubsystem m_Drive;
   private IndexerSubsystem m_Index;
-  public DemoAutoRoutine(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index) {
+  public TestAuto(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     m_Shooter = shoot;
@@ -31,14 +31,15 @@ public class DemoAutoRoutine extends SequentialCommandGroup {
     m_Index = Index;
     addCommands(
       new InstantCommand(() -> drive.setRaw(0.0,0.0), drive),
+      new TurnCommand(drive, 90),
       new TurnCommand(drive, 270),
-      new MoveCommand(drive, 6, true),
-      new TurnCommand(drive, 100),
-      new MoveCommand(drive, 7, true),
-     new TurnCommand(drive, 100),
-      new MoveCommand(drive, 1, true),
-      parallel( new ShootTeleopHigh(shoot, Index))
- 
+      new TurnCommand(drive, 90),
+      new TurnCommand(drive, 270),
+     new TurnCommand(drive, 90),
+     new TurnCommand(drive, 270),
+      new TurnCommand(drive, 90),
+    new TurnCommand(drive, 270)
+
     );
   }
   @Override
