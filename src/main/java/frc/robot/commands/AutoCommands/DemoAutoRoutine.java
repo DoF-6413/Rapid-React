@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.MoveCommand;
 import frc.robot.commands.ShootHigh;
+import frc.robot.commands.ShootTeleopHigh;
 import frc.robot.commands.TurnCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IndexerSubsystem;
@@ -18,19 +19,30 @@ import frc.robot.subsystems.ShooterSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DemoAutoRoutine extends SequentialCommandGroup {
   /** Creates a new AutoMove. */
+  private ShooterSubsystem m_Shooter;
+  private DrivetrainSubsystem m_Drive;
+  private IndexerSubsystem m_Index;
   public DemoAutoRoutine(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    m_Shooter = shoot;
+    m_Drive = drive;
+    m_Index = Index;
     addCommands(
       new TurnCommand(drive, 270),
-      new MoveCommand(drive, 5, true),
-      new TurnCommand(drive, 90),
-      new MoveCommand(drive, 8, true),
-     new TurnCommand(drive, 90),
-      new MoveCommand(drive, 2, true),
-      parallel( new ShootHigh(shoot), new IndexerCommand(Index))
+      new MoveCommand(drive, 6, true),
+      new TurnCommand(drive, 100),
+      new MoveCommand(drive, 7, true),
+     new TurnCommand(drive, 100),
+      new MoveCommand(drive, 1, true),
+      parallel( new ShootTeleopHigh(shoot, Index))
  
     );
   }
-
+  @Override
+  public void end(boolean interrupted) {
+    m_Drive.setRaw(0.00, 0.0);
+    m_Shooter.disable();
+    m_Index.stopMotor();
+  }
 }

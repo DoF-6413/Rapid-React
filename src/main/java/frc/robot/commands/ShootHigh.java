@@ -20,7 +20,7 @@ public class ShootHigh extends SequentialCommandGroup {
    m_Shooter = shoot;
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      new InstantCommand( () -> shoot.setSetpoint(4250*0.70)),
+      new InstantCommand( () -> shoot.setSetpoint(2800)),
       //change to 2300 for low goal
       //change to 4250 for high goal
       new InstantCommand(() -> shoot.enable()),
