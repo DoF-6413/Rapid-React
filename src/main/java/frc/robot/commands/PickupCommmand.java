@@ -14,7 +14,9 @@ import frc.robot.Constants;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PickupCommmand extends SequentialCommandGroup {
   /** Creates a new Shoot. */
+  private IntakeSubsystem m_intakeSubsystem;
   public PickupCommmand(IntakeSubsystem Intake) {
+    m_intakeSubsystem = Intake;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
@@ -22,5 +24,9 @@ public class PickupCommmand extends SequentialCommandGroup {
       new WaitCommand(Constants.oneSecond),
       new InstantCommand( () -> Intake.stopMotor())
       ); 
+  }
+  @Override
+  public void end(boolean interrupted) {
+    m_intakeSubsystem.stopMotor();
   }
 }

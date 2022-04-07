@@ -14,16 +14,23 @@ import frc.robot.Constants;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ShootHigh extends SequentialCommandGroup {
   /** Creates a new Shoot. */
+  private ShooterSubsystem m_Shooter;
   public ShootHigh(ShooterSubsystem shoot) {
     // Add your commands in the addCommands() call, e.g.
+   m_Shooter = shoot;
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      new InstantCommand( () -> shoot.setSetpoint(4250)),
+      new InstantCommand( () -> shoot.setSetpoint(2800)),
       //change to 2300 for low goal
       //change to 4250 for high goal
       new InstantCommand(() -> shoot.enable()),
       new WaitCommand(Constants.fourSeconds),
       new InstantCommand(() -> shoot.disable())
       ); 
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    m_Shooter.disable();
   }
 }

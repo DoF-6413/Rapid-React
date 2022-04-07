@@ -56,6 +56,7 @@ public class MoveCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_DrivetrainSubsystem.setRaw(0.00, 0.0);
   }
 
   // Returns true when the command should end.
