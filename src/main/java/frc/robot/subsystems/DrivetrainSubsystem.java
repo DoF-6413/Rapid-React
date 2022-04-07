@@ -169,7 +169,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
        */
       public double getHeading()
       {
-        return Math.IEEEremainder(m_gyroSubsystem.getAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
+        return Math.IEEEremainder(m_gyroSubsystem.ZAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
       }
     
       /**

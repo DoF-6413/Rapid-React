@@ -35,14 +35,14 @@ public class AutoShootToCorner extends SequentialCommandGroup {
       new PickupCommmand(intake),
       new MoveCommand(drive, 3, true),
       parallel( new ShootHigh(shoot), new IndexerCommand(Index)),
-      new TurnAuto(drive, gyro, 34),
+      new TurnCommand(drive, 34),
       new MoveCommand(drive, -4, false),
       new PickupCommmand(intake),
-      new TurnAuto(drive, gyro, -118),
+      new TurnCommand(drive, 182),
       new MoveCommand(drive, -8, false),
       new PickupCommmand(intake),
       new MoveCommand(drive, -2, false),
-      new TurnAuto(drive, gyro, 23),
+      new TurnCommand(drive, 23),
       new MoveCommand(drive, 10, true),
       parallel( new ShootLow(shoot), new IndexerCommand(Index))
     );

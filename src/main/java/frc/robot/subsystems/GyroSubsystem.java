@@ -40,7 +40,8 @@ public class GyroSubsystem extends SubsystemBase {
    * Get heading of the robot (no domain).
    * @return the angle of the gyro in degrees.
    */
-  public double getAngle (){
-    return gyro.getAngle();
+  public double ZAngle (){
+    gyro.reset();
+    return gyro.getYaw();
   }
 }
