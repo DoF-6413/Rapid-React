@@ -37,7 +37,7 @@ public class RobotContainer {
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
+  public static GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
@@ -69,8 +69,9 @@ public class RobotContainer {
   private final Command m_wHighIntake = new WAutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
 
   private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
-  private final Command m_demoAuto = new DemoAutoRoutine(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
-  private final Command m_testAuto = new TestAuto(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
+  // private final Command m_demoAuto = new DemoAutoRoutine(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
+  // private final Command m_testAuto = new TestAuto(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
+  private final Command m_spin = new spin(m_drivetrainSubsystem, m_gyroSubsystem);
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -165,8 +166,9 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     m_chooser.addOption("Low Goal", m_autoLowGoal);
     m_chooser.addOption("Just Move", m_autoMove);
     m_chooser.addOption("Push Away", m_autoPush);
-    m_chooser.addOption("Demo Auto", m_demoAuto);
-    m_chooser.addOption("Test", m_testAuto);
+    m_chooser.addOption("Spin", m_spin);
+    // m_chooser.addOption("Demo Auto", m_demoAuto);
+    // m_chooser.addOption("Test", m_testAuto);
       SmartDashboard.putData(m_chooser);
 
 

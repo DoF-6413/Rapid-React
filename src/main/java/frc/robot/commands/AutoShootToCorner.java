@@ -14,6 +14,7 @@ import pabeles.concurrency.ConcurrencyOps.NewInstance;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -35,14 +36,14 @@ public class AutoShootToCorner extends SequentialCommandGroup {
       new PickupCommmand(intake),
       new MoveCommand(drive, 3, true),
       parallel( new ShootHigh(shoot), new IndexerCommand(Index)),
-      new TurnAuto(drive, gyro, 34),
+      new TurnAuto(new PIDController(Constants.K_CHASSIS_TURN_P, Constants.K_CHASSIS_TURN_I, Constants.K_CHASSIS_TURN_D), drive, gyro, 34),
       new MoveCommand(drive, -4, false),
       new PickupCommmand(intake),
-      new TurnAuto(drive, gyro, -118),
+      new TurnAuto(new PIDController(Constants.K_CHASSIS_TURN_P, Constants.K_CHASSIS_TURN_I, Constants.K_CHASSIS_TURN_D), drive, gyro, -118),
       new MoveCommand(drive, -8, false),
       new PickupCommmand(intake),
       new MoveCommand(drive, -2, false),
-      new TurnAuto(drive, gyro, 23),
+      new TurnAuto(new PIDController(Constants.K_CHASSIS_TURN_P, Constants.K_CHASSIS_TURN_I, Constants.K_CHASSIS_TURN_D), drive, gyro, 23),
       new MoveCommand(drive, 10, true),
       parallel( new ShootLow(shoot), new IndexerCommand(Index))
     );

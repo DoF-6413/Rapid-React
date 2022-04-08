@@ -25,7 +25,7 @@ public class GyroSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Roll", gyro.getRoll());
     SmartDashboard.putNumber("Gyro Z", gyro.getRawGyroZ());
     SmartDashboard.putNumber("Yaw", gyro.getYaw());
-    SmartDashboard.putNumber("Yaw", gyro.getAngle());
+    SmartDashboard.putNumber("Angle", gyro.getAngle());
   }
 
   public void GyroReadings(){
