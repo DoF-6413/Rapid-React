@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
@@ -12,16 +13,14 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.GyroSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 public class TurnAuto extends PIDCommand {
   /** Creates a new TurnAuto. */
-private PIDController m_PidController;
-
-private DrivetrainSubsystem m_drivetrain;
-  public TurnAuto(PIDController pidControl, DrivetrainSubsystem drivetrainSubsystem, GyroSubsystem gyroSubsystem, double targetAngleDegrees) {
+  public TurnAuto(DrivetrainSubsystem drivetrainSubsystem, GyroSubsystem gyroSubsystem, double targetAngleDegrees) {
     // Use addRequirements() here to declare subsystem dependencies.
   
     super(
-      pidControl,
+      new PIDController(Constants.K_CHASSIS_TURN_P, Constants.K_CHASSIS_TURN_I, Constants.K_CHASSIS_TURN_D), 
       // Close loop on heading
       gyroSubsystem::getAngle,
       // Set reference to target
@@ -30,17 +29,16 @@ private DrivetrainSubsystem m_drivetrain;
       output -> drivetrainSubsystem.autoDrive(0, output), // divide by 180 to maybe scale angle to be between minus 1 and 1
       // Require the drive
       drivetrainSubsystem);
-  
-    m_PidController = pidControl;
-
-    m_drivetrain = drivetrainSubsystem;
-
-    // Set the controller to be continuous (because it is an angle controller)
-    getController().enableContinuousInput(-180, 180);
-    // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
-    // setpoint before it is considered as having reached the reference
-    getController()
-        .setTolerance(Constants.K_TURN_TOLERANCE_DEG, Constants.K_TURN_RATE_TOLERANCE_DEG_PER_SEC);
+      
+      
+      
+      // Set the controller to be continuous (because it is an angle controller)
+      getController().enableContinuousInput(-180, 180);
+      // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
+      // setpoint before it is considered as having reached the reference
+      getController()
+      .setTolerance(Constants.K_TURN_TOLERANCE_DEG, Constants.K_TURN_RATE_TOLERANCE_DEG_PER_SEC);
+      getController().setSetpoint(targetAngleDegrees);
     }
     
     // Called when the command is initially scheduled.
@@ -53,20 +51,22 @@ private DrivetrainSubsystem m_drivetrain;
     @Override
     public void execute() {
       SmartDashboard.putNumber("TurnAngle", RobotContainer.m_gyroSubsystem.getAngle());
-      SmartDashboard.putNumber("PID Calculate", m_PidController.calculate(RobotContainer.m_gyroSubsystem.getAngle()));
-      m_drivetrain.autoDrive( 0, m_PidController.calculate(RobotContainer.m_gyroSubsystem.getAngle()));  
-      
+      System.out.println("Execute Works");
+      //SmartDashboard.putNumber("PID Calculate", m_PidController.calculate(RobotContainer.m_gyroSubsystem.getAngle()));
+      RobotContainer.m_drivetrainSubsystem.autoDrive( 0, (getController().calculate(RobotContainer.m_gyroSubsystem.getAngle())/100));  
+      SmartDashboard.putNumber("Calculate Results", getController().calculate(RobotContainer.m_gyroSubsystem.getAngle()));
     }
     
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-      m_drivetrain.setRaw(0.0, 0.0);
+     RobotContainer.m_drivetrainSubsystem.setRaw(0, 0);
     }
     
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+      System.out.println("Is Finished Return " + getController().atSetpoint() + " setpoint " + getController().getSetpoint());
       return getController().atSetpoint();
   }
 }

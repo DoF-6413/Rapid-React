@@ -20,7 +20,7 @@ public class spin extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new TurnAuto(new PIDController(Constants.K_CHASSIS_TURN_P, Constants.K_CHASSIS_TURN_I, Constants.K_CHASSIS_TURN_D), drive, gyro, 90)
+      new TurnAuto(drive, gyro, 90)
     );
   }
 }

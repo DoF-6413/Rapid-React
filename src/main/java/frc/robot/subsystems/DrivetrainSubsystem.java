@@ -182,7 +182,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
        */
       public void autoDrive(double power, double turn)
       {
+          System.out.println("Auto Drive Works " + turn);
         diffDrive.arcadeDrive(-power, turn, false);
+        SmartDashboard.putNumber("Turn Number", turn);
       }
 
       
