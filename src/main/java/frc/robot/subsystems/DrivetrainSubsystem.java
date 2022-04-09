@@ -97,28 +97,27 @@ public class DrivetrainSubsystem extends SubsystemBase {
      */
     public void setRaw(double rightStick, double leftStick) {
 
-        // if(rightStick > 0){
-        // RightStick = -(rightStick*rightStick);
-        // } else if (rightStick < 0){
-        // RightStick = (rightStick*rightStick);
-        // }
-
-        // if(leftStick > 0){
-        // LeftStick = (leftStick*leftStick);
-        // } else if (rightStick < 0){
-        // LeftStick = -(leftStick*leftStick);
-        // }
-
         diffDrive.arcadeDrive(-(rightStick), (leftStick));
         printEncoderStatus();
     }
-
-/**
- * ,
- */
-
-
-
+    
+    /**
+     * Controls movement of robot drivetrain with passed in power and turn values
+     * from autonomous input. Example: vision control.
+     * Difference from teleopDrive is there's no deadband.
+     * <br>
+     * @param power - motor power between -1 and 1 (Positive is forward)
+     * @param turn - motor turn between -1 and 1 (Positive is clockwise)
+     */
+    
+     //Turn on scaling, change value to true
+    
+    /**
+     * ,
+     */
+    
+    
+    
 
 
 
@@ -175,20 +174,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
         return Math.IEEEremainder(m_gyroSubsystem.getAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
       }
     
-      /**
-       * Controls movement of robot drivetrain with passed in power and turn values
-       * from autonomous input. Example: vision control.
-       * Difference from teleopDrive is there's no deadband.
-       * <br>
-       * @param power - motor power between -1 and 1 (Positive is forward)
-       * @param turn - motor turn between -1 and 1 (Positive is clockwise)
-       */
-      public void autoDrive(double power, double turn)
-      {
-          System.out.println("Auto Drive Works " + turn);
-        diffDrive.arcadeDrive(-power, turn, false);
-        SmartDashboard.putNumber("Turn Number", turn);
-      }
 
       public void current(){
         SmartDashboard.putNumber("Left Current", leftLead.getOutputCurrent());
