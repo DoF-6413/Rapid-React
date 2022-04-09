@@ -79,6 +79,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
+        // leftLead.setSmartCurrentLimit(10);
+        // rightLead.setSmartCurrentLimit(10);
+
         //leftLead.setOpenLoopRampRate(0.5);
         //rightLead.setOpenLoopRampRate(0.5);
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(this.getHeading()));
@@ -187,5 +190,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Turn Number", turn);
       }
 
+      public void current(){
+        SmartDashboard.putNumber("Left Current", leftLead.getOutputCurrent());
+        SmartDashboard.putNumber("Right Current", rightLead.getOutputCurrent());
+      }
       
 }

@@ -10,8 +10,9 @@ import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.MoveCommand;
 import frc.robot.commands.ShootHigh;
 import frc.robot.commands.ShootTeleopHigh;
-import frc.robot.commands.TurnCommand;
+import frc.robot.commands.TurnAuto;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.GyroSubsystem;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -23,23 +24,13 @@ public class TestAuto extends SequentialCommandGroup {
   private ShooterSubsystem m_Shooter;
   private DrivetrainSubsystem m_Drive;
   private IndexerSubsystem m_Index;
-  public TestAuto(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index) {
+  public TestAuto(DrivetrainSubsystem drive, ShooterSubsystem shoot, GyroSubsystem gyro) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     m_Shooter = shoot;
     m_Drive = drive;
-    m_Index = Index;
     addCommands(
-      new InstantCommand(() -> drive.setRaw(0.0,0.0), drive),
-      new TurnCommand(drive, 90),
-      new TurnCommand(drive, 270),
-      new TurnCommand(drive, 90),
-      new TurnCommand(drive, 270),
-     new TurnCommand(drive, 90),
-     new TurnCommand(drive, 270),
-      new TurnCommand(drive, 90),
-    new TurnCommand(drive, 270)
-
+   new TurnAuto(drive, gyro, 135)
     );
   }
   @Override
