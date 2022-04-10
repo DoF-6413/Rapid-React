@@ -101,27 +101,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
         printEncoderStatus();
     }
     
-    /**
-     * Controls movement of robot drivetrain with passed in power and turn values
-     * from autonomous input. Example: vision control.
-     * Difference from teleopDrive is there's no deadband.
-     * <br>
-     * @param power - motor power between -1 and 1 (Positive is forward)
-     * @param turn - motor turn between -1 and 1 (Positive is clockwise)
-     */
-    
-     //Turn on scaling, change value to true
-    
-    /**
-     * ,
-     */
-    
-    
-    
-
-
-
-
 
     /*
      * to switch to tank drive uncomment this and place inside of set raw
