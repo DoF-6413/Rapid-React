@@ -66,7 +66,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public void armPosition() {
     SmartDashboard.putNumber("Encoder Left Actuator", rightActuatorEncoder.getPosition());
     SmartDashboard.putNumber("Encoder Right Actuator", leftActuatorEncoder.getPosition());
-    
+
   }
 
   public void stopActuators() {
