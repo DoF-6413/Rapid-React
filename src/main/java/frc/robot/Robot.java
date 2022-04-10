@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    RobotContainer.m_gyroSubsystem.resetYaw();
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -86,6 +87,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+
   }
 
   @Override

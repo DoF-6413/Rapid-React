@@ -3,18 +3,15 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import frc.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Axis;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
 import frc.robot.commands.AutoCommands.*;
@@ -34,13 +31,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  public static DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   // private final AutoCommand m_autoCommand = new
   // AutoCommand(m_drivetrainSubsystem);
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-
+  public static GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
@@ -72,8 +69,9 @@ public class RobotContainer {
   private final Command m_wHighIntake = new WAutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
 
   private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
-  private final Command m_demoAuto = new DemoAutoRoutine(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
-  private final Command m_testAuto = new TestAuto(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
+  // private final Command m_demoAuto = new DemoAutoRoutine(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
+   private final Command m_testAuto = new TestAuto(m_drivetrainSubsystem, m_shooterSubsystem, m_gyroSubsystem);
+  private final Command m_spin = new spin(m_drivetrainSubsystem, m_gyroSubsystem);
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -157,7 +155,8 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
-     
+    new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
+
     SmartDashboard.putData(m_shooterSubsystem);
     m_chooser.setDefaultOption("Mid High Intake", m_autoHighIntake);
     m_chooser.addOption("Mid Low Intake", m_autoLowIntake);
@@ -167,9 +166,12 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     m_chooser.addOption("Low Goal", m_autoLowGoal);
     m_chooser.addOption("Just Move", m_autoMove);
     m_chooser.addOption("Push Away", m_autoPush);
-    m_chooser.addOption("Demo Auto", m_demoAuto);
+    m_chooser.addOption("Spin", m_spin);
+    // m_chooser.addOption("Demo Auto", m_demoAuto);
     m_chooser.addOption("Test", m_testAuto);
       SmartDashboard.putData(m_chooser);
+
+
   }
 
   /**

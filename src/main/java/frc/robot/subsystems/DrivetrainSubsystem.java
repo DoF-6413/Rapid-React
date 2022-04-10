@@ -4,11 +4,15 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import frc.robot.subsystems.GyroSubsystem;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+
 //CANSPark imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
@@ -24,15 +28,19 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private CANSparkMax rightFollow2;
     // Encoder right lead is used for values on the right side of the robot because
     // they are all connected
-
+    
     private RelativeEncoder encoderLeftLead;
     private RelativeEncoder encoderRightLead;
-
+    
     double RightStick;
     double LeftStick;
-
+    
     private DifferentialDrive diffDrive;
 
+    private final DifferentialDriveOdometry m_odometry;
+    
+    private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
+    
     public DrivetrainSubsystem() {
         // Initializes left motors in default constructor
         leftLead = new CANSparkMax(Constants.leftDeviceID[0], MotorType.kBrushless);
@@ -71,10 +79,18 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
+        // leftLead.setSmartCurrentLimit(10);
+        // rightLead.setSmartCurrentLimit(10);
+
+        // TO DO: test ramping with drivetrain (Need driveteam to see how they like it) 
+        //might need more custimization (Slower when stoping, faster when starting)
         //leftLead.setOpenLoopRampRate(0.5);
         //rightLead.setOpenLoopRampRate(0.5);
+        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(this.getHeading()));
+        
+        
     }
-
+    
     /**
      * Sets the raw speed of the drivetrain using an tank style.
      * 
@@ -83,32 +99,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
      */
     public void setRaw(double rightStick, double leftStick) {
 
-        // if(rightStick > 0){
-        // RightStick = -(rightStick*rightStick);
-        // } else if (rightStick < 0){
-        // RightStick = (rightStick*rightStick);
-        // }
-
-        // if(leftStick > 0){
-        // LeftStick = (leftStick*leftStick);
-        // } else if (rightStick < 0){
-        // LeftStick = -(leftStick*leftStick);
-        // }
-
         diffDrive.arcadeDrive(-(rightStick), (leftStick));
         printEncoderStatus();
     }
-
-/**
- * ,
- */
-
-
-
-
-
-
-
+    
 
     /*
      * to switch to tank drive uncomment this and place inside of set raw
@@ -148,4 +142,23 @@ public class DrivetrainSubsystem extends SubsystemBase {
         encoderLeftLead.setPosition(0);
         encoderRightLead.setPosition(0);
     }
+
+   
+    
+      /**
+       * Get gyro heading between -180 to 180.
+       * Uses Math.IEEEremainder to get range of -180 to 180 --> dividend - (divisor * Math.Round(dividend / divisor)).
+       * @return the robot's heading in degrees.
+       */
+      public double getHeading()
+      {
+        return Math.IEEEremainder(m_gyroSubsystem.getAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
+      }
+    
+
+      public void current(){
+        SmartDashboard.putNumber("Left Current", leftLead.getOutputCurrent());
+        SmartDashboard.putNumber("Right Current", rightLead.getOutputCurrent());
+      }
+      
 }
