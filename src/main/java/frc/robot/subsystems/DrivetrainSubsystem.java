@@ -82,6 +82,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         // leftLead.setSmartCurrentLimit(10);
         // rightLead.setSmartCurrentLimit(10);
 
+        // TO DO: test ramping with drivetrain (Need driveteam to see how they like it) 
+        //might need more custimization (Slower when stoping, faster when starting)
         //leftLead.setOpenLoopRampRate(0.5);
         //rightLead.setOpenLoopRampRate(0.5);
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(this.getHeading()));
