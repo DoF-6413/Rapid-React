@@ -43,4 +43,8 @@ public class GyroSubsystem extends SubsystemBase {
   public double getAngle (){
     return gyro.getAngle();
   }
+
+  public double getRoll (){
+    return gyro.getRoll();
+  }
 }

@@ -77,7 +77,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void setActuatorUp(double speed) {
     if (toplimitSwitch.get() || 
-    SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -1) {
+    SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -2) {
       // We are going up and top limit is tripped so stop
       intakeLeftActuator.set(0);
       intakeRightActuator.set(0);
@@ -105,6 +105,18 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     armPosition();
   }
-  // TODO: Create a function that moves the aucuator 90 degrees to drop intake
-  // system
+
+  public void setActuatorPosition(double speed){
+if ((bottomlimitSwitch.get() || SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -2) && speed < 0){
+  intakeLeftActuator.set(0);
+  intakeRightActuator.set(0);
+} else if ((toplimitSwitch.get() || SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -39) && speed > 0){
+
+  intakeLeftActuator.set(0);
+  intakeRightActuator.set(0);
+}else {
+  intakeLeftActuator.set(speed);
+  intakeRightActuator.set(-speed);
+}
+  }
 }
