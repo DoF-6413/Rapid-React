@@ -47,10 +47,12 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void goDownManual(){
     climberMotor.set(TalonFXControlMode.PercentOutput, -0.20);
+    climberPosition();
   }
 
   public void goUpManual(){
     climberMotor.set(TalonFXControlMode.PercentOutput, 0.20);
+    climberPosition();
   }
 
   public void stop() {
@@ -67,6 +69,6 @@ public class ClimberSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    
+
   }
 }
