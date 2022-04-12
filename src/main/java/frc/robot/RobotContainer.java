@@ -32,13 +32,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
-  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  public static ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   // private final AutoCommand m_autoCommand = new
   // AutoCommand(m_drivetrainSubsystem);
-  private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
-  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  public static IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
+  public static IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   public static GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  public static ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
