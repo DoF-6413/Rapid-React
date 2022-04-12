@@ -20,7 +20,7 @@ public class ClimbActuators extends PIDCommand {
     // Use addRequirements() here to declare subsystem dependencies.
   
     super(
-      new PIDController(Constants.K_CHASSIS_TURN_P, Constants.K_CHASSIS_TURN_I, Constants.K_CHASSIS_TURN_D), 
+      new PIDController(Constants.K_IntakeActuator_P, Constants.K_IntakeActuator_I, Constants.K_IntakeActuator_D), 
       // Close loop on heading
       gyroSubsystem::getRoll,
       // Set reference to target
@@ -37,7 +37,7 @@ public class ClimbActuators extends PIDCommand {
       // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
       // setpoint before it is considered as having reached the reference
       getController()
-      .setTolerance(Constants.K_TURN_TOLERANCE_DEG, Constants.K_TURN_RATE_TOLERANCE_DEG_PER_SEC);
+      .setTolerance(Constants.K_TiltToleranceDeg, Constants.K_TiltRateToleranceDegPerSec);
       getController().setSetpoint(targetAngleDegrees);
     }
     
@@ -50,19 +50,14 @@ public class ClimbActuators extends PIDCommand {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-      SmartDashboard.putNumber("TurnAngle", RobotContainer.m_gyroSubsystem.getAngle());
-      System.out.println("Execute Works");
-      RobotContainer.m_drivetrainSubsystem.current();
-      //SmartDashboard.putNumber("PID Calculate", m_PidController.calculate(RobotContainer.m_gyroSubsystem.getAngle()));
-      RobotContainer.m_drivetrainSubsystem.setRaw( 0, (getController().calculate(RobotContainer.m_gyroSubsystem.getAngle())/100));  
-      SmartDashboard.putNumber("Calculate Results", getController().calculate(RobotContainer.m_gyroSubsystem.getAngle()));
+      RobotContainer.m_drivetrainSubsystem.setRaw( 0, (getController().calculate(RobotContainer.m_gyroSubsystem.getRoll())/100));  
+      SmartDashboard.putNumber("Calculate Results", (getController().calculate(RobotContainer.m_gyroSubsystem.getRoll())/100));
     }
     
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-     RobotContainer.m_drivetrainSubsystem.setRaw(0, 0);
-     //RobotContainer.m_gyroSubsystem.resetYaw();
+     RobotContainer.m_intakeSubsystem.stopActuators();
     }
     
     // Returns true when the command should end.

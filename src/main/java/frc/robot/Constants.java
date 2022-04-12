@@ -46,8 +46,8 @@ public final class Constants {
             final public static double slowSpeed = 0.50;
     
         //Intake PID (Only Used When Climbing)
-        public static final double K_IntakeActuator_P = 0.8;
-        public static final double K_IntakeActuator_I = 0.55;
+        public static final double K_IntakeActuator_P = 0;
+        public static final double K_IntakeActuator_I = 0;
         public static final double K_IntakeActuator_D = 0;
         public static final double K_TiltToleranceDeg = 2;
         public static final double K_TiltRateToleranceDegPerSec = 2;

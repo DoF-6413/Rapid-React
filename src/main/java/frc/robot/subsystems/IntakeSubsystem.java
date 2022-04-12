@@ -107,11 +107,10 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setActuatorPosition(double speed){
-if ((bottomlimitSwitch.get() || SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -2) && speed < 0){
+if ((bottomlimitSwitch.get() || SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -39) && speed < 0){
   intakeLeftActuator.set(0);
   intakeRightActuator.set(0);
-} else if ((toplimitSwitch.get() || SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -39) && speed > 0){
-
+} else if ((toplimitSwitch.get() || SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -2) && speed > 0){
   intakeLeftActuator.set(0);
   intakeRightActuator.set(0);
 }else {
