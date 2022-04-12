@@ -8,18 +8,13 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.ActuatorDown;
-import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.MoveCommand;
 import frc.robot.commands.PickupCommmand;
-import frc.robot.commands.ShootHigh;
 import frc.robot.commands.ShootTeleopHigh;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import pabeles.concurrency.ConcurrencyOps.NewInstance; 
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -36,7 +31,7 @@ public class WAutoHighIntake extends SequentialCommandGroup {
       //new MoveCommand(drive, 4, true),
       new PickupCommmand(intake), 
       new MoveCommand(drive, 3, true),
-      parallel( new ShootTeleopHigh(shoot, Index, 2500), new IndexerCommand(Index))
+      new ShootTeleopHigh(shoot, Index, 2500)
     );
   }
 }

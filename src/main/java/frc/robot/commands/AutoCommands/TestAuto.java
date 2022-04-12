@@ -4,12 +4,7 @@
 
 package frc.robot.commands.AutoCommands;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.IndexerCommand;
-import frc.robot.commands.MoveCommand;
-import frc.robot.commands.ShootHigh;
-import frc.robot.commands.ShootTeleopHigh;
 import frc.robot.commands.TurnAuto;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.GyroSubsystem;
