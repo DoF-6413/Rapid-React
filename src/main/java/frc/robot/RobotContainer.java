@@ -32,13 +32,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
-  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  public static ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   // private final AutoCommand m_autoCommand = new
   // AutoCommand(m_drivetrainSubsystem);
-  private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
-  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  public static IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
+  public static IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   public static GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  public static ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
@@ -72,6 +72,7 @@ public class RobotContainer {
   // private final Command m_demoAuto = new DemoAutoRoutine(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
    private final Command m_testAuto = new TestAuto(m_drivetrainSubsystem, m_shooterSubsystem, m_gyroSubsystem);
   private final Command m_spin = new spin(m_drivetrainSubsystem, m_gyroSubsystem);
+  private final Command m_threeBallAuto = new ThreeBallAuto();
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -167,6 +168,7 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     m_chooser.addOption("Just Move", m_autoMove);
     m_chooser.addOption("Push Away", m_autoPush);
     m_chooser.addOption("Spin", m_spin);
+    m_chooser.addOption("Three Ball", m_threeBallAuto);
     // m_chooser.addOption("Demo Auto", m_demoAuto);
     m_chooser.addOption("Test", m_testAuto);
       SmartDashboard.putData(m_chooser);
