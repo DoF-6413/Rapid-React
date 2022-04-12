@@ -26,7 +26,7 @@ public class ClimbActuators extends PIDCommand {
       // Set reference to target
       targetAngleDegrees,
       // Pipe output to turn robot
-      output -> intakeSubsystem.setActuatorDown(2), // divide by 180 to maybe scale angle to be between minus 1 and 1
+      output -> intakeSubsystem.setActuatorPosition(output), // divide by 180 to maybe scale angle to be between minus 1 and 1
       // Require the drive
       intakeSubsystem);
       
