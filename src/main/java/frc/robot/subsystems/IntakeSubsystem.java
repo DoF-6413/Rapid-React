@@ -90,8 +90,10 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setActuatorDown(double speed) {
-    if (bottomlimitSwitch.get()||
-    SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -38) {
+    if (bottomlimitSwitch.get())
+    //||
+    //SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -38) 
+    {
       // We are going down and bottom limit is tripped so stop
 
       intakeLeftActuator.set(0);
@@ -107,4 +109,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
   // TODO: Create a function that moves the aucuator 90 degrees to drop intake
   // system
+
+  public boolean isDown(){
+    return bottomlimitSwitch.get();
+  }
 }

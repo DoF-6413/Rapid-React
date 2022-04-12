@@ -35,7 +35,7 @@ public class AutoHighIntake extends SequentialCommandGroup {
       //new MoveCommand(drive, 4, true),
       parallel(new PickupCommmand(intake)), 
       new MoveCommand(drive, 3, true),
-      parallel( new ShootHigh(shoot), new IndexerCommand(Index)),
+      parallel( new ShootHigh(shoot, 2800), new IndexerCommand(Index)),
       new MoveCommand(drive, -7, false)
     );
   }

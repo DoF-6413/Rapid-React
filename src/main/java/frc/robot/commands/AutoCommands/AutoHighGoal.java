@@ -11,6 +11,7 @@ import frc.robot.commands.ActuatorDown;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.MoveCommand;
 import frc.robot.commands.ShootHigh;
+import frc.robot.commands.ShootTeleopHigh;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import pabeles.concurrency.ConcurrencyOps.NewInstance; 
@@ -32,7 +33,7 @@ public class AutoHighGoal extends SequentialCommandGroup {
       new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
       //comment out above for high goal
       //new MoveCommand(drive, 3, true),
-      parallel( new ShootHigh(shoot), new IndexerCommand(Index)),
+      parallel( new ShootTeleopHigh(shoot, Index, 2400), new IndexerCommand(Index)),
       new MoveCommand(drive, -4, false)
       // change above to -8 for low goal
       // change above to -4 for high hoal

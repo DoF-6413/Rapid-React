@@ -151,7 +151,7 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     // Trigger Button Right Bumper (R1) = Runs Shooter Subsystem at 5000 R P M
 
     new JoystickButton(m_xbox, XboxController.Button.kRightBumper.value)
-    .whenHeld(new ShootTeleopHigh(m_shooterSubsystem, m_indexerSubsystem))
+    .whenHeld(new ShootTeleopHigh(m_shooterSubsystem, m_indexerSubsystem, 2800))
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 

@@ -13,11 +13,11 @@ import frc.robot.subsystems.ShooterSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ShootTeleopHigh extends SequentialCommandGroup {
   /** Creates a new ShootTeleopHigh. */
-  public ShootTeleopHigh(ShooterSubsystem shoot, IndexerSubsystem index) {
+  public ShootTeleopHigh(ShooterSubsystem shoot, IndexerSubsystem index, double speed) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-      parallel(new IndexerTeleop(index),new ShootHigh(shoot))
+      parallel(new IndexerTeleop(index),new ShootHigh(shoot, speed))
     );
   }
 }

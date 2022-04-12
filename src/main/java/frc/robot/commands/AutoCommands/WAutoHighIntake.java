@@ -12,6 +12,7 @@ import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.MoveCommand;
 import frc.robot.commands.PickupCommmand;
 import frc.robot.commands.ShootHigh;
+import frc.robot.commands.ShootTeleopHigh;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import pabeles.concurrency.ConcurrencyOps.NewInstance; 
@@ -33,9 +34,9 @@ public class WAutoHighIntake extends SequentialCommandGroup {
       new MoveCommand(drive, -3, false),
       new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
       //new MoveCommand(drive, 4, true),
-      parallel(new PickupCommmand(intake)), 
+      new PickupCommmand(intake), 
       new MoveCommand(drive, 3, true),
-      parallel( new ShootHigh(shoot), new IndexerCommand(Index))
+      parallel( new ShootTeleopHigh(shoot, Index, 2500), new IndexerCommand(Index))
     );
   }
 }
