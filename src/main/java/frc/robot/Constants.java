@@ -44,6 +44,8 @@ public final class Constants {
     final public static int k10Percent = 10;
     final public static int k30Percent = 30;
 
+    final public static double kOff = 0;
+    
     // Sets indexer speed (Currently 20%)
     final public static double indexerSpeed = .60;
 // switched to positive march 11

@@ -24,13 +24,10 @@ public class IntakeSubsystem extends SubsystemBase {
     DigitalInput toplimitSwitch = new DigitalInput(0);
     DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
-    boolean down;
-
     // Initializing intake motors
     // Defining what each inake motor is and their ID's
     public IntakeSubsystem() {
-        // Defines motors used for dropping and raising intake system (arms);uncomment
-        // when we write code for Acuators
+        // Defines motors used for dropping and raising intake system (arms)
         intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);
         intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
         intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
@@ -44,21 +41,27 @@ public class IntakeSubsystem extends SubsystemBase {
         }
 
 
-    // Spins Intake Motor
+    /**
+     * Spins the intake motor
+     */
     public void spinMotor() {
-        intakeSpinner.set(0.5); // runs the motor at the speed set in constants% power
+        intakeSpinner.set( Constants.intakeSpeed );
         }
 
 
-    // Reverses Intake Motor
+    /**
+     * Reverses the intake motor
+     */
     public void reverseMotor() {
-        intakeSpinner.set(-0.5); // runs the motor at the speed set in constants% power
+        intakeSpinner.set( Constants.reverseIntakeSpeed );
         }
 
 
-    // Stops Intake Motor
+    /**
+     * Stop the intake motor
+     */
     public void stopMotor() {
-        intakeSpinner.set(0); // stops the motor (puts it at 0% power)
+        intakeSpinner.set( Constants.kOff ); // stops the motor (puts it at 0% power)
         }
 
 
@@ -71,6 +74,9 @@ public class IntakeSubsystem extends SubsystemBase {
         }
 
 
+    /**
+     * Stop the actuator motors
+     */
     public void stopActuators() {
         intakeLeftActuator.set(0);
         intakeRightActuator.set(0);
@@ -78,14 +84,19 @@ public class IntakeSubsystem extends SubsystemBase {
         }
 
 
+    /**
+     * Start moving the arms up at the given speed
+     * 
+     * @param speed - The speed to move the arms up at
+     */
     public void setActuatorUp(double speed) {
         if ( toplimitSwitch.get() || SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -1) {
-            // We are going up and top limit is tripped so stop
-            intakeLeftActuator.set(0);
-            intakeRightActuator.set(0);
+            // We want to go up but we the top limit switch tripped so stop the motors since we are fully "up"
+            intakeLeftActuator.set( Constants.kOff );
+            intakeRightActuator.set( Constants.kOff );
             }
         else {
-            // We are going up but top limit is not tripped so go at commanded speed
+            // We are not fully up so turn the motors on for the commanded speed
             intakeLeftActuator.set(speed);
             intakeRightActuator.set(-speed);
             }
@@ -94,28 +105,45 @@ public class IntakeSubsystem extends SubsystemBase {
         }
 
 
+    /**
+     * Start moving the arms down at the given speed
+     * 
+     * @param speed - The speed to move the arms up at
+     */
     public void setActuatorDown(double speed) {
         if (bottomlimitSwitch.get()) { // || SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -38) 
-            // We are going down and bottom limit is tripped so stop
+            // We want to go down but the bottom limit switch tripped so stop the motors sincde we are fully "down"
 
-            intakeLeftActuator.set(0);
-            intakeRightActuator.set(0);
-            down = true;
+            intakeLeftActuator.set( Constants.kOff );
+            intakeRightActuator.set( Constants.kOff );
         } 
         else {
-            // We are going down but bottom limit is not tripped so go at commanded speed
-            intakeLeftActuator.set(-speed);
-            intakeRightActuator.set(speed);
-            down = false;
+            // We are not fully down so turn the motors on for the commanded speed
+            intakeLeftActuator.set( -speed );
+            intakeRightActuator.set( speed );
         }
 
         armPosition();
         }
 
-    // TODO: Create a function that moves the aucuator 90 degrees to drop intake
-    // system
+    // TODO: Create a function that moves the acuator 90 degrees to drop intake system (Huh??)
 
+    /**
+     * Are the acutator arms down?  We decide this by relying on the bottom limit switch. 
+     * 
+     * @return true if they are, false otherwise
+     */
     public boolean isDown(){
         return bottomlimitSwitch.get();
+        }
+
+
+    /**
+     * Are the acutator arms up?  We decide this by relying on the top limit switch. 
+     * 
+     * @return true if they are, false otherwise
+     */
+    public boolean isUp(){
+        return toplimitSwitch.get();
         }
 }
