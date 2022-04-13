@@ -99,8 +99,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     /**
      * Sets the raw speed of the drivetrain using an tank style.
      * 
-     * @param leftStick  Value from -1.0 to 1.0 representing the left rate
-     * @param rightStick Value from -1.0 to 1.0 representing the right rate
+     * @param leftStick  Value from -1.0 to 1.0 representing the left rate (Speed)
+     * @param rightStick Value from -1.0 to 1.0 representing the right rate (Rotation)
      */
     public void setRaw(double rightStick, double leftStick) {
 
@@ -125,7 +125,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
     }
 
-    public double getAvgEncocderDistance() {
+    public double getAvgEncoderDistance() {
         double averageEncoderDistance = (encoderLeftLead.getPosition() + encoderRightLead.getPosition())/2.0 ;
         System.out.println ("averageEncoderDistance" + averageEncoderDistance);
         return averageEncoderDistance;
