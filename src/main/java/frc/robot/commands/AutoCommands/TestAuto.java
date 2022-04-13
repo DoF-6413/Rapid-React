@@ -6,11 +6,14 @@ package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.RobotContainer;
+import frc.robot.commands.ClimberGoTo;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.MoveCommand;
 import frc.robot.commands.ShootHigh;
 import frc.robot.commands.ShootTeleopHigh;
 import frc.robot.commands.TurnAuto;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.GyroSubsystem;
 import frc.robot.subsystems.IndexerSubsystem;
@@ -26,11 +29,8 @@ public class TestAuto extends SequentialCommandGroup {
   private IndexerSubsystem m_Index;
   public TestAuto(DrivetrainSubsystem drive, ShooterSubsystem shoot, GyroSubsystem gyro) {
     // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    m_Shooter = shoot;
-    m_Drive = drive;
     addCommands(
-   new TurnAuto(drive, gyro, 135)
+   new ClimberGoTo(25)
     );
   }
   @Override

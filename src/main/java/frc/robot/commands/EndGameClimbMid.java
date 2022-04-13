@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -15,10 +16,11 @@ public class EndGameClimbMid extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new IntakeGoTo(0),
-      new ClimberGoTo(0),
+      //new IntakeGoTo(0),
+      new ClimberGoTo(-2.5),
       new IntakeGoTo(-5),
-      new ClimberGoTo(4.5)
+      new WaitCommand(0.5),
+      new ClimberGoTo(7)
     );
   }
 }
