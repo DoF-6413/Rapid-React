@@ -35,6 +35,7 @@ public class RobotContainer {
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
   
   public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
@@ -158,6 +159,8 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
    
       SmartDashboard.putData(m_chooser);
 
+m_LimelightSubsystem.getTx();
+m_LimelightSubsystem.getTy();
 
   }
 
