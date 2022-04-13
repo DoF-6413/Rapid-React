@@ -66,9 +66,12 @@ public class IntakeSubsystem extends SubsystemBase {
   public void armPosition() {
     SmartDashboard.putNumber("Encoder Left Actuator", rightActuatorEncoder.getPosition());
     SmartDashboard.putNumber("Encoder Right Actuator", leftActuatorEncoder.getPosition());
-
   }
 
+  public double currentActuatorPosition(){
+    return ((SmartDashboard.getNumber("Encoder Left Actuator", rightActuatorEncoder.getPosition()) +
+    SmartDashboard.getNumber("Encoder Right Actuator", leftActuatorEncoder.getPosition()))/2);
+  }
   public void stopActuators() {
     intakeLeftActuator.set(0);
     intakeRightActuator.set(0);
@@ -91,7 +94,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void setActuatorDown(double speed) {
     if (bottomlimitSwitch.get()||
-    SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -38) {
+    SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -39) {
       // We are going down and bottom limit is tripped so stop
 
       intakeLeftActuator.set(0);
@@ -106,16 +109,5 @@ public class IntakeSubsystem extends SubsystemBase {
     armPosition();
   }
 
-  public void setActuatorPosition(double speed){
-if ((bottomlimitSwitch.get() || SmartDashboard.getNumber("Encoder Left Actuator", 0) <= -39) && speed < 0){
-  intakeLeftActuator.set(0);
-  intakeRightActuator.set(0);
-} else if ((toplimitSwitch.get() || SmartDashboard.getNumber("Encoder Left Actuator", 0) >= -2) && speed > 0){
-  intakeLeftActuator.set(0);
-  intakeRightActuator.set(0);
-}else {
-  intakeLeftActuator.set(speed);
-  intakeRightActuator.set(-speed);
-}
-  }
+ 
 }
