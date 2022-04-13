@@ -45,13 +45,13 @@ public class ClimberSubsystem extends SubsystemBase {
     climberPosition();
   }
 
-  public void goDownManual(){
-    climberMotor.set(TalonFXControlMode.PercentOutput, -0.20);
+  public void goDownManual(double speed){
+    climberMotor.set(TalonFXControlMode.PercentOutput, speed);
     climberPosition();
   }
 
-  public void goUpManual(){
-    climberMotor.set(TalonFXControlMode.PercentOutput, 0.20);
+  public void goUpManual(double speed){
+    climberMotor.set(TalonFXControlMode.PercentOutput, speed);
     climberPosition();
   }
 
@@ -69,6 +69,9 @@ public class ClimberSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
 
+  public double getCurrentPosition(){
+    return SmartDashboard.getNumber("Climber Encoder", 0);
   }
 }

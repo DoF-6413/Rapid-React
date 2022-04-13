@@ -42,8 +42,8 @@ public final class Constants {
             final public static double intakeSpeed = 0.5;
             // Sets Intake Backwards (Away from Shooter) Speed (Currently 50%)
             final public static double reverseIntakeSpeed = -0.5;
-            // Sets Intake Actuator Speed
-            final public static double slowSpeed = 0.50;
+            // Sets Intake Actuator Up Speed
+            final public static double actuatorsSpeed = 0.50;
     
         //Intake PID (Only Used When Climbing)
         public static final double K_IntakeActuator_P = 0;
@@ -57,6 +57,12 @@ public final class Constants {
         final public static double indexerSpeed = .60;
         // indexer wait time to optimize shooter control in teleop
         final public static double indexerWaitTime = 0.25;
+
+    //Climber Constants
+        //Sets Climber Speed Up
+        final public static double climberSpeedUp = 0.6;
+        //Sets Climber Speed Down
+        final public static double climberSpeedDown = -0.6;
 
     //Shooter Contants
         //Shooter PID

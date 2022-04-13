@@ -113,20 +113,12 @@ new JoystickButton(m_rightStick, 1)
 
   //Manual Down so after match can bring down without relying on encoder values
 new JoystickButton(m_leftStick, 7)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(), m_climberSubsystem)).
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(-0.20), m_climberSubsystem)).
 whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
 new JoystickButton(m_leftStick, 12)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(), m_climberSubsystem)).
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(0.20), m_climberSubsystem)).
 whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
-
-new JoystickButton(m_rightStick, 4).
-whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorPosition(0.5))).
-whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
-
-new JoystickButton(m_rightStick, 5).
-whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorPosition(-0.5))).
-whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
@@ -139,14 +131,14 @@ whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSub
     // Trigger ButtonX = Brings Actuator Up and Will Stop When Released or When
     // Limit Switch Get Hits
     new JoystickButton(m_xbox, XboxController.Button.kY.value)
-        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorUp(Constants.slowSpeed), m_intakeSubsystem))
+        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorUp(Constants.actuatorsSpeed), m_intakeSubsystem))
         .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
     // Trigger ButtonY = Bring Actuator Down and Will Stop When Released or When
     
 // individual actuators up and down
     // Limit Switches Get Hits
     new JoystickButton(m_xbox, XboxController.Button.kX.value)
-       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorDown(Constants.slowSpeed), m_intakeSubsystem))
+       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorDown(Constants.actuatorsSpeed), m_intakeSubsystem))
         .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
     // Trigger Button Left Bumper (L1) = Runs Shooter Subsystem at 2000 R P M
