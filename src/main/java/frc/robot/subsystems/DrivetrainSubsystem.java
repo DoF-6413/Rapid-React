@@ -65,6 +65,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         // Set right follow motors
         rightFollow1.follow(rightLead);
         rightFollow2.follow(rightLead);
+ 
         diffDrive = new DifferentialDrive(leftLead, rightLead);
 
         // Coverts Tics to Feet for Encoder Readout
@@ -87,13 +88,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
         leftFollow1.setSmartCurrentLimit( Constants.k30Percent );  
         leftFollow2.setSmartCurrentLimit( Constants.k30Percent );      
 
-        // TO DO: test ramping with drivetrain (Need driveteam to see how they like it) 
+        // TODO: test ramping with drivetrain (Need driveteam to see how they like it) 
         //might need more custimization (Slower when stoping, faster when starting)
         //leftLead.setOpenLoopRampRate(0.5);
         //rightLead.setOpenLoopRampRate(0.5);
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(this.getHeading()));
-        
-        
     }
     
     /**
@@ -103,42 +102,45 @@ public class DrivetrainSubsystem extends SubsystemBase {
      * @param rightStick Value from -1.0 to 1.0 representing the right rate (Rotation)
      */
     public void setRaw(double rightStick, double leftStick) {
+        /*
+        * to switch to tank drive uncomment this next line
+        * diffDrive.tankDrive(-leftStick.getY(), -rightStick.getY());
+        * parameters to pass into setRaw method
+        */
 
         diffDrive.arcadeDrive(-(rightStick), (leftStick));
+
         printEncoderStatus();
     }
     
-
-    /*
-     * to switch to tank drive uncomment this and place inside of set raw
-     * diffDrive.tankDrive(-leftStick.getY(), -rightStick.getY());
-     * parameters to pass into setRaw method
-     */
 
     public void printStatus(Double joystickLeftInput, Double joystickRightInput) {
         SmartDashboard.putNumber("Joystick Left input = ", joystickLeftInput);
         SmartDashboard.putNumber("Joystick Right input = ", joystickRightInput);
     }
 
+
     public void printEncoderStatus() {
-        SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
-        SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
+        SmartDashboard.putNumber("Encoder Left Lead", LeftEncoderDistance());
+        SmartDashboard.putNumber("Encoder Right Lead", RightEncoderDistance());
     }
 
+
     public double getAvgEncoderDistance() {
-        double averageEncoderDistance = (encoderLeftLead.getPosition() + encoderRightLead.getPosition())/2.0 ;
+        double averageEncoderDistance = (LeftEncoderDistance() + RightEncoderDistance()) / 2.0 ;
         System.out.println ("averageEncoderDistance" + averageEncoderDistance);
         return averageEncoderDistance;
     }
 
-    public double LeftEncoderDistance(){
+
+    public double LeftEncoderDistance() {
         double leftEncoderDistance = (encoderLeftLead.getPosition());
         System.out.println ("leftEncoderDistance" + leftEncoderDistance);
         return leftEncoderDistance;
     }
 
-    public double RightEncoderDistance(){
-        double rightEncoderDistance = (encoderLeftLead.getPosition());
+    public double RightEncoderDistance() {
+        double rightEncoderDistance = (encoderRightLead.getPosition());  // Was Left for some reason...
         System.out.println ("rightEncoderDistance" + rightEncoderDistance);
         return rightEncoderDistance;
     }
@@ -150,20 +152,20 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
    
     
-      /**
-       * Get gyro heading between -180 to 180.
-       * Uses Math.IEEEremainder to get range of -180 to 180 --> dividend - (divisor * Math.Round(dividend / divisor)).
-       * @return the robot's heading in degrees.
-       */
-      public double getHeading()
-      {
+    /**
+     * Get gyro heading between -180 to 180.
+     * Uses Math.IEEEremainder to get range of -180 to 180 --> dividend - (divisor * Math.Round(dividend / divisor)).
+     * @return the robot's heading in degrees.
+     */
+    public double getHeading()
+        {
         return Math.IEEEremainder(m_gyroSubsystem.getAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
-      }
+        }
     
 
-      public void current(){
+    public void current(){
         SmartDashboard.putNumber("Left Current", leftLead.getOutputCurrent());
         SmartDashboard.putNumber("Right Current", rightLead.getOutputCurrent());
-      }
-      
+        }
+
 }
