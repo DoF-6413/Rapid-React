@@ -6,67 +6,73 @@ package frc.robot;
 
 public final class Constants {
     //Ports
+    // Joystick ports
+    final public static int initialJoystickPort = 0;
+    final public static int secondaryJoystickPort = 1;
 
-        // defining joystick ports
-        final public static int initialJoystickPort = 0;
-        final public static int secondaryJoystickPort = 1;
+    // XBox port
+    final public static int xboxPort = 2;
 
-        // defining xbox port
-        final public static int xboxPort = 2;
-
-    // defining axis
+    // Joystick axis
     final public static int joystickYAxis = 1;
     final public static int joystickXAxis = 0;
 
-    // Defining CANIDs
-        //Drivetrain CAN IDs
-        final public static int[] leftDeviceID = new int[] { 1, 2, 3 }; // CAN ID configured using Spark MAX Client
-        final public static int[] rightDeviceID = new int[] { 4, 5, 6 };
-
-        //Intake CAN IDs
-        final public static int[] intakeDeviceID = new int[] { 8, 9, 10 }; 
-                                                                       
-        //Shooter CAN IDs
-        final public static int[] shooterID = new int[] { 7, 11 };
-
-        //Indexer CAN ID
-        final public static int IndexerID = 12;
-        
-        //Climber CAN ID
-        final public static int ClimberID = 13;
+    //
+    // CAN IDs
+    //
+    // Drivetrain
+    final public static int[] leftDeviceID  = new int[] { 1, 2, 3 }; // CAN IDs configured using Spark MAX Client
+    final public static int[] rightDeviceID = new int[] { 4, 5, 6 };
+    // Intake
+    final public static int[] intakeDeviceID = new int[] { 8, 9, 10 }; 
+    // Shooter
+    final public static int[] shooterID = new int[] { 7, 11 };
+    // Indexer
+    final public static int IndexerID = 12;
+    // Climber
+    final public static int ClimberID = 13;
 
 
-    //Intake Constants
-        // Sets Intake Forward (To Shooter) Speed (Currently 50%)
-        final public static double intakeSpeed = 0.5;
-        
-    final public static double reverseIntakeSpeed = -0.5;
-    final public static double slowSpeed = 0.50;
-
-    // FACTS
+    //
+    // Robot Constants
+    //
     final public static double wheelDiameter = 4.;
     final public static double tick2feet = 1.0 / 42. * wheelDiameter * 6.11 * Math.PI / 12.;
     // final public static double FalconTurnsPerRotation = 3600;
+
+    // Motor current limits
+    final public static int k10Percent = 10;
+    final public static int k30Percent = 30;
 
     // Sets indexer speed (Currently 20%)
     final public static double indexerSpeed = .60;
 // switched to positive march 11
     // Falcon 500 RPM Equation
+    // UNUSED???
     final public static double velocityToRPM(double velocity) {
         return velocity * 600 / 2048;
     }
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SHOOTER
-    // CONSTANTS~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    //
+    // Intake Constants
+    //
+    // Sets Intake Forward (To Shooter) Speed (Currently 50%)
+    final public static double intakeSpeed = 0.5;
+        
+    final public static double reverseIntakeSpeed = -0.5;
+    final public static double slowSpeed = 0.50;
+
+
+    //
+    // Shooter Constants
+    //
     final public static double kP = 0.5;
     final public static double kI = 15;
     final public static double kD = 45;
 
     final public static double kShooterTolerance = 1.0;
     final public static double kShooterDerivativeTolerance = 0.01;
-    // auto values
-    // units in feet
-    final public static double moveDistanceFromTarmac = 5;
 
     // shooter run times seconds
     final public static double waitTimeForShooter = 15; 
@@ -78,28 +84,38 @@ public final class Constants {
 
     // indexer wait time to optimize shooter control in teleop
     final public static double indexerWaitTime = 0.25;
-    //MATH
+    // MATH
     final public static double wheelToWheel = 26;
     final public static double turningRadius = wheelToWheel/2;
     final public static double turningSomething = wheelToWheel * 0.01745329;
-    final public static double circOfWheelToWheel = wheelToWheel/12 /2 * 2 * Math.PI;
+    final public static double circOfWheelToWheel = wheelToWheel / 12 / 2 * 2 * Math.PI;
 
     // final public static double oneEightyTurn = circOfWheelToWheel/2;
     // final public static double ninetyTurn = circOfWheelToWheel/4;
     // final public static double fortyFiveTurn = circOfWheelToWheel/8;
 
-    //Shooter Speeds
+    // Shooter Speeds
     final public static double lowerHubSpeed = 2300;
     final public static double upperHubSpeed = 4000;
 
-
-
+    //
+    // Gyro Constants
+    //
     final public static boolean K_GYRO_REVERSED = false;
 
-    /* Drivetrain PID */
-  public static final double K_CHASSIS_TURN_P = 0.8;
-  public static final double K_CHASSIS_TURN_I = 0.55;
-  public static final double K_CHASSIS_TURN_D = 0;
-  public static final double K_TURN_TOLERANCE_DEG = 2;
-  public static final double K_TURN_RATE_TOLERANCE_DEG_PER_SEC = 2;
+    public static final double K_TURN_TOLERANCE_DEG = 2;
+    public static final double K_TURN_RATE_TOLERANCE_DEG_PER_SEC = 2;
+
+    //
+    // Drivetrain Constants
+    //
+    // auto values
+    // units in feet
+    final public static double moveDistanceFromTarmac = 5;
+
+    // PID Settings
+    public static final double K_CHASSIS_TURN_P = 2.0;
+    public static final double K_CHASSIS_TURN_I = 0.55;
+    public static final double K_CHASSIS_TURN_D = 0.1;
+   
 }

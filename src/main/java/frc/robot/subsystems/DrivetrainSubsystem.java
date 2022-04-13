@@ -79,8 +79,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
-        // leftLead.setSmartCurrentLimit(10);
-        // rightLead.setSmartCurrentLimit(10);
+        // We need to current limit the motors so we don't brown out (esp. when turning)
+        rightLead.setSmartCurrentLimit( Constants.k30Percent );
+        rightFollow1.setSmartCurrentLimit( Constants.k30Percent );
+        rightFollow2.setSmartCurrentLimit( Constants.k30Percent );
+        leftLead.setSmartCurrentLimit( Constants.k30Percent );
+        leftFollow1.setSmartCurrentLimit( Constants.k30Percent );  
+        leftFollow2.setSmartCurrentLimit( Constants.k30Percent );      
 
         // TO DO: test ramping with drivetrain (Need driveteam to see how they like it) 
         //might need more custimization (Slower when stoping, faster when starting)
