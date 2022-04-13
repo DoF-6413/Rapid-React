@@ -45,7 +45,7 @@ public final class Constants {
     final public static int k30Percent = 30;
 
     final public static double kOff = 0;
-    
+
     // Sets indexer speed (Currently 20%)
     final public static double indexerSpeed = .60;
 // switched to positive march 11
@@ -99,6 +99,8 @@ public final class Constants {
     // Shooter Speeds
     final public static double lowerHubSpeed = 2300;
     final public static double upperHubSpeed = 4000;
+    final public static double upperHubSpeedAuto1 = 2500;
+    final public static double upperHubSpeedAuto2 = 2800;
 
     //
     // Gyro Constants

@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 /**
@@ -23,14 +24,14 @@ public class ThreeBallAuto extends SequentialCommandGroup {
   public ThreeBallAuto() {
     addCommands(
       new ActuatorDown(RobotContainer.m_intakeSubsystem),
-      new ShootTeleopHigh( RobotContainer.m_shooterSubsystem, RobotContainer.m_indexerSubsystem, 2500),
+      new ShootTeleopHigh( RobotContainer.m_shooterSubsystem, RobotContainer.m_indexerSubsystem, Constants.upperHubSpeedAuto1 ),
       new MoveCommand(RobotContainer.m_drivetrainSubsystem, -3, false),
       new PickupCommmand(RobotContainer.m_intakeSubsystem), 
       new TurnAuto(RobotContainer.m_drivetrainSubsystem, RobotContainer.m_gyroSubsystem, 122),
       new MoveCommand(RobotContainer.m_drivetrainSubsystem, -9, false),
       new PickupCommmand(RobotContainer.m_intakeSubsystem),
       new TurnAuto(RobotContainer.m_drivetrainSubsystem, RobotContainer.m_gyroSubsystem, -122),
-      new ShootTeleopHigh( RobotContainer.m_shooterSubsystem, RobotContainer.m_indexerSubsystem, 2800)
+      new ShootTeleopHigh( RobotContainer.m_shooterSubsystem, RobotContainer.m_indexerSubsystem, Constants.upperHubSpeedAuto2 )   // This other speed is untested!
     );
   }
 }
