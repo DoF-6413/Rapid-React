@@ -42,6 +42,7 @@ public class RobotContainer {
   public static IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   public static GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
   public static ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
   
   // public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   // public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
@@ -200,6 +201,8 @@ new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
     m_chooser.addOption("Test", m_testAuto);
       SmartDashboard.putData(m_chooser);
 
+m_LimelightSubsystem.getTx();
+m_LimelightSubsystem.getTy();
 
   }
 
