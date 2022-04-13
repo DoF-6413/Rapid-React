@@ -11,6 +11,7 @@ import frc.robot.Constants;
 public class IntakeGoTo extends CommandBase {
   /** Creates a new IntakeGoTo. */
   public double endpoint;
+  public double startpoint;
   public IntakeGoTo(double Endpoint) {
     // Use addRequirements() here to declare subsystem dependencies.
     endpoint = Endpoint;
@@ -21,6 +22,7 @@ public class IntakeGoTo extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.m_intakeSubsystem.stopActuators();
+    startpoint = RobotContainer.m_intakeSubsystem.currentActuatorPosition();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -44,7 +46,7 @@ public class IntakeGoTo extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (RobotContainer.m_intakeSubsystem.currentActuatorPosition() > endpoint) ?
+    return (startpoint > endpoint) ?
     RobotContainer.m_intakeSubsystem.currentActuatorPosition() <= endpoint :
     RobotContainer.m_intakeSubsystem.currentActuatorPosition() >= endpoint ;
   }

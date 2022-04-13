@@ -11,14 +11,16 @@ import frc.robot.Constants;
 public class ClimberGoTo extends CommandBase {
   /** Creates a new ClimberFullRetract. */
   public double endpoint;
+  public double startpoint;
   public ClimberGoTo(double Endpoint) {
     // Use addRequirements() here to declare subsystem dependencies.
     endpoint = Endpoint;
   }
-
+  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    startpoint = RobotContainer.m_climberSubsystem.getCurrentPosition();
     RobotContainer.m_climberSubsystem.stop();
   }
 
@@ -43,7 +45,7 @@ RobotContainer.m_climberSubsystem.goDownManual(Constants.climberSpeedDown);
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (RobotContainer.m_climberSubsystem.getCurrentPosition() > endpoint) ?
+    return (startpoint > endpoint) ?
     RobotContainer.m_climberSubsystem.getCurrentPosition() <= endpoint :
     RobotContainer.m_climberSubsystem.getCurrentPosition() >= endpoint ;
   }
