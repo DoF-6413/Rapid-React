@@ -48,7 +48,7 @@ RobotContainer.m_intakeSubsystem.stopActuators();
   @Override
   public boolean isFinished() {
     return StartingPosition > Angle ?
-    RobotContainer.m_intakeSubsystem.currentActuatorPosition() <= Angle :
-    RobotContainer.m_intakeSubsystem.currentActuatorPosition() >= Angle ;
+    RobotContainer.m_gyroSubsystem.getRoll() <= Angle :
+    RobotContainer.m_gyroSubsystem.getRoll() >= Angle ;
   }
 }
