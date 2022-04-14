@@ -127,7 +127,14 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     new JoystickButton(m_rightStick, 3).
     whenPressed(new EndGameClimbMid());
    
+    new JoystickButton(m_leftStick, 3).
+    whenPressed(new TiltTo(10));
 
+    new JoystickButton(m_leftStick, 4).
+    whenPressed(new TiltTo(20));
+
+    new JoystickButton(m_leftStick, 4).
+    whenPressed(new TiltTo(30));
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
