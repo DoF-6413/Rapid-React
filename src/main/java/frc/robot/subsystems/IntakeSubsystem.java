@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 
 public class IntakeSubsystem extends SubsystemBase {
 
@@ -35,16 +36,19 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);
     intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
     intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
-
+    
     intakeLeftActuator.setSmartCurrentLimit(10);
     intakeRightActuator.setSmartCurrentLimit(10);
     leftActuatorEncoder = intakeLeftActuator.getEncoder();
     rightActuatorEncoder = intakeLeftActuator.getEncoder();
-  }
 
+    intakeLeftActuator.setOpenLoopRampRate(0.5);
+    intakeRightActuator.setOpenLoopRampRate(0.5);
+  }
+  
   // Spins Intake Motor
   public void spinMotor() {
-
+    
     intakeSpinner.set(0.5); // runs the motor at the speed set in constants% power
 
   }
