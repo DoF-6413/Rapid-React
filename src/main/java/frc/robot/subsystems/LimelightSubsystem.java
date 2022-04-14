@@ -34,4 +34,11 @@ public class LimelightSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("LimelightY", y);
      return y;
   }
+
+  public boolean hasTarget ()
+  {
+    boolean targetSeen = (table.getEntry("tv").getDouble(0) == 0);
+    SmartDashboard.putBoolean("LimelightY", targetSeen);
+     return targetSeen;
+  }
 }
