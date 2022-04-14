@@ -20,7 +20,7 @@ public class ClimberSubsystem extends SubsystemBase {
     
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.statorCurrLimit.enable = true;
-    config.statorCurrLimit.currentLimit = 40;
+    config.statorCurrLimit.currentLimit = 45;
     climberMotor.configAllSettings(config); 
   }
   public void goUp() {
