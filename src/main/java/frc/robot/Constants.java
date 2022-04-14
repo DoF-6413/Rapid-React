@@ -118,7 +118,7 @@ public final class Constants {
     final public static double moveDistanceFromTarmac = 5;
 
     // PID Settings
-    public static final double K_CHASSIS_TURN_P = 2.0;
+    public static final double K_CHASSIS_TURN_P = 2.1;
     public static final double K_CHASSIS_TURN_I = 0.55;
     public static final double K_CHASSIS_TURN_D = 0.1;
    

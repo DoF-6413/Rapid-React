@@ -27,10 +27,10 @@ public class ThreeBallAuto extends SequentialCommandGroup {
       new ShootTeleopHigh( RobotContainer.m_shooterSubsystem, RobotContainer.m_indexerSubsystem, Constants.upperHubSpeedAuto1 ),
       new MoveCommand(RobotContainer.m_drivetrainSubsystem, -3, false),
       new PickupCommmand(RobotContainer.m_intakeSubsystem), 
-      new TurnAuto(RobotContainer.m_drivetrainSubsystem, RobotContainer.m_gyroSubsystem, 122),
-      new MoveCommand(RobotContainer.m_drivetrainSubsystem, -9, false),
+      new TurnAuto(RobotContainer.m_drivetrainSubsystem, RobotContainer.m_gyroSubsystem, 120),
+      new MoveCommand(RobotContainer.m_drivetrainSubsystem, -8, false),
       new PickupCommmand(RobotContainer.m_intakeSubsystem),
-      new TurnAuto(RobotContainer.m_drivetrainSubsystem, RobotContainer.m_gyroSubsystem, -122),
+      new TurnAuto(RobotContainer.m_drivetrainSubsystem, RobotContainer.m_gyroSubsystem, -80),
       new ShootTeleopHigh( RobotContainer.m_shooterSubsystem, RobotContainer.m_indexerSubsystem, Constants.upperHubSpeedAuto2 )   // This other speed is untested!
     );
   }

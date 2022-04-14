@@ -15,7 +15,7 @@ import frc.robot.Constants;
 public class ShootHigh extends SequentialCommandGroup {
   /** Creates a new Shoot. */
   private ShooterSubsystem m_Shooter;
-  public ShootHigh(ShooterSubsystem shoot, double speed) {
+  public ShootHigh(ShooterSubsystem shoot, double speed, double shootDelay) {
     // Add your commands in the addCommands() call, e.g.
    m_Shooter = shoot;
     // addCommands(new FooCommand(), new BarCommand());
@@ -26,7 +26,7 @@ public class ShootHigh extends SequentialCommandGroup {
       //change to 2300 for low goal
       //change to 4250 for high goal
       new InstantCommand(() -> shoot.enable()),
-      new WaitCommand(Constants.fourSeconds),
+      new WaitCommand(shootDelay),
       new InstantCommand(() -> shoot.disable())
       ); 
   }
