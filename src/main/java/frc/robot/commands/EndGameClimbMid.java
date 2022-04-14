@@ -17,10 +17,20 @@ public class EndGameClimbMid extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       //new IntakeGoTo(0),
-      new ClimberGoTo(-2.5),
-      new IntakeGoTo(-5),
+      new ClimberGoTo(-1),
+      new IntakeGoTo(-3.5),
       new WaitCommand(0.5),
-      new ClimberGoTo(7)
+      new ClimberGoTo(7),
+      parallel (new ClimberGoTo(45), new TiltTo(-45)),
+      new WaitCommand(7.5),
+      new ClimberGoTo(40),
+      parallel(new ClimberGoTo(20), new IntakeGoTo(-15)),
+      new IntakeGoTo(-4),
+      new ClimberGoTo(-1),
+      new IntakeGoTo(-3.5)
+      //WE ARE AT HIGH BAR
+      // new WaitCommand(0.5),
+      // new ClimberGoTo()
     );
   }
 }

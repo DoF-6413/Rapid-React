@@ -20,6 +20,8 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
 /**
  * This class is where the bulk of the robot should be declared. Since
  * Command-based is a
@@ -127,14 +129,14 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     new JoystickButton(m_rightStick, 3).
     whenPressed(new EndGameClimbMid());
    
-    new JoystickButton(m_leftStick, 3).
-    whenPressed(new TiltTo(10));
+    // new JoystickButton(m_leftStick, 3).
+    // whenPressed();
 
     new JoystickButton(m_leftStick, 4).
-    whenPressed(new TiltTo(20));
+    whenPressed(new TiltTo(-20));
 
-    new JoystickButton(m_leftStick, 4).
-    whenPressed(new TiltTo(30));
+    new JoystickButton(m_leftStick, 5).
+    whenPressed(new TiltTo(-30));
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
