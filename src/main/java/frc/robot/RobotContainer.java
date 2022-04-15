@@ -130,14 +130,14 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
         
     // Trigger ButtonX = Brings Actuator Up and Will Stop When Released or When
     // Limit Switch Get Hits
-    new JoystickButton(m_xbox, XboxController.Button.kX.value)
+    new JoystickButton(m_xbox, XboxController.Button.kY.value)
         .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorUp(Constants.slowSpeed), m_intakeSubsystem))
         .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
     // Trigger ButtonY = Bring Actuator Down and Will Stop When Released or When
     
 // individual actuators up and down
     // Limit Switches Get Hits
-    new JoystickButton(m_xbox, XboxController.Button.kY.value)
+    new JoystickButton(m_xbox, XboxController.Button.kX.value)
        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorDown(Constants.slowSpeed), m_intakeSubsystem))
         .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
