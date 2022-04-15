@@ -6,23 +6,27 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.RobotContainer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class EndGameClimbMid extends SequentialCommandGroup {
-  /** Creates a new EndGameClimbMid. */
-  public EndGameClimbMid() {
+public class EndGameClimbTraverse extends SequentialCommandGroup {
+  /** Creates a new EndGameClimbTraverse. */
+  public EndGameClimbTraverse() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new IntakeGoTo(0),
-      new ClimberGoTo(0),
-      new IntakeGoTo(-2),
-      new WaitCommand(0.5),
-      new ClimberGoTo(7)
-      //MID BAR JUST INTAKE ACTUATORS
+      new TiltTo(-40),
+      new ClimberGoTo(48), 
+      new WaitCommand(2),
+      new TiltTo(-30),
+      new WaitCommand(2),
+      new ClimberGoTo(40),
+      new ClimberGoTo(25),
+      parallel(new ClimberGoTo(20), new IntakeGoTo(-15)),
+      new IntakeGoTo(-4),
+      new ClimberGoTo(0)
     );
   }
 }
-
