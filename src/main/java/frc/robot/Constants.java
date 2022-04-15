@@ -3,6 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 public final class Constants {
     // defining joystick ports
@@ -91,4 +94,4 @@ public final class Constants {
   // limelight min and max sweet spot values
   public static final double limelightMax = 3;
   public static final double limelightMin = -3;
-}
+  }
