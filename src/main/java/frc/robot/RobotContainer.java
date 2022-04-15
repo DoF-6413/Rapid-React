@@ -95,15 +95,15 @@ public class RobotContainer {
         new JoystickButton(m_leftStick, 1)
         .whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
         .whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
-        .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
-        .whenReleased(new RunCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+        .whenReleased(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
+        .whenReleased(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 //        .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 //Right Trigger on Joystick = Make the climber go down
 new JoystickButton(m_rightStick, 1)
 .whenPressed(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem))
 .whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
-.whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
-.whenReleased(new RunCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+.whenReleased(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
+.whenReleased(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
   //      .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
   new JoystickButton(m_rightStick, 2)
   .whenPressed(new regurgitate(m_intakeSubsystem)).
