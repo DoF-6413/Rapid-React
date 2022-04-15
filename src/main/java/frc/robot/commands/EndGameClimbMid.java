@@ -18,12 +18,12 @@ public class EndGameClimbMid extends SequentialCommandGroup {
     addCommands(
       //new IntakeGoTo(0),
       new ClimberGoTo(-1),
-      new IntakeGoTo(-3),
+      new IntakeGoTo(-2),
       new WaitCommand(0.5),
       new ClimberGoTo(7),
       //MID BAR JUST INTAKE ACTUATORS
       parallel (new ClimberGoTo(45), new TiltTo(-40)),
-      new WaitCommand(6),
+      new TiltTo(-30),
       new ClimberGoTo(40),
       //NOW CONNECTED AT TWO POINTS
       //BOTTOM COMMAND RELEASES FROM MID BAR
@@ -31,19 +31,27 @@ public class EndGameClimbMid extends SequentialCommandGroup {
       parallel(new ClimberGoTo(20), new IntakeGoTo(-15)),
       new IntakeGoTo(-4),
       new ClimberGoTo(-1),
-      new IntakeGoTo(-3),
+      new IntakeGoTo(-2),
       //WE ARE AT HIGH BAR
-      new WaitCommand(0.5),
-      new ClimberGoTo(45),
-      new WaitCommand(2.5),
-      new TiltTo(-25),
-      new WaitCommand(2.5),
+      // new WaitCommand(0.5),
+      // new ClimberGoTo(47), // full exstention
+      // new WaitCommand(2.5),
+      // new TiltTo(-25),
+      // new WaitCommand(2.5),
+      // new TiltTo(-30),
+      // new WaitCommand(1),
+      // new ClimberGoTo(25),
+      new ClimberGoTo(7),
+      parallel(new ClimberGoTo(47), new TiltTo(-40)),
+      new WaitCommand(2),
       new TiltTo(-30),
-      new WaitCommand(1),
+      new WaitCommand(2),
+      new ClimberGoTo(40),
       new ClimberGoTo(25),
       parallel(new ClimberGoTo(20), new IntakeGoTo(-15)),
       new IntakeGoTo(-4),
       new ClimberGoTo(-1)
+      //new IntakeGoTo(-2)
     );
   }
 }
