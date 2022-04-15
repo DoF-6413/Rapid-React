@@ -128,12 +128,17 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
 
     new JoystickButton(m_rightStick, 3).
     whenPressed(new EndGameClimbMid());
-   
+
+    new JoystickButton(m_rightStick, 4).
+    whenPressed(new EndGameClimbHigh());
+
+    new JoystickButton(m_rightStick, 5).
+    whenPressed(new EndGameClimbTraverse());
     // new JoystickButton(m_leftStick, 3).
     // whenPressed();
 
     new JoystickButton(m_leftStick, 4).
-    whenPressed(new TiltTo(-20));
+    whenPressed(new ClimberReset());
 
     new JoystickButton(m_leftStick, 5).
     whenPressed(new TiltTo(-30));
