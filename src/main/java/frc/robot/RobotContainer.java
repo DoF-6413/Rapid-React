@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  public static LEDSubsystem m_ledSubsystem = new LEDSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   // private final AutoCommand m_autoCommand = new
   // AutoCommand(m_drivetrainSubsystem);
