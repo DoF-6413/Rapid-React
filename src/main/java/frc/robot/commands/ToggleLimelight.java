@@ -11,13 +11,14 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TurnLimelightOff extends SequentialCommandGroup {
-  /** Creates a new TurnLimelightOff. */
-  public TurnLimelightOff(LimelightSubsystem light) {
+public class ToggleLimelight extends SequentialCommandGroup {
+  /** Creates a new ToggleLimelight. */
+  public ToggleLimelight(LimelightSubsystem light) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-     new InstantCommand(() -> light.ledMode())
+      
+     new InstantCommand(() -> light.toggleLED())
     );
   }
 }

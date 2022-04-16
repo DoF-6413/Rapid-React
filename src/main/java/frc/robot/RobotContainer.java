@@ -200,10 +200,8 @@ new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
     // m_chooser.addOption("Demo Auto", m_demoAuto);
     m_chooser.addOption("Test", m_testAuto);
       SmartDashboard.putData(m_chooser);
-
-m_LimelightSubsystem.getTx();
-m_LimelightSubsystem.getTy();
-
+        m_LimelightSubsystem.getTx();
+        m_LimelightSubsystem.getTy();
   }
 
   /**
