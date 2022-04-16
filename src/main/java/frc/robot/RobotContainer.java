@@ -74,7 +74,6 @@ public class RobotContainer {
   // private final Command m_demoAuto = new DemoAutoRoutine(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
    private final Command m_testAuto = new TestAuto(m_drivetrainSubsystem, m_shooterSubsystem, m_gyroSubsystem);
   private final Command m_spin = new spin(m_drivetrainSubsystem, m_gyroSubsystem);
-  private final Command m_midBarRoutine = new EndGameClimbMid();
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -126,22 +125,19 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
 
 
 
-    new JoystickButton(m_rightStick, 3).
+    new JoystickButton(m_leftStick, 3).
     whenPressed(new EndGameClimbMid());
 
-    new JoystickButton(m_rightStick, 4).
+    new JoystickButton(m_leftStick, 4).
     whenPressed(new EndGameClimbHigh());
 
-    new JoystickButton(m_rightStick, 5).
+    new JoystickButton(m_leftStick, 5).
     whenPressed(new EndGameClimbTraverse());
     // new JoystickButton(m_leftStick, 3).
     // whenPressed();
 
-    new JoystickButton(m_leftStick, 4).
+    new JoystickButton(m_rightStick, 4).
     whenPressed(new ClimberReset());
-
-    new JoystickButton(m_leftStick, 5).
-    whenPressed(new TiltTo(-30));
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
@@ -191,7 +187,6 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     m_chooser.addOption("Just Move", m_autoMove);
     m_chooser.addOption("Push Away", m_autoPush);
     m_chooser.addOption("Spin", m_spin);
-    m_chooser.addOption("Mid Bar Routine", m_midBarRoutine);
 
     // m_chooser.addOption("Demo Auto", m_demoAuto);
     m_chooser.addOption("Test", m_testAuto);
