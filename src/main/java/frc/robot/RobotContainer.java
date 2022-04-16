@@ -95,7 +95,7 @@ public class RobotContainer {
 //Left Trigger on Joystick = Make the climber go up
        new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value).
       whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
-      .whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
+      .whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
       .whenReleased(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
       .whenReleased(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 //        .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
