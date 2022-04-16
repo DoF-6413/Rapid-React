@@ -42,12 +42,11 @@ public class RobotContainer {
   public static GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
   public static ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   
-  public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
-  public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
-  public XboxController m_xbox = new XboxController(Constants.xboxPort);
+  // public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
+  // public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
+  public XboxController m_driverXbox = new XboxController(0);
+  public XboxController m_xbox = new XboxController(1);
 
-  public Joystick LeftStick;
-  public Joystick RightStick;
 
   // XBOX Contoller Defs (For intake and Climber)
 
@@ -91,21 +90,21 @@ public class RobotContainer {
     configureButtonBindings();
     // Sets deafault Drivetrain for Subsystem
     m_drivetrainSubsystem.setDefaultCommand(
-        new RunCommand(() -> m_drivetrainSubsystem.setRaw(m_rightStick.getRawAxis(Constants.joystickYAxis),
-            m_leftStick.getRawAxis(Constants.joystickXAxis)), m_drivetrainSubsystem));
+        new RunCommand(() -> m_drivetrainSubsystem.setRaw(m_driverXbox.getLeftY(), 
+        m_driverXbox.getRightX()), m_drivetrainSubsystem));
 //Left Trigger on Joystick = Make the climber go up
-        new JoystickButton(m_leftStick, 1)
-        .whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
-        .whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
-        .whenReleased(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
-        .whenReleased(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+       new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value).
+      whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
+      .whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
+      .whenReleased(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
+      .whenReleased(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 //        .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 //Right Trigger on Joystick = Make the climber go down
-new JoystickButton(m_rightStick, 1)
-.whenPressed(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem))
-.whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
-.whenReleased(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
-.whenReleased(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+new JoystickButton(m_driverXbox, XboxController.Button.kLeftBumper.value)
+.whenActive(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem))
+.whenActive(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
+.whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
+.whenInactive(new  InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
   //      .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
 
@@ -180,7 +179,7 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
-    new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
+    // new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
 
     SmartDashboard.putData(m_shooterSubsystem);
     m_chooser.setDefaultOption("Mid High Intake", m_autoHighIntake);
