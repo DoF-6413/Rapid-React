@@ -28,6 +28,7 @@ public class EndGameClimbMid extends SequentialCommandGroup {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.m_intakeSubsystem.stopActuators();
+    RobotContainer.m_climberSubsystem.stop();
   }
 }
 
