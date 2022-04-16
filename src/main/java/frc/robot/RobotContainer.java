@@ -131,10 +131,10 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     new JoystickButton(m_xbox, XboxController.Axis.kLeftTrigger.value)
     .whenActive(new EndGameClimbMid());
 
-    new JoystickButton(m_leftStick, 12)
+    new JoystickButton(m_rightStick, 12)
     .whenPressed(new EndGameClimbHigh());
 
-    new JoystickButton(m_leftStick, 11)
+    new JoystickButton(m_rightStick, 11)
     .whenActive(new EndGameClimbTraverse());
     // new JoystickButton(m_leftStick, 3).
     // whenPressed();
@@ -143,8 +143,8 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     .whenActive(new EndGameClimbTraverseIntake());
 
     // preferably before press before match starts
-    new JoystickButton(m_leftStick, 4).
-    whenPressed(new ClimberReset());
+    new JoystickButton(m_leftStick, 4)
+    .whenPressed(new ClimberReset());
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
