@@ -41,4 +41,12 @@ public class LimelightSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("LimelightY", targetSeen);
      return targetSeen;
   }
+
+  public void ledMode()
+  {
+  //  NetworkTableEntry ledMode = table.getEntry("ledMode");
+ //   double TurnOff = ledMode.putNumber(1);
+ 
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+  }
 }

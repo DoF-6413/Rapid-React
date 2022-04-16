@@ -145,6 +145,9 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
+    new JoystickButton(m_leftStick, 9)
+.whenPressed(new TurnLimelightOff(m_LimelightSubsystem));
+
     new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
 
     SmartDashboard.putData(m_shooterSubsystem);
