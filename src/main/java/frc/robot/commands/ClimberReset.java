@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
+//negative is down, positive is up
 public class ClimberReset extends CommandBase {
   /** Creates a new ClimberReset. */
   public ClimberReset() {
@@ -24,8 +25,8 @@ public class ClimberReset extends CommandBase {
   @Override
   public void execute() {
    RobotContainer.m_climberSubsystem.goDownManual(-0.3);
-    System.out.println("AHHHHHHHHHHh");
   }
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
@@ -33,6 +34,7 @@ public class ClimberReset extends CommandBase {
   RobotContainer.m_climberSubsystem.stop();
    RobotContainer.m_climberSubsystem.setCurrentLimit(45);
   }
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

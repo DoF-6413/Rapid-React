@@ -29,9 +29,11 @@ RobotContainer.m_intakeSubsystem.stopActuators();
   public void execute() {
 
   if(RobotContainer.m_gyroSubsystem.getRoll() > Angle){
-    RobotContainer.m_intakeSubsystem.setActuatorDown(0.2);
+    RobotContainer.m_intakeSubsystem.setRightActuatorDown(0.2);
+    RobotContainer.m_intakeSubsystem.setLeftActuatorDown(0.2);
 } else if (RobotContainer.m_gyroSubsystem.getRoll() < Angle){
-    RobotContainer.m_intakeSubsystem.setActuatorUp(0.2);
+    RobotContainer.m_intakeSubsystem.setRightActuatorUp(0.2);
+    RobotContainer.m_intakeSubsystem.setLeftActuatorUp(0.2);
 } else {
   RobotContainer.m_intakeSubsystem.stopActuators();
 }

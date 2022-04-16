@@ -18,7 +18,8 @@ public class IntakeDown extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new InstantCommand(() -> RobotContainer.m_intakeSubsystem.setActuatorDown(0.05)),
+      parallel (new InstantCommand(() -> RobotContainer.m_intakeSubsystem.setRightActuatorDown(0.05)), 
+      new InstantCommand(() -> RobotContainer.m_intakeSubsystem.setRightActuatorDown(0.05))),
       new WaitCommand(3)
     );
   }

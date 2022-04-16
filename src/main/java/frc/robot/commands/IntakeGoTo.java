@@ -11,7 +11,9 @@ import frc.robot.Constants;
 public class IntakeGoTo extends CommandBase {
   /** Creates a new IntakeGoTo. */
   public double endpoint;
-  public double startpoint;
+ //tracking initial start point so we can compare during climbing to see when to finish
+  public double leftStartpoint;
+  public double rightStartpoint;
   public IntakeGoTo(double Endpoint) {
     // Use addRequirements() here to declare subsystem dependencies.
     endpoint = Endpoint;
@@ -22,19 +24,33 @@ public class IntakeGoTo extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.m_intakeSubsystem.stopActuators();
-    startpoint = RobotContainer.m_intakeSubsystem.currentActuatorPosition();
+    leftStartpoint = RobotContainer.m_intakeSubsystem.currentLeftActuatorPosition();
+    rightStartpoint = RobotContainer.m_intakeSubsystem.currentRightActuatorPosition();
+    RobotContainer.m_intakeSubsystem.climbingCurrentLimit();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.m_intakeSubsystem.currentActuatorPosition() > endpoint){
-      RobotContainer.m_intakeSubsystem.setActuatorDown(Constants.actuatorsSpeed);
-      } else if (RobotContainer.m_intakeSubsystem.currentActuatorPosition() < endpoint){
-        RobotContainer.m_intakeSubsystem.setActuatorUp(Constants.actuatorsSpeed);
-      } else {
-        RobotContainer.m_intakeSubsystem.stopActuators();
+    if(RobotContainer.m_intakeSubsystem.currentLeftActuatorPosition() > endpoint){
+        RobotContainer.m_intakeSubsystem.setLeftActuatorDown(Constants.actuatorsSpeed);
+        } 
+    else if (RobotContainer.m_intakeSubsystem.currentLeftActuatorPosition() < endpoint){
+        RobotContainer.m_intakeSubsystem.setLeftActuatorUp(Constants.actuatorsSpeed);
+      } 
+    else {
+        RobotContainer.m_intakeSubsystem.stopLeftActuator();
       }
+
+      if(RobotContainer.m_intakeSubsystem.currentRightActuatorPosition() > endpoint){
+          RobotContainer.m_intakeSubsystem.setRightActuatorDown(Constants.actuatorsSpeed);
+          }
+      else if (RobotContainer.m_intakeSubsystem.currentRightActuatorPosition() < endpoint){
+          RobotContainer.m_intakeSubsystem.setRightActuatorUp(Constants.actuatorsSpeed);
+        } 
+      else {
+          RobotContainer.m_intakeSubsystem.stopRightActuator();
+        }
   }
 
   // Called once the command ends or is interrupted.
@@ -46,8 +62,8 @@ public class IntakeGoTo extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (startpoint > endpoint) ?
-    RobotContainer.m_intakeSubsystem.currentActuatorPosition() <= endpoint :
-    RobotContainer.m_intakeSubsystem.currentActuatorPosition() >= endpoint ;
+    return (leftStartpoint > endpoint && rightStartpoint > endpoint) ?
+    (RobotContainer.m_intakeSubsystem.currentLeftActuatorPosition() <= endpoint) && (RobotContainer.m_intakeSubsystem.currentRightActuatorPosition() <= endpoint) :
+    (RobotContainer.m_intakeSubsystem.currentLeftActuatorPosition() >= endpoint) && (RobotContainer.m_intakeSubsystem.currentRightActuatorPosition() >= endpoint);
   }
 }

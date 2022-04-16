@@ -108,10 +108,6 @@ new JoystickButton(m_rightStick, 1)
 .whenReleased(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
   //      .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
-  new JoystickButton(m_rightStick, 2)
-  .whenPressed(new regurgitate(m_intakeSubsystem)).
-  whenReleased(new RunCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem)).
-  whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
   //Manual Down so after match can bring down without relying on encoder values
 new JoystickButton(m_leftStick, 8)
@@ -150,14 +146,16 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     // Trigger ButtonX = Brings Actuator Up and Will Stop When Released or When
     // Limit Switch Get Hits
     new JoystickButton(m_xbox, XboxController.Button.kY.value)
-        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorUp(Constants.actuatorsSpeed), m_intakeSubsystem))
+        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setLeftActuatorUp(Constants.actuatorsSpeed), m_intakeSubsystem))
+        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setRightActuatorUp(Constants.actuatorsSpeed), m_intakeSubsystem))
         .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
     // Trigger ButtonY = Bring Actuator Down and Will Stop When Released or When    
     
 // individual actuators up and down    
     // Limit Switches Get Hits
     new JoystickButton(m_xbox, XboxController.Button.kX.value)
-       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorDown(Constants.actuatorsSpeed), m_intakeSubsystem))
+       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setLeftActuatorDown(Constants.actuatorsSpeed), m_intakeSubsystem))
+       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setRightActuatorDown(Constants.actuatorsSpeed), m_intakeSubsystem))
         .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
         
 
