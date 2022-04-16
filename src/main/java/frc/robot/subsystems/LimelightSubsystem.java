@@ -14,7 +14,11 @@ public class LimelightSubsystem extends SubsystemBase {
   /** Creates a new LimelightSubsystem. */
   public LimelightSubsystem() {}
   
+  // current LedMode, 0= on, 1 = off
+  private int CurMode = 0;
+
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -42,11 +46,26 @@ public class LimelightSubsystem extends SubsystemBase {
      return targetSeen;
   }
 
-  public void ledMode()
+  public void ledOFF()
   {
-  //  NetworkTableEntry ledMode = table.getEntry("ledMode");
- //   double TurnOff = ledMode.putNumber(1);
- 
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
   }
+
+  public void ledON()
+  {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
+  }
+
+  public void toggleLED()
+  {
+    if (CurMode == 0)
+    { 
+      ledON();
+      CurMode=1;
+    } else {
+      ledOFF();
+      CurMode =0;
+    }
+  }
+
 }

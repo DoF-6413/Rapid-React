@@ -146,7 +146,7 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
     new JoystickButton(m_leftStick, 9)
-.whenPressed(new TurnLimelightOff(m_LimelightSubsystem));
+    .whenPressed(new ToggleLimelight(m_LimelightSubsystem));
 
     new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
 
@@ -161,10 +161,8 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     m_chooser.addOption("Push Away", m_autoPush);
    
       SmartDashboard.putData(m_chooser);
-
-m_LimelightSubsystem.getTx();
-m_LimelightSubsystem.getTy();
-
+        m_LimelightSubsystem.getTx();
+        m_LimelightSubsystem.getTy();
   }
 
   /**
