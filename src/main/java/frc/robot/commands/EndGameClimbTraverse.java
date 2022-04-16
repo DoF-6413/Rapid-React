@@ -29,4 +29,8 @@ public class EndGameClimbTraverse extends SequentialCommandGroup {
       new ClimberGoTo(0)
     );
   }
+  @Override
+  public void end(boolean interrupted) {
+    RobotContainer.m_intakeSubsystem.stopActuators();
+  }
 }

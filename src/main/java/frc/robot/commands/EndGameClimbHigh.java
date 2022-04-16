@@ -42,5 +42,8 @@ public class EndGameClimbHigh extends SequentialCommandGroup {
       //new IntakeGoTo(-2)
     );
   }
- 
+  @Override
+  public void end(boolean interrupted) {
+    RobotContainer.m_intakeSubsystem.stopActuators();
+  }
 }
