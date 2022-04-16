@@ -131,23 +131,26 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     new JoystickButton(m_xbox, XboxController.Axis.kLeftTrigger.value)
     .whenActive(new EndGameClimbMid());
 
-    new JoystickButton( new JoystickButton(m_leftStick, 12)
+    new JoystickButton(m_leftStick, 12)
     .whenPressed(new EndGameClimbHigh());
 
-    new JoystickButton(POVButton​(GenericHID joystick, int angle)))
+    new JoystickButton(m_leftStick, 11)
     .whenActive(new EndGameClimbTraverse());
     // new JoystickButton(m_leftStick, 3).
     // whenPressed();
+    
+    new JoystickButton(m_xbox, XboxController.Axis.kRightTrigger.value)
+    .whenActive(new EndGameClimbTraverseIntake());
 
+    // preferably before press before match starts
     new JoystickButton(m_leftStick, 4).
     whenPressed(new ClimberReset());
 
-    new JoystickButton(m_leftStick, 5).
-    whenPressed(new TiltTo(-30));
-
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
-    .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem));
+    .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem))
+    .whenPressed(new RunCommand(() -> m_intakeSubsystem.setActuatorUp(Constants.actuatorsSpeed), m_intakeSubsystem))
+    .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
         
     // Trigger ButtonB = Spins Intake and Indexer backwards (Away from Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kB.value)
