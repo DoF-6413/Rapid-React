@@ -131,8 +131,8 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     new JoystickButton(m_xbox, XboxController.Axis.kLeftTrigger.value)
     .whenActive(new EndGameClimbMid());
 
-    new JoystickButton(m_xbox, XboxController.Axis.kRightTrigger.value)
-    .whenActive(new EndGameClimbHigh());
+    new JoystickButton( new JoystickButton(m_leftStick, 12)
+    .whenPressed(new EndGameClimbHigh());
 
     new JoystickButton(POVButton​(GenericHID joystick, int angle)))
     .whenActive(new EndGameClimbTraverse());
