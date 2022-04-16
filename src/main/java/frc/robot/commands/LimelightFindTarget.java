@@ -27,13 +27,16 @@ public class LimelightFindTarget extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.m_LimelightSubsystem.getTy() > Constants.limelightMax){
-      RobotContainer.m_drivetrainSubsystem.setRaw(0.5, 0.0);
-  } else if(RobotContainer.m_LimelightSubsystem.getTy() < Constants.limelightMin){
-      RobotContainer.m_drivetrainSubsystem.setRaw(-0.5, 0.0);
-  } else { 
-    RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
-  }}
+      if(!RobotContainer.m_LimelightSubsystem.hasTarget()) {
+        if(RobotContainer.m_LimelightSubsystem.getTy() > Constants.limelightMax){
+            RobotContainer.m_drivetrainSubsystem.setRaw(0.5, 0.0);
+        } else if(RobotContainer.m_LimelightSubsystem.getTy() < Constants.limelightMin){
+            RobotContainer.m_drivetrainSubsystem.setRaw(-0.5, 0.0);
+        } else { 
+            RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
+        }
+        } 
+      }
 
   // Called once the command ends or is interrupted
   @Override
