@@ -17,7 +17,6 @@ public class EndGameClimbMid extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new IntakeGoTo(0),
       new ClimberGoTo(0),
       new IntakeGoTo(-2),
       new WaitCommand(0.5),

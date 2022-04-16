@@ -125,7 +125,7 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
 
 
 
-    new JoystickButton(m_leftStick, 3).
+    new JoystickButton(m_leftStick, 6).
     whenPressed(new EndGameClimbMid());
 
     new JoystickButton(m_leftStick, 4).
