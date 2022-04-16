@@ -8,6 +8,8 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Axis;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -126,14 +128,14 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
 
 
 
-    new JoystickButton(m_rightStick, 3).
-    whenPressed(new EndGameClimbMid());
+    new JoystickButton(m_xbox, XboxController.Axis.kLeftTrigger.value)
+    .whenActive(new EndGameClimbMid());
 
-    new JoystickButton(m_rightStick, 4).
-    whenPressed(new EndGameClimbHigh());
+    new JoystickButton(m_xbox, XboxController.Axis.kRightTrigger.value)
+    .whenActive(new EndGameClimbHigh());
 
-    new JoystickButton(m_rightStick, 5).
-    whenPressed(new EndGameClimbTraverse());
+    new JoystickButton(POVButton​(GenericHID joystick, int angle)))
+    .whenActive(new EndGameClimbTraverse());
     // new JoystickButton(m_leftStick, 3).
     // whenPressed();
 
