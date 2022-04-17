@@ -135,6 +135,15 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     new JoystickButton(m_rightStick, 4).
     whenPressed(new ClimberReset());
 
+    new JoystickButton(m_rightStick, 5).
+    whenPressed(new IntakeGoTo(-20));
+
+    new JoystickButton(m_rightStick, 6).
+    whenPressed(new IntakeGoTo(-30));
+
+    new JoystickButton(m_rightStick, 3).
+    whenPressed(new IntakeGoTo(-10));
+
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
     .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem));
@@ -146,16 +155,14 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     // Trigger ButtonX = Brings Actuator Up and Will Stop When Released or When
     // Limit Switch Get Hits
     new JoystickButton(m_xbox, XboxController.Button.kY.value)
-        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setLeftActuatorUp(Constants.actuatorsSpeed), m_intakeSubsystem))
-        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setRightActuatorUp(Constants.actuatorsSpeed), m_intakeSubsystem))
+        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setAllActuatorsUp(Constants.actuatorsSpeed), m_intakeSubsystem))
         .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
     // Trigger ButtonY = Bring Actuator Down and Will Stop When Released or When    
     
 // individual actuators up and down    
     // Limit Switches Get Hits
     new JoystickButton(m_xbox, XboxController.Button.kX.value)
-       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setLeftActuatorDown(Constants.actuatorsSpeed), m_intakeSubsystem))
-       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setRightActuatorDown(Constants.actuatorsSpeed), m_intakeSubsystem))
+       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setAllActuatorsDown(Constants.actuatorsSpeed), m_intakeSubsystem))
         .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
         
 
