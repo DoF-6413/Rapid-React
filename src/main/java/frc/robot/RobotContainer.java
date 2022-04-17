@@ -47,8 +47,10 @@ public class RobotContainer {
   // public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
   public static XboxController m_driverXbox = new XboxController(0);
   public static XboxController m_xbox = new XboxController(1);
-  public Trigger LeftTrigger = new Trigger(() -> IntakeSubsystem.getLeftTriggerActive());
-  public Trigger RightTrigger = new Trigger(() -> IntakeSubsystem.getRightTriggerActive());
+  public Trigger driverLeftTrigger = new Trigger(() -> IntakeSubsystem.getLeftTriggerActive());
+  public Trigger driverRightTrigger = new Trigger(() -> IntakeSubsystem.getRightTriggerActive());
+  public Trigger leftTrigger = new Trigger(()-> ClimberSubsystem.getLeftTriggerActive());
+  public Trigger rightTrigger = new Trigger(()-> ClimberSubsystem.getRightTriggerActive());
   // XBOX Contoller Defs (For intake and Climber)
 
   // different Autos
@@ -107,13 +109,13 @@ new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value)
 .whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(0.2), m_climberSubsystem)).
   whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
-RightTrigger
+driverRightTrigger
 .whenActive(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
 .whenActive(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
 .whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
 .whenInactive(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
-  LeftTrigger
+  driverLeftTrigger
   .whenActive(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem))
   .whenActive(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
   .whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
@@ -123,7 +125,7 @@ RightTrigger
   .whenPressed(new ClimberReset());
 
     new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
-    .whenPressed(new EndGameClimbMid());
+    .whenPressed(new EndGameClimbHigh());
 
 
 
@@ -164,6 +166,12 @@ RightTrigger
     .whenHeld(new ShootTeleopHigh(m_shooterSubsystem, m_indexerSubsystem))
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
+
+    rightTrigger
+.whenActive(new EndGameClimbTraverse());
+
+  leftTrigger
+  .whenActive(new EndGameClimbMid());
 
     // new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
 

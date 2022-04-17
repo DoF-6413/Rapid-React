@@ -26,9 +26,7 @@ public class EndGameClimbTraverse extends SequentialCommandGroup {
       new ClimberGoTo(25),
       parallel(new ClimberGoTo(20), new IntakeGoTo(-15)),
       new IntakeGoTo(-4),
-      new ClimberGoTo(0),
-      new IntakeGoTo(-2),
-      new ClimberGoTo(7)
+      new ClimberGoTo(0)
     );
   }
   @Override

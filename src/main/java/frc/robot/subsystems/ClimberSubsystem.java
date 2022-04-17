@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 
@@ -88,5 +89,13 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public double currentDrawed(){
     return climberMotor.getStatorCurrent();
+  }
+
+  public static boolean getLeftTriggerActive() {
+    return (RobotContainer.m_xbox.getLeftTriggerAxis() > 0);
+  }
+
+  public static boolean getRightTriggerActive() {
+    return (RobotContainer.m_xbox.getRightTriggerAxis() > 0);
   }
 }
