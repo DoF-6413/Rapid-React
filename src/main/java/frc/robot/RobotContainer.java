@@ -47,8 +47,6 @@ public class RobotContainer {
   // public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
   public static XboxController m_driverXbox = new XboxController(0);
   public static XboxController m_xbox = new XboxController(1);
-  double leftTriggerValue = m_driverXbox.getLeftTriggerAxis();
-  double rightTriggerValue = m_driverXbox.getRightTriggerAxis();
   public Trigger LeftTrigger = new Trigger(() -> IntakeSubsystem.getLeftTriggerActive());
   public Trigger RightTrigger = new Trigger(() -> IntakeSubsystem.getRightTriggerActive());
   // XBOX Contoller Defs (For intake and Climber)
@@ -96,28 +94,19 @@ public class RobotContainer {
         new RunCommand(() -> m_drivetrainSubsystem.setRaw(m_driverXbox.getLeftY(), 
         m_driverXbox.getRightX()), m_drivetrainSubsystem));
 //Left Trigger on Joystick = Make the climber go up
-       new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value).
-      whenPressed(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
-      .whenPressed(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
-      .whenReleased(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
-      .whenReleased(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+
 //        .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 //Right Trigger on Joystick = Make the climber go down
+//Manual Down so after match can bring down without relying on encoder values
 new JoystickButton(m_driverXbox, XboxController.Button.kLeftBumper.value)
-.whenActive(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem))
-.whenActive(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
-.whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
-.whenInactive(new  InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
-  //      .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(), m_climberSubsystem)).
+whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
-  //   //Manual Down so after match can bring down without relying on encoder values
-  // new JoystickButton(m_leftStick, 7)
-  // .whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(), m_climberSubsystem)).
-  // whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
-  
-  // new JoystickButton(m_leftStick, 12)
-  // .whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(), m_climberSubsystem)).
-  // whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+
+new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value)
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(), m_climberSubsystem)).
+  whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+
 RightTrigger
 .whenActive(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
 .whenActive(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
@@ -132,29 +121,12 @@ RightTrigger
 
 
 
-    new JoystickButton(m_leftStick, 6).
-    whenPressed(new EndGameClimbMid());
 
-    new JoystickButton(m_leftStick, 4).
-    whenPressed(new EndGameClimbHigh());
 
-    new JoystickButton(m_leftStick, 5).
-    whenPressed(new EndGameClimbTraverse());
-    // new JoystickButton(m_leftStick, 3).
-    // whenPressed();
 
-    new JoystickButton(m_rightStick, 4).
-    whenPressed(new ClimberReset());
 
-    new JoystickButton(m_rightStick, 5).
-    whenPressed(new IntakeGoTo(-20));
 
-    new JoystickButton(m_rightStick, 6).
-    whenPressed(new IntakeGoTo(-30));
-
-    new JoystickButton(m_rightStick, 3).
-    whenPressed(new IntakeGoTo(-10));
-
+  
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
     .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem));
