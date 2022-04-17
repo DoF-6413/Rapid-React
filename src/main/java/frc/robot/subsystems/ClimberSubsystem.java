@@ -47,7 +47,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void goDownManual(double speed){
-    climberMotor.set(TalonFXControlMode.PercentOutput, speed);
+    climberMotor.set(TalonFXControlMode.PercentOutput, -speed);
     climberPosition();
   }
 

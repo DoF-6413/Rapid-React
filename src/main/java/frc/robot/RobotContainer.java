@@ -99,12 +99,12 @@ public class RobotContainer {
 //Right Trigger on Joystick = Make the climber go down
 //Manual Down so after match can bring down without relying on encoder values
 new JoystickButton(m_driverXbox, XboxController.Button.kLeftBumper.value)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(), m_climberSubsystem)).
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(0.2), m_climberSubsystem)).
 whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
 
 new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(), m_climberSubsystem)).
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(0.2), m_climberSubsystem)).
   whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
 RightTrigger
