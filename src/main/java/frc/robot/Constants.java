@@ -92,16 +92,6 @@ public final class Constants {
   public static final double K_TURN_RATE_TOLERANCE_DEG_PER_SEC = 0;
 
   // limelight min and max sweet spot values
-<<<<<<< HEAD
-<<<<<<< HEAD
   public static final double limelightMax = 6;
   public static final double limelightMin = 4;
-=======
-  public static final double limelightMax = ;
-  public static final double limelightMin = -3;
->>>>>>> 76538cd (i Think i created two branches)
-=======
-  public static final double limelightMax = 4;
-  public static final double limelightMin = 6;
->>>>>>> ce8b4e7 (Added limelight functionality)
   }
