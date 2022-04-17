@@ -119,9 +119,11 @@ RightTrigger
   .whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
   .whenInactive(new  InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
+  new JoystickButton(m_driverXbox, XboxController.Button.kStart.value)
+  .whenPressed(new ClimberReset());
 
-
-
+    new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
+    .whenPressed(new EndGameClimbMid());
 
 
 
