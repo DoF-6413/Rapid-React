@@ -11,17 +11,22 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 
 public class LimelightFindTarget extends CommandBase {
   /** Creates a new LimelightFindTarget. */
-  public LimelightFindTarget() {
+  public final DrivetrainSubsystem m_DrivetrainSubsystem;
+
+  public LimelightFindTarget(DrivetrainSubsystem drivetrainSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_DrivetrainSubsystem = drivetrainSubsystem;
+    addRequirements(m_DrivetrainSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
+    m_DrivetrainSubsystem.setRaw(0.0, 0.0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -29,11 +34,11 @@ public class LimelightFindTarget extends CommandBase {
   public void execute() {
       if(!RobotContainer.m_LimelightSubsystem.hasTarget()) {
         if(RobotContainer.m_LimelightSubsystem.getTy() > Constants.limelightMax){
-            RobotContainer.m_drivetrainSubsystem.setRaw(0.5, 0.0);
+            m_DrivetrainSubsystem.setRaw(0.5, 0.0);
         } else if(RobotContainer.m_LimelightSubsystem.getTy() < Constants.limelightMin){
-            RobotContainer.m_drivetrainSubsystem.setRaw(-0.5, 0.0);
+            m_DrivetrainSubsystem.setRaw(-0.5, 0.0);
         } else { 
-            RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
+            m_DrivetrainSubsystem.setRaw(0.0, 0.0);
         }
         } 
       }
@@ -41,7 +46,7 @@ public class LimelightFindTarget extends CommandBase {
   // Called once the command ends or is interrupted
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
+    m_DrivetrainSubsystem.setRaw(0.0, 0.0);
   }
 
   // Returns true when the command should end.
