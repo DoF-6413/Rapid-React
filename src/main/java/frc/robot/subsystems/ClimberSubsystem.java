@@ -24,6 +24,7 @@ public class ClimberSubsystem extends SubsystemBase {
     config.statorCurrLimit.enable = true;
     config.statorCurrLimit.currentLimit = 45;
     climberMotor.configAllSettings(config); 
+    Position = climberMotor.getSelectedSensorPosition()/6380;
   }
   public void goUp() {
     //climberMotor.set(TalonFXControlMode.PercentOutput, 0.50); // runs the motor at 0% power
