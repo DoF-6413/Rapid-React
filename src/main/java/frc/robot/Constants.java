@@ -92,6 +92,6 @@ public final class Constants {
   public static final double K_TURN_RATE_TOLERANCE_DEG_PER_SEC = 0;
 
   // limelight min and max sweet spot values
-  public static final double limelightMax = 3;
-  public static final double limelightMin = -3;
+  public static final double limelightMax = 6;
+  public static final double limelightMin = 4;
   }
