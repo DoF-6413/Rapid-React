@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
 import frc.robot.commands.AutoCommands.*;
@@ -44,10 +45,12 @@ public class RobotContainer {
   
   // public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   // public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
-  public XboxController m_driverXbox = new XboxController(0);
-  public XboxController m_xbox = new XboxController(1);
-
-
+  public static XboxController m_driverXbox = new XboxController(0);
+  public static XboxController m_xbox = new XboxController(1);
+  double leftTriggerValue = m_driverXbox.getLeftTriggerAxis();
+  double rightTriggerValue = m_driverXbox.getRightTriggerAxis();
+  public Trigger LeftTrigger = new Trigger(() -> IntakeSubsystem.getLeftTriggerActive());
+  public Trigger RightTrigger = new Trigger(() -> IntakeSubsystem.getRightTriggerActive());
   // XBOX Contoller Defs (For intake and Climber)
 
   // different Autos
@@ -107,16 +110,25 @@ new JoystickButton(m_driverXbox, XboxController.Button.kLeftBumper.value)
 .whenInactive(new  InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
   //      .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
+  //   //Manual Down so after match can bring down without relying on encoder values
+  // new JoystickButton(m_leftStick, 7)
+  // .whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(), m_climberSubsystem)).
+  // whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+  
+  // new JoystickButton(m_leftStick, 12)
+  // .whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(), m_climberSubsystem)).
+  // whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+RightTrigger
+.whenActive(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
+.whenActive(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
+.whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
+.whenInactive(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
-  //Manual Down so after match can bring down without relying on encoder values
-new JoystickButton(m_leftStick, 8)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(-0.20), m_climberSubsystem)).
-whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
-
-new JoystickButton(m_leftStick, 12)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(0.20), m_climberSubsystem)).
-whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
-
+  LeftTrigger
+  .whenActive(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem))
+  .whenActive(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
+  .whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
+  .whenInactive(new  InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
 
 

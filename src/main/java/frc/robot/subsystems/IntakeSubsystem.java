@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-
+import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -171,4 +171,13 @@ public class IntakeSubsystem extends SubsystemBase {
   intakeLeftActuator.setSmartCurrentLimit(20);
   intakeRightActuator.setSmartCurrentLimit(20);
  }
+  public static boolean getLeftTriggerActive() {
+    return (RobotContainer.m_driverXbox.getLeftTriggerAxis() > 0);
+  }
+
+  public static boolean getRightTriggerActive() {
+    return (RobotContainer.m_driverXbox.getRightTriggerAxis() > 0);
+  }
+  // TODO: Create a function that moves the aucuator 90 degrees to drop intake
+  // system
 }
