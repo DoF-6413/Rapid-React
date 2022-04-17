@@ -133,7 +133,7 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
 
     // Trigger Button Left Bumper (L1) = Runs Shooter Subsystem at 2000 R P M
     new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value)
-    .whenHeld(new LimelightShootHigh(m_LimelightSubsystem, m_indexerSubsystem, m_shooterSubsystem))
+    .whenHeld(new LimelightShootHigh(m_LimelightSubsystem, m_indexerSubsystem, m_shooterSubsystem, m_drivetrainSubsystem))
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
   
@@ -141,9 +141,9 @@ whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem)
     // Trigger Button Right Bumper (R1) = Runs Shooter Subsystem at 5000 R P M
 
     new JoystickButton(m_xbox, XboxController.Button.kRightBumper.value)
-    .whenHeld(new LimelightShootLow(m_LimelightSubsystem, m_indexerSubsystem, m_shooterSubsystem))
-    .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
-    .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
+    .whenActive(new LimelightShootLow(m_LimelightSubsystem, m_indexerSubsystem, m_shooterSubsystem, m_drivetrainSubsystem))
+    //.whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
+    //.whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
     new JoystickButton(m_leftStick, 9)
     .whenPressed(new ToggleLimelight(m_LimelightSubsystem));

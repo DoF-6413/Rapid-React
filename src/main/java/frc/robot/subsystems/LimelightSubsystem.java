@@ -68,4 +68,7 @@ public class LimelightSubsystem extends SubsystemBase {
     }
   }
 
+  public void limelightReadong (){
+    System.out.println("MOVING TO" + hasTarget());
+  }
 }
