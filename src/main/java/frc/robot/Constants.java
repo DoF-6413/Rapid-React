@@ -43,6 +43,7 @@ public final class Constants {
     // Motor current limits
     final public static int k10Percent = 10;
     final public static int k30Percent = 30;
+    final public static int k50Percent = 50;
 
     final public static double kOff = 0;
 
@@ -118,8 +119,8 @@ public final class Constants {
     final public static double moveDistanceFromTarmac = 5;
 
     // PID Settings
-    public static final double K_CHASSIS_TURN_P = 2.1;
+    public static final double K_CHASSIS_TURN_P = 2.2;
     public static final double K_CHASSIS_TURN_I = 0.55;
-    public static final double K_CHASSIS_TURN_D = 0.1;
+    public static final double K_CHASSIS_TURN_D = 0.15;
    
 }

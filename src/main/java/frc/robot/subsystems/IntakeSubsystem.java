@@ -33,8 +33,8 @@ public class IntakeSubsystem extends SubsystemBase {
         intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
 
         // We need to current limit the motors so we don't brown out (esp. when turning)
-        intakeLeftActuator.setSmartCurrentLimit( Constants.k10Percent );
-        intakeRightActuator.setSmartCurrentLimit( Constants.k10Percent );
+        intakeLeftActuator.setSmartCurrentLimit( Constants.k50Percent );
+        intakeRightActuator.setSmartCurrentLimit( Constants.k50Percent);
 
         leftActuatorEncoder = intakeLeftActuator.getEncoder();
         rightActuatorEncoder = intakeLeftActuator.getEncoder();
