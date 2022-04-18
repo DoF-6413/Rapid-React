@@ -22,7 +22,7 @@ public class ClimberSubsystem extends SubsystemBase {
     
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.statorCurrLimit.enable = true;
-    config.statorCurrLimit.currentLimit = 45;
+    config.statorCurrLimit.currentLimit = 50;
     climberMotor.configAllSettings(config); 
     Position = climberMotor.getSelectedSensorPosition()/6380;
   }
@@ -49,7 +49,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void goDownManual(double speed){
-    climberMotor.set(TalonFXControlMode.PercentOutput, -speed);
+    climberMotor.set(TalonFXControlMode.PercentOutput, speed);
     climberPosition();
   }
 

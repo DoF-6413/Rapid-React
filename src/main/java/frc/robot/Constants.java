@@ -59,10 +59,14 @@ public final class Constants {
         final public static double indexerWaitTime = 0.25;
 
     //Climber Constants
-        //Sets Climber Speed Up
+        //Sets Auto Climber Speed Up
         final public static double climberSpeedUp = 0.6;
-        //Sets Climber Speed Down
+        //Sets Auto Climber Speed Down
         final public static double climberSpeedDown = -0.6;
+        //Sets Manual Climber Speed Up
+        final public static double manualClimberSpeedUp = 0.2;
+        //Sets Manual Climber Speed Down
+        final public static double manualClimberSpeedDown = -0.2;
 
     //Shooter Contants
         //Shooter PID

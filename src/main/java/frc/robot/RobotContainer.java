@@ -101,12 +101,12 @@ public class RobotContainer {
 //Right Trigger on Joystick = Make the climber go down
 //Manual Down so after match can bring down without relying on encoder values
 new JoystickButton(m_driverXbox, XboxController.Button.kLeftBumper.value)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(0.2), m_climberSubsystem)).
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(Constants.manualClimberSpeedDown), m_climberSubsystem)).
 whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
 
 new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(0.2), m_climberSubsystem)).
+.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(Constants.manualClimberSpeedUp), m_climberSubsystem)).
   whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
 driverRightTrigger
@@ -124,13 +124,17 @@ driverRightTrigger
   new JoystickButton(m_driverXbox, XboxController.Button.kStart.value)
   .whenPressed(new ClimberReset());
 
-    new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
-    .whenPressed(new EndGameClimbHigh());
+    // new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
+    // .whenPressed(new EndGameClimbHigh());
 
 
 
-
+    // new JoystickButton(m_xbox, XboxController.Button.kStart.value)
+    // .whenPressed(new intakeGoTo(-20));
   
+     
+     
+
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
     .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem));
@@ -170,7 +174,8 @@ driverRightTrigger
     rightTrigger
 .whenActive(new EndGameClimbTraverse());
 
-  leftTrigger
+  // leftTrigger
+  new JoystickButton(m_xbox, XboxController.Button.kBack.value)
   .whenActive(new EndGameClimbMid());
 
     // new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
