@@ -27,8 +27,8 @@ public class ActuatorDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intakeSubsystem.setRightActuatorDown(0.4);
-    m_intakeSubsystem.setLeftActuatorDown(0.4);
+    m_intakeSubsystem.setAllActuatorsDown(0.4);
+    
   }
   
   // Called once the command ends or is interrupted.
