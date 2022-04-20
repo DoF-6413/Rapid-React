@@ -5,6 +5,7 @@ import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.*;
 
 //CANSpark imports
 import com.revrobotics.CANSparkMax;
@@ -158,11 +159,9 @@ public class IntakeSubsystem extends SubsystemBase {
       // We are going down and bottom limit is tripped so stop
 
       intakeLeftActuator.set(0);
-      down = true;
     } else {
       // We are going down but bottom limit is not tripped so go at commanded speed
       intakeLeftActuator.set(-speed);
-      down = false;
     }
     armPosition();
   }
@@ -178,6 +177,13 @@ public class IntakeSubsystem extends SubsystemBase {
   public static boolean getRightTriggerActive() {
     return (RobotContainer.m_driverXbox.getRightTriggerAxis() > 0);
   }
+
+  /*function
+  getlimitswitch
+  return  true
+  else
+  return false
+  */
   // TODO: Create a function that moves the aucuator 90 degrees to drop intake
   // system
 }
