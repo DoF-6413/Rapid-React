@@ -5,28 +5,26 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.IndexerSubsystem;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
+
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PickupCommmand extends SequentialCommandGroup {
-  /** Creates a new Shoot. */
-  private IntakeSubsystem m_intakeSubsystem;
-  public PickupCommmand(IntakeSubsystem Intake) {
-    m_intakeSubsystem = Intake;
+public class IndexerTeleop extends SequentialCommandGroup {
+  /** Creates a new IndexerTeleop. */
+  public IndexerTeleop(IndexerSubsystem index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands( 
-      new InstantCommand( () -> Intake.spinMotor()),
+    addCommands(
+      new InstantCommand(() -> index.spinBack()),
+      new WaitCommand(Constants.indexerWaitTime),
+      new InstantCommand(() -> index.spinMotor()),
       new WaitCommand(Constants.oneSecond),
-      new InstantCommand( () -> Intake.stopMotor())
-      ); 
-  }
-  @Override
-  public void end(boolean interrupted) {
-    m_intakeSubsystem.stopMotor();
+      new InstantCommand(()-> index.stopMotor())
+    // this continues running in low hub
+    );
   }
 }

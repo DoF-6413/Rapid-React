@@ -14,7 +14,9 @@ import frc.robot.Constants;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class regurgitate extends SequentialCommandGroup {
   /** Creates a new Shoot. */
+  private IntakeSubsystem m_intakeSubsystem;
   public regurgitate(IntakeSubsystem intake) {
+    m_intakeSubsystem = intake;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
@@ -26,5 +28,10 @@ public class regurgitate extends SequentialCommandGroup {
       //change to 2300 for low goal
       //change to 4250 for high goal
       ); 
+  }
+  @Override
+  public void end(boolean interrupted) {
+    m_intakeSubsystem.stopMotor();
+    m_intakeSubsystem.stopActuators();
   }
 }
