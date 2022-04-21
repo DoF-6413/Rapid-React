@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
@@ -45,6 +46,9 @@ RobotContainer.m_climberSubsystem.goDownManual(Constants.climberSpeedDown);
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    SmartDashboard.putNumber("cmdEndpoint", endpoint);
+    SmartDashboard.putNumber("cmdStartpoint", startpoint);
+    
     return (startpoint > endpoint) ?
     RobotContainer.m_climberSubsystem.getCurrentPosition() <= endpoint :
     RobotContainer.m_climberSubsystem.getCurrentPosition() >= endpoint ;

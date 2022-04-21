@@ -127,7 +127,8 @@ driverRightTrigger
     new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
     .whenPressed(new EndGameClimbHigh());
 
-
+new JoystickButton(m_driverXbox, XboxController.Button.kA.value).
+whenPressed(new EndGameClimbMid());
 
     // new JoystickButton(m_xbox, XboxController.Button.kStart.value)
     // .whenPressed(new intakeGoTo(-20));
@@ -174,9 +175,10 @@ driverRightTrigger
     rightTrigger
 .whenActive(new EndGameClimbTraverse());
 
-  leftTrigger
-  .whenActive(new EndGameClimbMid());
+  // leftTrigger
+  // .whenActive(new EndGameClimbMid());
 
+  
     // new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
 
     SmartDashboard.putData(m_shooterSubsystem);

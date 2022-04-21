@@ -20,7 +20,7 @@ public class EndGameClimbMid extends SequentialCommandGroup {
       new ClimberGoTo(0),
       new intakeGoTo(-2),
       new WaitCommand(0.5),
-      new ClimberGoTo(7)
+      new ClimberGoTo(8)
       //MID BAR JUST INTAKE ACTUATORS
     );
   }

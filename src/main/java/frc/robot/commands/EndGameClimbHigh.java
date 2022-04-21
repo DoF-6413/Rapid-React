@@ -18,7 +18,7 @@ public class EndGameClimbHigh extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new TiltTo(-40),
-      new ClimberGoTo(48), 
+      new ClimberGoTo(49), 
       new TiltTo(-30),
       new ClimberGoTo(40),
       //NOW CONNECTED AT TWO POINTS
@@ -28,6 +28,7 @@ public class EndGameClimbHigh extends SequentialCommandGroup {
       new intakeGoTo(-4),
       new ClimberGoTo(0),
       new intakeGoTo(-2),
+      new WaitCommand(0.5),
       new ClimberGoTo(7)
       //WE ARE AT HIGH BAR
       // new WaitCommand(0.5),

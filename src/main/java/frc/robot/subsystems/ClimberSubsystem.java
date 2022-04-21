@@ -28,7 +28,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
   public void goUp() {
     //climberMotor.set(TalonFXControlMode.PercentOutput, 0.50); // runs the motor at 0% power
-    if (Position >= 40){
+    if (Position >= 47){
       climberMotor.set(TalonFXControlMode.PercentOutput, 0);
     }
     else {
@@ -75,7 +75,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public double getCurrentPosition(){
-    return SmartDashboard.getNumber("Climber Encoder", 0);
+    return climberMotor.getSelectedSensorPosition()/6380;
   }
   
   public void setCurrentLimit(double Current){
