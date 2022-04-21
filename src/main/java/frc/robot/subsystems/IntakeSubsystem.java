@@ -184,6 +184,10 @@ public class IntakeSubsystem extends SubsystemBase {
   else
   return false
   */
+
+  public boolean isDown(){
+    return bottomlimitSwitch.get() ? true : false;
+  }
   // TODO: Create a function that moves the aucuator 90 degrees to drop intake
   // system
 }

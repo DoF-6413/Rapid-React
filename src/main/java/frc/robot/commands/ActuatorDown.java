@@ -5,6 +5,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj.DigitalInput;
 
@@ -15,7 +17,7 @@ public class ActuatorDown extends CommandBase {
 
   private final IntakeSubsystem m_intakeSubsystem;
 
-  DigitalInput bottomlimitSwitch = new DigitalInput(1);
+  // DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
   public ActuatorDown(IntakeSubsystem intake) {
     m_intakeSubsystem = intake;
@@ -45,6 +47,6 @@ public class ActuatorDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return bottomlimitSwitch.get();
+    return RobotContainer.m_intakeSubsystem.isDown() == true;
   }
 }

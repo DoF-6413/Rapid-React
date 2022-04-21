@@ -7,6 +7,7 @@ package frc.robot.commands.AutoCommands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotContainer;
+import frc.robot.commands.ActuatorDown;
 import frc.robot.commands.ClimberGoTo;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.MoveCommand;
@@ -17,6 +18,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.GyroSubsystem;
 import frc.robot.subsystems.IndexerSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -27,10 +29,10 @@ public class TestAuto extends SequentialCommandGroup {
   private ShooterSubsystem m_Shooter;
   private DrivetrainSubsystem m_Drive;
   private IndexerSubsystem m_Index;
-  public TestAuto(DrivetrainSubsystem drive, ShooterSubsystem shoot, GyroSubsystem gyro) {
+  public TestAuto(DrivetrainSubsystem drive, ShooterSubsystem shoot, GyroSubsystem gyro, IntakeSubsystem intake) {
     // Add your commands in the addCommands() call, e.g.
     addCommands(
-   new ClimberGoTo(25)
+   new ActuatorDown(intake)
     );
   }
   @Override
