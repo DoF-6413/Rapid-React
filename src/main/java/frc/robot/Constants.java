@@ -64,9 +64,9 @@ public final class Constants {
         //Sets Auto Climber Speed Down
         final public static double climberSpeedDown = -0.6;
         //Sets Manual Climber Speed Up
-        final public static double manualClimberSpeedUp = 0.2;
+        final public static double manualClimberSpeedUp = 0.5;
         //Sets Manual Climber Speed Down
-        final public static double manualClimberSpeedDown = -0.2;
+        final public static double manualClimberSpeedDown = -0.5;
 
     //Shooter Contants
         //Shooter PID

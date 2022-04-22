@@ -127,9 +127,6 @@ driverRightTrigger
     new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
     .whenPressed(new EndGameClimbHigh());
 
-new JoystickButton(m_driverXbox, XboxController.Button.kA.value).
-whenPressed(new EndGameClimbMid());
-
     // new JoystickButton(m_xbox, XboxController.Button.kStart.value)
     // .whenPressed(new intakeGoTo(-20));
   
@@ -138,11 +135,11 @@ whenPressed(new EndGameClimbMid());
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
-    .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem));
+    .whenPressed(new ClimberGoTo(47));
         
     // Trigger ButtonB = Spins Intake and Indexer backwards (Away from Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kB.value)
-    .whenPressed(new RunCommand(() -> m_climberSubsystem.goDown(), m_climberSubsystem));
+    .whenPressed(new ClimberGoTo(0));
         
     // Trigger ButtonX = Brings Actuator Up and Will Stop When Released or When
     // Limit Switch Get Hits
@@ -175,8 +172,8 @@ whenPressed(new EndGameClimbMid());
     rightTrigger
 .whenActive(new EndGameClimbTraverse());
 
-  // leftTrigger
-  // .whenActive(new EndGameClimbMid());
+  leftTrigger
+  .whenActive(new EndGameClimbMid());
 
   
     // new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));

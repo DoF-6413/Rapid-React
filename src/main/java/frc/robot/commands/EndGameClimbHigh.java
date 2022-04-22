@@ -24,23 +24,13 @@ public class EndGameClimbHigh extends SequentialCommandGroup {
       //NOW CONNECTED AT TWO POINTS
       //BOTTOM COMMAND RELEASES FROM MID BAR
       new ClimberGoTo(30),
-      parallel( new ClimberGoTo(13), new intakeGoTo(-15)),
+      parallel( new ClimberGoTo(18), new intakeGoTo(-15)),
       new intakeGoTo(-4),
       new ClimberGoTo(0),
       new intakeGoTo(-2),
       new WaitCommand(0.5),
       new ClimberGoTo(7)
-      //WE ARE AT HIGH BAR
-      // new WaitCommand(0.5),
-      // new ClimberGoTo(47), // full exstention
-      // new WaitCommand(2.5),
-      // new TiltTo(-25),
-      // new WaitCommand(2.5),
-      // new TiltTo(-30),
-      // new WaitCommand(1),
-      // new ClimberGoTo(25),
-      
-      //new IntakeGoTo(-2)
+     
     );
   }
   @Override
