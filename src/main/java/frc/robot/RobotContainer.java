@@ -46,41 +46,11 @@ public class RobotContainer {
   // public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
   // public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
   public static XboxController m_driverXbox = new XboxController(0);
-  public static XboxController m_xbox = new XboxController(1);
+  // not used
+  //public static XboxController m_xbox = new XboxController(1);
   public Trigger driverLeftTrigger = new Trigger(() -> IntakeSubsystem.getLeftTriggerActive());
   public Trigger driverRightTrigger = new Trigger(() -> IntakeSubsystem.getRightTriggerActive());
-  public Trigger leftTrigger = new Trigger(()-> ClimberSubsystem.getLeftTriggerActive());
-  public Trigger rightTrigger = new Trigger(()-> ClimberSubsystem.getRightTriggerActive());
   // XBOX Contoller Defs (For intake and Climber)
-
-  // different Autos
-  private final Command m_autoHighIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
-  m_indexerSubsystem, m_intakeSubsystem);
-
-  private final Command m_wAutoLowIntake = new WAutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem,
-  m_indexerSubsystem, m_intakeSubsystem);
-
-  private final Command m_autoHighGoal = new AutoHighGoal(m_drivetrainSubsystem, m_shooterSubsystem,
-  m_indexerSubsystem, m_intakeSubsystem);
-
-  private final Command m_autoLowGoal = new AutoLowGoal(m_drivetrainSubsystem, m_shooterSubsystem,
-  m_indexerSubsystem, m_intakeSubsystem);
-
-  private final Command m_autoMove = new AutoMove(m_drivetrainSubsystem, m_intakeSubsystem);
-
-  private final Command m_autoPush = new AutoPush(m_drivetrainSubsystem, m_intakeSubsystem);
-
-  private final Command m_wHighIntake = new WAutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
-
-  private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
-  // private final Command m_demoAuto = new DemoAutoRoutine(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
-   private final Command m_testAuto = new TestAuto(m_drivetrainSubsystem, m_shooterSubsystem, m_gyroSubsystem, m_intakeSubsystem);
-  private final Command m_spin = new spin(m_drivetrainSubsystem, m_gyroSubsystem);
-  // Intake Subsystem
-  public SendableChooser<Command> m_chooser = new SendableChooser<>();
-
-//   m_chooser.setDefaultOption("Simple Auto", m_autoIntake);
-//     m_chooser.addOption("Complex Auto", m_autoHighGoal);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -97,17 +67,7 @@ public class RobotContainer {
         m_driverXbox.getRightX()), m_drivetrainSubsystem));
 //Left Trigger on Joystick = Make the climber go up
 
-//        .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
-//Right Trigger on Joystick = Make the climber go down
-//Manual Down so after match can bring down without relying on encoder values
-new JoystickButton(m_driverXbox, XboxController.Button.kLeftBumper.value)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(Constants.manualClimberSpeedDown), m_climberSubsystem)).
-whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
-
-new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(Constants.manualClimberSpeedUp), m_climberSubsystem)).
-  whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
 
 driverRightTrigger
 .whenActive(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
@@ -121,45 +81,13 @@ driverRightTrigger
   .whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
   .whenInactive(new  InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
-  new JoystickButton(m_driverXbox, XboxController.Button.kStart.value)
-  .whenPressed(new ClimberReset());
-
-    new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
-    .whenPressed(new EndGameClimbHigh());
-
-new JoystickButton(m_driverXbox, XboxController.Button.kA.value).
-whenPressed(new EndGameClimbMid());
 
     // new JoystickButton(m_xbox, XboxController.Button.kStart.value)
     // .whenPressed(new intakeGoTo(-20));
-  
-     
-     
 
-    // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
-    new JoystickButton(m_xbox, XboxController.Button.kA.value)
-    .whenPressed(new RunCommand(() -> m_climberSubsystem.goUp(), m_climberSubsystem));
-        
-    // Trigger ButtonB = Spins Intake and Indexer backwards (Away from Shooter)
-    new JoystickButton(m_xbox, XboxController.Button.kB.value)
-    .whenPressed(new RunCommand(() -> m_climberSubsystem.goDown(), m_climberSubsystem));
-        
-    // Trigger ButtonX = Brings Actuator Up and Will Stop When Released or When
-    // Limit Switch Get Hits
-    new JoystickButton(m_xbox, XboxController.Button.kY.value)
-        .whenPressed(new RunCommand(() -> m_intakeSubsystem.setAllActuatorsUp(Constants.actuatorsSpeed), m_intakeSubsystem))
-        .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
-    // Trigger ButtonY = Bring Actuator Down and Will Stop When Released or When    
-    
-// individual actuators up and down    
-    // Limit Switches Get Hits
-    new JoystickButton(m_xbox, XboxController.Button.kX.value)
-       .whenPressed(new RunCommand(() -> m_intakeSubsystem.setAllActuatorsDown(Constants.actuatorsSpeed), m_intakeSubsystem))
-        .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
-        
 
     // Trigger Button Left Bumper (L1) = Runs Shooter Subsystem at 2000 R P M
-    new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value)
+    new JoystickButton(m_driverXbox, XboxController.Button.kLeftBumper.value)
     .whenHeld(new ShootTeleopLow(m_shooterSubsystem, m_indexerSubsystem))
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
@@ -167,34 +95,16 @@ whenPressed(new EndGameClimbMid());
   
     // Trigger Button Right Bumper (R1) = Runs Shooter Subsystem at 5000 R P M
 
-    new JoystickButton(m_xbox, XboxController.Button.kRightBumper.value)
+    new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value)
     .whenHeld(new ShootTeleopHigh(m_shooterSubsystem, m_indexerSubsystem))
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
-
-    rightTrigger
-.whenActive(new EndGameClimbTraverse());
 
   // leftTrigger
   // .whenActive(new EndGameClimbMid());
 
   
     // new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
-
-    SmartDashboard.putData(m_shooterSubsystem);
-    m_chooser.setDefaultOption("Mid High Intake", m_autoHighIntake);
-    m_chooser.addOption("Mid Low Intake", m_autoLowIntake);
-    m_chooser.addOption("Wall Low Intake", m_wAutoLowIntake);
-    m_chooser.addOption("Wall High Intake", m_wHighIntake);
-    m_chooser.addOption("High Goal", m_autoHighGoal);
-    m_chooser.addOption("Low Goal", m_autoLowGoal);
-    m_chooser.addOption("Just Move", m_autoMove);
-    m_chooser.addOption("Push Away", m_autoPush);
-    m_chooser.addOption("Spin", m_spin);
-
-    // m_chooser.addOption("Demo Auto", m_demoAuto);
-    m_chooser.addOption("Test", m_testAuto);
-      SmartDashboard.putData(m_chooser);
 
 
   }
@@ -221,6 +131,6 @@ whenPressed(new EndGameClimbMid());
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     // new AutoCommand(DrivetrainSubsystem, 5);
-    return m_chooser.getSelected();
+    return null;
   }
 }

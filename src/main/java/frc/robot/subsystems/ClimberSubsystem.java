@@ -92,11 +92,11 @@ public class ClimberSubsystem extends SubsystemBase {
     return climberMotor.getStatorCurrent();
   }
 
-  public static boolean getLeftTriggerActive() {
-    return (RobotContainer.m_xbox.getLeftTriggerAxis() > 0);
-  }
+  // public static boolean getLeftTriggerActive() {
+  //   return (RobotContainer.m_xbox.getLeftTriggerAxis() > 0);
+  // }
 
-  public static boolean getRightTriggerActive() {
-    return (RobotContainer.m_xbox.getRightTriggerAxis() > 0);
-  }
+  // public static boolean getRightTriggerActive() {
+  //   return (RobotContainer.m_xbox.getRightTriggerAxis() > 0);
+  // }
 }
