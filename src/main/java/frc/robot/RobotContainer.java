@@ -131,7 +131,7 @@ new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
     .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
 
-
+//Left Middle Button on Auz Control Resets CLimber (Brings climber allthe way down and sets encoder value to 0)
   new JoystickButton(m_xbox, XboxController.Button.kStart.value)
   .whenPressed(new ClimberReset());
 
@@ -171,10 +171,11 @@ new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
+    //Runs the endgame climb mid routine, used to hook onto mid bar
     rightTrigger
     .whenActive(new EndGameClimbMid());
     
-    
+    //runs the endgame high routine, used to hook onto high and traverse bar
     leftTrigger
     .whenActive(new EndGameClimbHigh());
   
