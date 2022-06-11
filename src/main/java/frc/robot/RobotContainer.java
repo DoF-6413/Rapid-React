@@ -114,11 +114,11 @@ driverRightTrigger
   .whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
   .whenInactive(new  InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
-  new JoystickButton(m_driverXbox, XboxController.Button.kA.value)
+  new JoystickButton(m_xbox, XboxController.Button.kA.value)
   .whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(Constants.manualClimberSpeedUp), m_climberSubsystem)).
   whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
   
-  new JoystickButton(m_driverXbox, XboxController.Button.kB.value)
+  new JoystickButton(m_xbox, XboxController.Button.kB.value)
     .whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(Constants.manualClimberSpeedDown), m_climberSubsystem)).
     whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
     
@@ -136,11 +136,11 @@ new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
   .whenPressed(new ClimberReset());
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
-    new JoystickButton(m_xbox, XboxController.Button.kA.value)
+    new JoystickButton(m_driverXbox, XboxController.Button.kA.value)
     .whenPressed(new ClimberGoTo(47));
         
     // Trigger ButtonB = Spins Intake and Indexer backwards (Away from Shooter)
-    new JoystickButton(m_xbox, XboxController.Button.kB.value)
+    new JoystickButton(m_driverXbox, XboxController.Button.kB.value)
     .whenPressed(new ClimberGoTo(0));
         
     // Trigger ButtonX = Brings Actuator Up and Will Stop When Released or When
