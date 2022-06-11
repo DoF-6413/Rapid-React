@@ -101,13 +101,11 @@ public class RobotContainer {
 //Right Trigger on Joystick = Make the climber go down
 //Manual Down so after match can bring down without relying on encoder values
 new JoystickButton(m_driverXbox, XboxController.Button.kLeftBumper.value)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(Constants.manualClimberSpeedDown), m_climberSubsystem)).
-whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+.whenPressed(new EndGameClimbMid());
 
 
 new JoystickButton(m_driverXbox, XboxController.Button.kRightBumper.value)
-.whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(Constants.manualClimberSpeedUp), m_climberSubsystem)).
-  whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+.whenPressed(new EndGameClimbHigh());
 
 driverRightTrigger
 .whenActive(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
@@ -121,18 +119,27 @@ driverRightTrigger
   .whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
   .whenInactive(new  InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
 
+  new JoystickButton(m_driverXbox, XboxController.Button.kA.value)
+  .whenPressed(new RunCommand(() -> m_climberSubsystem.goUpManual(Constants.manualClimberSpeedUp), m_climberSubsystem)).
+  whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+  
+  new JoystickButton(m_driverXbox, XboxController.Button.kB.value)
+    .whenPressed(new RunCommand(() -> m_climberSubsystem.goDownManual(Constants.manualClimberSpeedDown), m_climberSubsystem)).
+    whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+    
+    new JoystickButton(m_driverXbox, XboxController.Button.kY.value)
+    .whenPressed(new RunCommand(() -> m_intakeSubsystem.setAllActuatorsUp(Constants.actuatorsSpeed), m_intakeSubsystem))
+    .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
+
+new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
+   .whenPressed(new RunCommand(() -> m_intakeSubsystem.setAllActuatorsDown(Constants.actuatorsSpeed), m_intakeSubsystem))
+    .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
+
   new JoystickButton(m_driverXbox, XboxController.Button.kStart.value)
   .whenPressed(new ClimberReset());
 
-    new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
-    .whenPressed(new EndGameClimbHigh());
 
-    // new JoystickButton(m_xbox, XboxController.Button.kStart.value)
-    // .whenPressed(new intakeGoTo(-20));
   
-     
-     
-
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_xbox, XboxController.Button.kA.value)
     .whenPressed(new ClimberGoTo(47));
@@ -169,14 +176,9 @@ driverRightTrigger
     .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
     .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
-    rightTrigger
-.whenActive(new EndGameClimbTraverse());
-
-  leftTrigger
-  .whenActive(new EndGameClimbMid());
-
+   
   
-    // new JoystickButton(m_rightStick, 7).whenPressed(new InstantCommand(() -> m_gyroSubsystem.resetYaw(), m_drivetrainSubsystem));
+  
 
     SmartDashboard.putData(m_shooterSubsystem);
     m_chooser.setDefaultOption("Mid High Intake", m_autoHighIntake);

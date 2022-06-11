@@ -99,7 +99,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
      */
     public void setRaw(double rightStick, double leftStick) {
 
-        diffDrive.arcadeDrive(-(rightStick), (leftStick));
+        diffDrive.arcadeDrive(-(rightStick), (leftStick)*Constants.turningScale);
         printEncoderStatus();
     }
     

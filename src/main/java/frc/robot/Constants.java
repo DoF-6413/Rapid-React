@@ -89,6 +89,8 @@ public final class Constants {
         public static final double K_CHASSIS_TURN_D = 0;
         public static final double K_TURN_TOLERANCE_DEG = 2;
         public static final double K_TURN_RATE_TOLERANCE_DEG_PER_SEC = 2;
+        //Turn Scaling
+        public static final double turningScale = 0.5;
 
     //Auto Values
         // shooter run times in seconds
