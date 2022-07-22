@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import frc.robot.subsystems.GyroSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.util.Units;
 
 //CANSPark imports
 import com.revrobotics.CANSparkMax;
@@ -35,9 +37,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
     double RightStick;
     double LeftStick;
     
+    private final DifferentialDriveKinematics m_kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(Constants.wheelToWheel));
     private DifferentialDrive diffDrive;
-
-    private final DifferentialDriveOdometry m_odometry;
+    private final DifferentialDriveOdometry  m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(this.getHeading()));
+    
     
     private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
     
@@ -86,7 +89,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         //might need more custimization (Slower when stoping, faster when starting)
         //leftLead.setOpenLoopRampRate(0.5);
         //rightLead.setOpenLoopRampRate(0.5);
-        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(this.getHeading()));
+        
+       
         
         
     }
@@ -133,7 +137,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public double RightEncoderDistance(){
-        double rightEncoderDistance = (encoderLeftLead.getPosition());
+        double rightEncoderDistance = (encoderRightLead.getPosition());
         System.out.println ("rightEncoderDistance" + rightEncoderDistance);
         return rightEncoderDistance;
     }
