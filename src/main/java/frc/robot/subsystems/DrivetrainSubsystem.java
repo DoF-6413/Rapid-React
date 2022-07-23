@@ -5,10 +5,12 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.geometry.Pose2d;
 //import frc.robot.subsystems.GyroSubsystem;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.util.Units;
 
 //CANSPark imports
@@ -39,8 +41,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     
     private final DifferentialDriveKinematics m_kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(Constants.wheelToWheel));
     private DifferentialDrive diffDrive;
-    private final DifferentialDriveOdometry  m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(this.getHeading()));
-    
+    private final DifferentialDriveOdometry  m_odometry = new DifferentialDriveOdometry(getHeading());
+    Pose2d m_pose;
     
     private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
     
@@ -147,22 +149,47 @@ public class DrivetrainSubsystem extends SubsystemBase {
         encoderRightLead.setPosition(0);
     }
 
-   
+    // public double LeftEncoderVelocity(){
+    //     double leftEncoderVelocity = (encoderLeftLead.getVelocity());
+    //     // System.out.println ("leftEncoderDistance" + leftEncoderDistance);
+    //     return leftEncoderVelocity;
+    // }
+
+    // public double RightEncoderVelocity(){
+    //     double rightEncoderVelocity = (encoderRightLead.getVelocity());
+    //     // System.out.println ("rightEncoderDistance" + rightEncoderDistance);
+    //     return rightEncoderVelocity;
+    // }
     
       /**
        * Get gyro heading between -180 to 180.
        * Uses Math.IEEEremainder to get range of -180 to 180 --> dividend - (divisor * Math.Round(dividend / divisor)).
        * @return the robot's heading in degrees.
        */
-      public double getHeading()
-      {
-        return Math.IEEEremainder(m_gyroSubsystem.getAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
-      }
+    //   public double getHeading()
+    //   {
+    //     return Math.IEEEremainder(m_gyroSubsystem.getAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
+    //   }
     
+        public Rotation2d getHeading()
+        {
+            //questionable....
+            return Rotation2d.fromDegrees(-m_gyroSubsystem.getAngle());
+        }
+
+        // public DifferentialDriveWheelSpeeds getSpeed()
+        // {
+        //     return new DifferentialDriveWheelSpeeds(
+        //         LeftEncoderVelocity(), RightEncoderVelocity());
+        // }
 
       public void current(){
         SmartDashboard.putNumber("Left Current", leftLead.getOutputCurrent());
         SmartDashboard.putNumber("Right Current", rightLead.getOutputCurrent());
       }
       
+      @Override
+      public void periodic() {
+         m_pose = m_odometry.update(getHeading(), Units.feetToMeters(LeftEncoderDistance()), Units.feetToMeters(RightEncoderDistance()) );
+      }
 }
