@@ -19,7 +19,7 @@ public class EndGameClimbTraverse extends SequentialCommandGroup {
     addCommands(
       new TiltTo(-40),
       new ClimberGoTo(48), 
-      new TiltTo(-30),
+      new TiltTo(-27),
       new ClimberGoTo(40),
       new ClimberGoTo(25),
       new intakeGoTo(-4)
