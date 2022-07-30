@@ -131,9 +131,17 @@ new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
     .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
 
 
-//Left Middle Button on Auz Control Resets CLimber (Brings climber allthe way down and sets encoder value to 0)
+//Left Middle Button on Aux Control Resets CLimber (Brings climber allthe way down and sets encoder value to 0)
   new JoystickButton(m_xbox, XboxController.Button.kStart.value)
   .whenPressed(new ClimberReset());
+
+  //Left Middle Button on Driver Control Sets Intake Actuator to Coast 
+  new JoystickButton(m_driverXbox, XboxController.Button.kStart.value)
+  .whenPressed(new BrakeToCoast());
+
+  //Right Middle Button on Driver Control Sets Intake Actuator to Brake
+  new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
+  .whenPressed(new CoastToBrake());
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_driverXbox, XboxController.Button.kA.value)
