@@ -135,13 +135,9 @@ new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
   new JoystickButton(m_xbox, XboxController.Button.kStart.value)
   .whenPressed(new ClimberReset());
 
-  //Left Middle Button on Driver Control Sets Intake Actuator to Coast 
-  new JoystickButton(m_driverXbox, XboxController.Button.kStart.value)
-  .whenPressed(new BrakeToCoast());
-
   //Right Middle Button on Driver Control Sets Intake Actuator to Brake
-  new JoystickButton(m_driverXbox, XboxController.Button.kBack.value)
-  .whenPressed(new CoastToBrake());
+  new JoystickButton(m_xbox, XboxController.Button.kBack.value)
+  .whenPressed(new EndGameClimbTraverse());
 
     // Trigger ButtonA = Spins Intake and Indexer forwards (Towards Shooter)
     new JoystickButton(m_driverXbox, XboxController.Button.kA.value)
