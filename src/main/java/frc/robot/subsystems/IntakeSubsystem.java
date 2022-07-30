@@ -17,8 +17,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
   // Defines Intake Motor Variables
   // Uncomment intake Acuators when we write that code
-  private CANSparkMax intakeLeftActuator;
-  private CANSparkMax intakeRightActuator;
+  public CANSparkMax intakeLeftActuator;
+  public CANSparkMax intakeRightActuator;
   private CANSparkMax intakeSpinner;
 
   private RelativeEncoder leftActuatorEncoder;
@@ -190,4 +190,15 @@ public class IntakeSubsystem extends SubsystemBase {
   }
   // TODO: Create a function that moves the aucuator 90 degrees to drop intake
   // system
+
+  public void brakeToCoast(){
+    intakeLeftActuator.setIdleMode(CANSparkMax.IdleMode.kCoast);
+    intakeRightActuator.setIdleMode(CANSparkMax.IdleMode.kCoast);
+  }
+
+  public void coastToBrake(){
+    intakeLeftActuator.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    intakeRightActuator.setIdleMode(CANSparkMax.IdleMode.kBrake);
+  }
+
 }
