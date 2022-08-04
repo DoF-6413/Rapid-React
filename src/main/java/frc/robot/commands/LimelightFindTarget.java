@@ -15,6 +15,7 @@ import frc.robot.subsystems.LimelightSubsystem;
 
 public class LimelightFindTarget extends CommandBase {
   /** Creates a new LimelightFindTarget. */
+  public double beginningYPosition;
   public final DrivetrainSubsystem m_DrivetrainSubsystem;
 
   public LimelightFindTarget(DrivetrainSubsystem drivetrainSubsystem) {
@@ -27,6 +28,7 @@ public class LimelightFindTarget extends CommandBase {
   @Override
   public void initialize() {
     m_DrivetrainSubsystem.setRaw(0.0, 0.0);
+    beginningYPosition = RobotContainer.m_LimelightSubsystem.getTy();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -54,6 +56,6 @@ public class LimelightFindTarget extends CommandBase {
   public boolean isFinished(
   ) {
     
-    return (RobotContainer.m_LimelightSubsystem.getTy() > Constants.limelightMax ) ? RobotContainer.m_LimelightSubsystem.getTy() <= Constants.limelightMin : RobotContainer.m_LimelightSubsystem.getTy() >= Constants.limelightMin;
+    return (beginningYPosition > Constants.limelightMax ) ? RobotContainer.m_LimelightSubsystem.getTy() <= Constants.limelightMax : RobotContainer.m_LimelightSubsystem.getTy() >= Constants.limelightMin;
   }
 }
