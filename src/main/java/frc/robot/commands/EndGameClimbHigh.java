@@ -27,10 +27,10 @@ public class EndGameClimbHigh extends SequentialCommandGroup {
       new BrakeToCoast(),
       new ClimberGoTo(12.5),
       new CoastToBrake(),
-      new intakeGoTo(-4),
+      new IntakeGoTo(-4),
       new WaitCommand(0.5),
       new ClimberGoTo(0),
-      new intakeGoTo(-2),
+      new IntakeGoTo(-2),
       new WaitCommand(0.5),
       new ClimberGoTo(7)
      
