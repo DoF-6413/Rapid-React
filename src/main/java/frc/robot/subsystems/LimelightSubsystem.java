@@ -16,11 +16,14 @@ public class LimelightSubsystem extends SubsystemBase {
   
   // current LedMode, 0= on, 1 = off
   private int CurMode = 0;
-
+  
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
   @Override
   public void periodic() {
+    NetworkTableEntry ty = table.getEntry("ty");
+    double y = ty.getDouble(0);
+    SmartDashboard.putNumber("LimelightY", y);
     // This method will be called once per scheduler run
   }
   public double getTx ()
@@ -35,7 +38,7 @@ public class LimelightSubsystem extends SubsystemBase {
   {
     NetworkTableEntry ty = table.getEntry("ty"); 
     double y = ty.getDouble(0);
-    SmartDashboard.putNumber("LimelightY", y);
+    
      return y;
   }
 
