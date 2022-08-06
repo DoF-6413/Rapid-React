@@ -34,7 +34,7 @@ public class LimelightFindTarget extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      if(!RobotContainer.m_LimelightSubsystem.hasTarget()) {
+      if(RobotContainer.m_LimelightSubsystem.hasTarget()) {
         if(RobotContainer.m_LimelightSubsystem.getTy() > Constants.limelightMax){
             m_DrivetrainSubsystem.setRaw(0.5, 0.0);
         } else if(RobotContainer.m_LimelightSubsystem.getTy() < Constants.limelightMin){
