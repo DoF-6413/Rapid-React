@@ -121,7 +121,9 @@ public final class Constants {
             final public static double circOfWheelToWheel = wheelToWheel/12 /2 * 2 * Math.PI;
 
 // limelight min and max sweet spot values
-public static final double limelightMax = 11;
-public static final double limelightMin = 8;
+public static final double limelightYMax = 11;
+public static final double limelightYMin = 8;
 
+public static final double limelightXMax = 0;
+public static final double limelightXMin = 0;
 }

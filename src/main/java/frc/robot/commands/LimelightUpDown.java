@@ -13,12 +13,12 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 
-public class LimelightFindTarget extends CommandBase {
+public class LimelightUpDown extends CommandBase {
   /** Creates a new LimelightFindTarget. */
   public double beginningYPosition;
   public final DrivetrainSubsystem m_DrivetrainSubsystem;
 
-  public LimelightFindTarget(DrivetrainSubsystem drivetrainSubsystem) {
+  public LimelightUpDown(DrivetrainSubsystem drivetrainSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_DrivetrainSubsystem = drivetrainSubsystem;
     addRequirements(m_DrivetrainSubsystem);
@@ -35,9 +35,9 @@ public class LimelightFindTarget extends CommandBase {
   @Override
   public void execute() {
       if(RobotContainer.m_LimelightSubsystem.hasTarget()) {
-        if(RobotContainer.m_LimelightSubsystem.getTy() > Constants.limelightMax){
+        if(RobotContainer.m_LimelightSubsystem.getTy() > Constants.limelightYMax){
             m_DrivetrainSubsystem.setRaw(0.5, 0.0);
-        } else if(RobotContainer.m_LimelightSubsystem.getTy() < Constants.limelightMin){
+        } else if(RobotContainer.m_LimelightSubsystem.getTy() < Constants.limelightYMin){
             m_DrivetrainSubsystem.setRaw(-0.5, 0.0);
         } else { 
             m_DrivetrainSubsystem.setRaw(0.0, 0.0);
@@ -56,6 +56,6 @@ public class LimelightFindTarget extends CommandBase {
   public boolean isFinished(
   ) {
     
-    return (beginningYPosition > Constants.limelightMax ) ? RobotContainer.m_LimelightSubsystem.getTy() <= Constants.limelightMax : RobotContainer.m_LimelightSubsystem.getTy() >= Constants.limelightMin;
+    return (beginningYPosition > Constants.limelightYMax ) ? RobotContainer.m_LimelightSubsystem.getTy() <= Constants.limelightYMax : RobotContainer.m_LimelightSubsystem.getTy() >= Constants.limelightYMin;
   }
 }
