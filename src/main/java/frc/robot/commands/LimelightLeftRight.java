@@ -27,9 +27,9 @@ public class LimelightLeftRight extends CommandBase {
   public void execute() {
       if(RobotContainer.m_LimelightSubsystem.hasTarget()) {
         if(RobotContainer.m_LimelightSubsystem.getTx() > Constants.limelightXMax){
-            RobotContainer.m_drivetrainSubsystem.setRaw(0.5, 0.0);
+            RobotContainer.m_drivetrainSubsystem.setRaw(0, 0.5);
         } else if(RobotContainer.m_LimelightSubsystem.getTx() < Constants.limelightXMin){
-            RobotContainer.m_drivetrainSubsystem.setRaw(-0.5, 0.0);
+            RobotContainer.m_drivetrainSubsystem.setRaw(0, -0.5);
         } else { 
             RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
         }
