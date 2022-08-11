@@ -124,6 +124,6 @@ public final class Constants {
 public static final double limelightYMax = 11;
 public static final double limelightYMin = 8;
 
-public static final double limelightXMax = 0;
-public static final double limelightXMin = 0;
+public static final double limelightXMax = 3;
+public static final double limelightXMin = -3;
 }
