@@ -32,13 +32,13 @@ public class TestAuto extends SequentialCommandGroup {
   public TestAuto(DrivetrainSubsystem drive, ShooterSubsystem shoot, GyroSubsystem gyro, IntakeSubsystem intake) {
     // Add your commands in the addCommands() call, e.g.
     addCommands(
-   new ActuatorDown(intake)
+  //  new ActuatorDown(intake)
     );
   }
   @Override
   public void end(boolean interrupted) {
-    m_Drive.setRaw(0.00, 0.0);
-    m_Shooter.disable();
-    m_Index.stopMotor();
+    // m_Drive.setRaw(0.00, 0.0);
+    // m_Shooter.disable();
+    // m_Index.stopMotor();
   }
 }

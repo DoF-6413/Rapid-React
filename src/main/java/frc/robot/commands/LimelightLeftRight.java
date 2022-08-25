@@ -33,7 +33,9 @@ public class LimelightLeftRight extends CommandBase {
         } else { 
             RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
         }
-        } 
+        } else { 
+          RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
+      }
       }
 
   // Called once the command ends or is interrupted
