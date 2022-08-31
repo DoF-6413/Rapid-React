@@ -22,7 +22,9 @@ public class EndGameClimbTraverse extends SequentialCommandGroup {
       new TiltTo(-27),
       new ClimberGoTo(40),
       new ClimberGoTo(25),
-      new IntakeGoTo(-4)
+      parallel(new ClimberGoTo(20), new IntakeGoTo(-15)),
+      new IntakeGoTo(-2),
+      new ClimberGoTo(0)
     );
   }
   @Override

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class IntakeGoTo extends SequentialCommandGroup {
-  /** Creates a new intakeGoTo. */
+  /** Creates a new IntakeGoTo. */
   public IntakeGoTo(double endpoint) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
