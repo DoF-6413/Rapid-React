@@ -9,6 +9,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import frc.robot.subsystems.GyroSubsystem;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+
 //CANSPark imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -40,6 +45,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final DifferentialDriveOdometry m_odometry;
     
     private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
+    private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
     
     public DrivetrainSubsystem() {
         // Initializes left motors in default constructor
@@ -79,10 +85,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
-        // leftLead.setSmartCurrentLimit(10);
-        // rightLead.setSmartCurrentLimit(10);
+        leftLead.setSmartCurrentLimit( 9 );
+        rightLead.setSmartCurrentLimit( 9 );
 
-        // TO DO: test ramping with drivetrain (Need driveteam to see how they like it) 
+        // TODO: test ramping with drivetrain (Need driveteam to see how they like it) 
         //might need more custimization (Slower when stoping, faster when starting)
         //leftLead.setOpenLoopRampRate(0.5);
         //rightLead.setOpenLoopRampRate(0.5);
@@ -99,7 +105,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
      */
     public void setRaw(double rightStick, double leftStick) {
 
-        diffDrive.arcadeDrive(-(rightStick), (leftStick));
+        diffDrive.arcadeDrive(-(rightStick), (leftStick)*Constants.turningScale);
         printEncoderStatus();
     }
     
@@ -160,5 +166,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Left Current", leftLead.getOutputCurrent());
         SmartDashboard.putNumber("Right Current", rightLead.getOutputCurrent());
       }
-      
+      public void autoDrive(double power, double turn)
+      {
+        diffDrive.arcadeDrive(-power, turn, false);
+      }
+
+      public void setShooterPosition(){
+
+      }
 }

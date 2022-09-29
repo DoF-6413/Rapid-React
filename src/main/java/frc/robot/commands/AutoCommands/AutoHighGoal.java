@@ -29,14 +29,9 @@ public class AutoHighGoal extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand()); 
     addCommands(
       new ActuatorDown(intake),
-      new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
-      //comment out above for high goal
-      //new MoveCommand(drive, 3, true),
       parallel( new ShootHigh(shoot), new IndexerCommand(Index)),
       new MoveCommand(drive, -4, false)
-      // change above to -8 for low goal
-      // change above to -4 for high hoal
-      //new PickupCommmand(intake)
+     
     );
   }
 }
