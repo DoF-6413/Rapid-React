@@ -27,7 +27,7 @@ public final class Constants {
         final public static int[] rightDeviceID = new int[] { 4, 5, 6 };
 
         //Intake CAN IDs
-        final public static int[] intakeDeviceID = new int[] { 8, 9, 10 }; 
+        final public static int[] intakeDeviceID = new int[] { 8, 9, 7 }; 
                                                                        
         //Shooter CAN IDs
         final public static int[] shooterID = new int[] { 7, 11 };
