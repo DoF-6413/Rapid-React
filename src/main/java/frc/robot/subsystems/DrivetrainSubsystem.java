@@ -88,7 +88,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         leftLead.setSmartCurrentLimit( 9 );
         rightLead.setSmartCurrentLimit( 9 );
 
-        // TO DO: test ramping with drivetrain (Need driveteam to see how they like it) 
+        // TODO: test ramping with drivetrain (Need driveteam to see how they like it) 
         //might need more custimization (Slower when stoping, faster when starting)
         //leftLead.setOpenLoopRampRate(0.5);
         //rightLead.setOpenLoopRampRate(0.5);

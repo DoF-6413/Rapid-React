@@ -31,8 +31,6 @@ public class WAutoHighIntake extends SequentialCommandGroup {
     addCommands(
       new ActuatorDown(intake),
       new MoveCommand(drive, -3, false),
-      new InstantCommand(()-> System.out.println("YOU ARE RUNNING IN AUTO LOL")),
-      //new MoveCommand(drive, 4, true),
       parallel(new PickupCommmand(intake)), 
       new MoveCommand(drive, 1, true),
       parallel( new ShootHigh(shoot), new IndexerCommand(Index))

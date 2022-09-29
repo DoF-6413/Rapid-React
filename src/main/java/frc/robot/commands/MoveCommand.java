@@ -30,14 +30,7 @@ public class MoveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // if (goesForward) {
-    //   goForward(toDistance);
-    // } else if (!goesForward) {
-    //  goBackwards(toDistance);
-    // } else {
-    //   m_DrivetrainSubsystem.setRaw(0.00, 0.00);
-
-    // }
+    
     if (goesForward) {
       if (m_DrivetrainSubsystem.getAvgEncocderDistance() < toDistance)
         m_DrivetrainSubsystem.setRaw(-0.5, 0);

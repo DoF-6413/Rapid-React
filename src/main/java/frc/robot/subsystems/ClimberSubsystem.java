@@ -26,28 +26,7 @@ public class ClimberSubsystem extends SubsystemBase {
     climberMotor.configAllSettings(config); 
     Position = climberMotor.getSelectedSensorPosition()/6380;
   }
-  //commenting out cause replacing with go to
-  // public void goUp() {
-  //   //climberMotor.set(TalonFXControlMode.PercentOutput, 0.50); // runs the motor at 0% power
-  //   if (Position >= 47){
-  //     climberMotor.set(TalonFXControlMode.PercentOutput, 0);
-  //   }
-  //   else {
-  //     climberMotor.set(TalonFXControlMode.PercentOutput, 0.80);
-  //   }
-  //   climberPosition();
-  // }
-
-  // public void goDown() {
-  //   //climberMotor.set(TalonFXControlMode.PercentOutput, -0.5); // runs the motor at 0% power
-  //   if (Position <= 0){
-  //     climberMotor.set(TalonFXControlMode.PercentOutput, 0);
-  //   }
-  //   else {
-  //     climberMotor.set(TalonFXControlMode.PercentOutput, -0.50);
-  //   }
-  //   climberPosition();
-  // }
+ 
 
   public void goDownManual(double speed){
     climberMotor.set(TalonFXControlMode.PercentOutput, speed);

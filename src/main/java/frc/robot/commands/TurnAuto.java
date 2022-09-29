@@ -53,7 +53,7 @@ public class TurnAuto extends PIDCommand {
       SmartDashboard.putNumber("TurnAngle", RobotContainer.m_gyroSubsystem.getAngle());
       System.out.println("Execute Works");
       RobotContainer.m_drivetrainSubsystem.current();
-      //SmartDashboard.putNumber("PID Calculate", m_PidController.calculate(RobotContainer.m_gyroSubsystem.getAngle()));
+     
       RobotContainer.m_drivetrainSubsystem.setRaw( 0, (getController().calculate(RobotContainer.m_gyroSubsystem.getAngle())/100));  
       SmartDashboard.putNumber("Calculate Results", getController().calculate(RobotContainer.m_gyroSubsystem.getAngle()));
     }
@@ -62,7 +62,6 @@ public class TurnAuto extends PIDCommand {
     @Override
     public void end(boolean interrupted) {
      RobotContainer.m_drivetrainSubsystem.setRaw(0, 0);
-     //RobotContainer.m_gyroSubsystem.resetYaw();
     }
     
     // Returns true when the command should end.

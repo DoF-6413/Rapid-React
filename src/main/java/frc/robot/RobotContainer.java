@@ -36,25 +36,21 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   public static ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  // private final AutoCommand m_autoCommand = new
-  // AutoCommand(m_drivetrainSubsystem);
   public static IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
   public static IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   public static GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
   public static ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
 
-  // public Joystick m_leftStick = new Joystick(Constants.initialJoystickPort);
-  // public Joystick m_rightStick = new Joystick(Constants.secondaryJoystickPort);
+  // XBOX Contoller Defs (For intake and Climber)
   public static XboxController m_driverXbox = new XboxController(0);
   public static XboxController m_xbox = new XboxController(1);
   public Trigger driverLeftTrigger = new Trigger(() -> IntakeSubsystem.getLeftTriggerActive());
   public Trigger driverRightTrigger = new Trigger(() -> IntakeSubsystem.getRightTriggerActive());
   public Trigger leftTrigger = new Trigger(()-> ClimberSubsystem.getLeftTriggerActive());
   public Trigger rightTrigger = new Trigger(()-> ClimberSubsystem.getRightTriggerActive());
-  // XBOX Contoller Defs (For intake and Climber)
 
-  // different Autos
+  //Different Autos
   private final Command m_autoHighIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
   m_indexerSubsystem, m_intakeSubsystem);
 
@@ -74,14 +70,10 @@ public class RobotContainer {
   private final Command m_wHighIntake = new WAutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
 
   private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem, m_intakeSubsystem);
-  // private final Command m_demoAuto = new DemoAutoRoutine(m_drivetrainSubsystem, m_shooterSubsystem, m_indexerSubsystem);
-   private final Command m_testAuto = new TestAuto(m_drivetrainSubsystem, m_shooterSubsystem, m_gyroSubsystem, m_intakeSubsystem);
+
   private final Command m_spin = new spin(m_drivetrainSubsystem, m_gyroSubsystem);
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
-
-//   m_chooser.setDefaultOption("Simple Auto", m_autoIntake);
-//     m_chooser.addOption("Complex Auto", m_autoHighGoal);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -96,19 +88,17 @@ public class RobotContainer {
     m_drivetrainSubsystem.setDefaultCommand(
         new RunCommand(() -> m_drivetrainSubsystem.setRaw(m_driverXbox.getLeftY(), 
         m_driverXbox.getRightX()), m_drivetrainSubsystem));
-//Left Trigger on Joystick = Make the climber go up
-
-//        .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
-//Right Trigger on Joystick = Make the climber go down
-//Manual Down so after match can bring down without relying on encoder values
-
-
-driverRightTrigger
-.whenActive(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
-.whenActive(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
-.whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
-.whenInactive(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
-
+        
+        //      
+        
+        
+        driverRightTrigger
+        .whenActive(new InstantCommand(() -> m_intakeSubsystem.spinMotor(), m_intakeSubsystem))
+        .whenActive(new InstantCommand(() -> m_indexerSubsystem.spinMotor(), m_indexerSubsystem))
+        .whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
+        .whenInactive(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
+        
+        
   driverLeftTrigger
   .whenActive(new InstantCommand(() -> m_intakeSubsystem.reverseMotor(), m_intakeSubsystem))
   .whenActive(new InstantCommand(() -> m_indexerSubsystem.spinBack(), m_indexerSubsystem))
@@ -196,9 +186,6 @@ new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
     m_chooser.addOption("Just Move", m_autoMove);
     m_chooser.addOption("Push Away", m_autoPush);
     m_chooser.addOption("Spin", m_spin);
-
-    // m_chooser.addOption("Demo Auto", m_demoAuto);
-    m_chooser.addOption("Test", m_testAuto);
       SmartDashboard.putData(m_chooser);
         m_LimelightSubsystem.getTx();
         m_LimelightSubsystem.getTy();
@@ -225,7 +212,6 @@ new JoystickButton(m_driverXbox, XboxController.Button.kX.value)
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    // new AutoCommand(DrivetrainSubsystem, 5);
     return m_chooser.getSelected();
   }
 }
