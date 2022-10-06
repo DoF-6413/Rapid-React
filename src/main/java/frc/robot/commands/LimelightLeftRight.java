@@ -5,50 +5,64 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.Constants;
+import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
+
+/**
+ * This command moves the robot left and right utill in ideal angle for high goal shot
+ */
 
 public class LimelightLeftRight extends CommandBase {
   /** Creates a new LimelightLeftRight. */
   public double beginningXPosition;
-  public LimelightLeftRight() {
+  private DrivetrainSubsystem m_DrivetrainSubsystem;
+  private LimelightSubsystem m_LimelightSubsystem;
+
+  public LimelightLeftRight(DrivetrainSubsystem drivetrainSubsystem, LimelightSubsystem limelightSubsystem) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    m_DrivetrainSubsystem = drivetrainSubsystem;
+    m_LimelightSubsystem =limelightSubsystem;
+    addRequirements(m_DrivetrainSubsystem);
+    addRequirements(m_LimelightSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
-    beginningXPosition = RobotContainer.m_LimelightSubsystem.getTx();
+    m_DrivetrainSubsystem.setRaw(0.0, 0.0);
+    beginningXPosition = m_LimelightSubsystem.getTx();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      if(RobotContainer.m_LimelightSubsystem.hasTarget()) {
-        if(RobotContainer.m_LimelightSubsystem.getTx() > Constants.limelightXMax){
-            RobotContainer.m_drivetrainSubsystem.setRaw(0, 0.5);
-        } else if(RobotContainer.m_LimelightSubsystem.getTx() < Constants.limelightXMin){
-            RobotContainer.m_drivetrainSubsystem.setRaw(0, -0.5);
+      if(m_LimelightSubsystem.hasTarget()) {
+        if(m_LimelightSubsystem.getTx() > Constants.limelightXMax){
+            m_DrivetrainSubsystem.setRaw(0, 0.5);
+        } else if(m_LimelightSubsystem.getTx() < Constants.limelightXMin){
+            m_DrivetrainSubsystem.setRaw(0, -0.5);
         } else { 
-            RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
+            m_DrivetrainSubsystem.setRaw(0.0, 0.0);
         }
         } else { 
-          RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
+          m_DrivetrainSubsystem.setRaw(0.0, 0.0);
       }
       }
 
   // Called once the command ends or is interrupted
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_drivetrainSubsystem.setRaw(0.0, 0.0);
+    m_DrivetrainSubsystem.setRaw(0.0, 0.0);
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished(
-  ) {
+  public boolean isFinished() {
     
-    return (beginningXPosition > Constants.limelightXMax ) ? RobotContainer.m_LimelightSubsystem.getTx() <= Constants.limelightXMax : RobotContainer.m_LimelightSubsystem.getTx() >= Constants.limelightXMin;
+    return (beginningXPosition > Constants.limelightXMax ) ?
+        m_LimelightSubsystem.getTx() <= Constants.limelightXMax :
+        m_LimelightSubsystem.getTx() >= Constants.limelightXMin;
   }
 }

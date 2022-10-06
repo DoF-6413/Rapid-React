@@ -19,8 +19,8 @@ public class LimelightShootLow extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new LimelightUpDown(drive), 
-      new LimelightLeftRight(),
+      new LimelightUpDown(drive, light), 
+      new LimelightLeftRight(drive, light),
       new ShootTeleopLow(shoot, index)
     );
   }

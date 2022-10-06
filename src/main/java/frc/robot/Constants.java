@@ -30,7 +30,7 @@ public final class Constants {
         final public static int[] intakeDeviceID = new int[] { 8, 9, 7 }; 
                                                                        
         //Shooter CAN IDs
-        final public static int[] shooterID = new int[] { 7, 11 };
+        final public static int[] shooterID = new int[] { 10, 11 };
 
         //Indexer CAN ID
         final public static int IndexerID = 12;

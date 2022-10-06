@@ -13,9 +13,9 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 public class ShooterSubsystem extends PIDSubsystem {
-  private TalonFX leftShooterMotor = new TalonFX(11); // creates a new TalonFX with ID 0
+  private TalonFX leftShooterMotor = new TalonFX(Constants.shooterID[1]); // creates a new TalonFX with ID 0
   private double m_setpoint = 2000;
-  private TalonFX rightShooterMotor = new TalonFX(10);
+  private TalonFX rightShooterMotor = new TalonFX(Constants.shooterID[0]);
 
   public ShooterSubsystem() {
     super(new PIDController(Constants.kP, Constants.kI, Constants.kD));

@@ -8,15 +8,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 
+/**
+ * This is the climber subsystem
+ */
 public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new Climber. */
-  private double Position;
+
   TalonFX climberMotor = new TalonFX(Constants.ClimberID);
   public ClimberSubsystem() {
     
@@ -24,7 +26,7 @@ public class ClimberSubsystem extends SubsystemBase {
     config.statorCurrLimit.enable = true;
     config.statorCurrLimit.currentLimit = 50;
     climberMotor.configAllSettings(config); 
-    Position = climberMotor.getSelectedSensorPosition()/6380;
+  
   }
  
 
@@ -46,7 +48,6 @@ public class ClimberSubsystem extends SubsystemBase {
   public void climberPosition() {
     SmartDashboard.putNumber("Climber Encoder", climberMotor.getSelectedSensorPosition()/6380);   
     SmartDashboard.putNumber("Climber Current", climberMotor.getStatorCurrent());   
-    Position = climberMotor.getSelectedSensorPosition()/6380;
   }
 
   @Override
