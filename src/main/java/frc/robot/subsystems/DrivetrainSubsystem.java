@@ -75,11 +75,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightLead.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
-
-        leftLead.setSmartCurrentLimit( 9 );
-        rightLead.setSmartCurrentLimit( 9 );
-        
-        
+         
     }
     
     /**
@@ -91,59 +87,24 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public void setRaw(double rightStick, double leftStick) {
 
         diffDrive.arcadeDrive(-(rightStick), (leftStick)*Constants.turningScale);
-        printEncoderStatus();
+        updateDashboard();
     }
     
 
-    /*
-     * to switch to tank drive uncomment this and place inside of set raw
-     * diffDrive.tankDrive(-leftStick.getY(), -rightStick.getY());
-     * parameters to pass into setRaw method
-     */
 
-    public void printStatus(Double joystickLeftInput, Double joystickRightInput) {
-        SmartDashboard.putNumber("Joystick Left input = ", joystickLeftInput);
-        SmartDashboard.putNumber("Joystick Right input = ", joystickRightInput);
-    }
-
-    public void printEncoderStatus() {
-        SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
-        SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
-    }
-
+    
     public double getAvgEncocderDistance() {
         double averageEncoderDistance = (encoderLeftLead.getPosition() + encoderRightLead.getPosition())/2.0 ;
         System.out.println ("averageEncoderDistance" + averageEncoderDistance);
         return averageEncoderDistance;
     }
 
-    public double LeftEncoderDistance(){
-        double leftEncoderDistance = (encoderLeftLead.getPosition());
-        System.out.println ("leftEncoderDistance" + leftEncoderDistance);
-        return leftEncoderDistance;
-    }
-
-    public double RightEncoderDistance(){
-        double rightEncoderDistance = (encoderLeftLead.getPosition());
-        System.out.println ("rightEncoderDistance" + rightEncoderDistance);
-        return rightEncoderDistance;
-    }
-
-    public void resetEncoderValue() {
+      public void resetEncoderValue() {
         encoderLeftLead.setPosition(0);
         encoderRightLead.setPosition(0);
     }
     
-
-      public void current(){
-        SmartDashboard.putNumber("Left Current", leftLead.getOutputCurrent());
-        SmartDashboard.putNumber("Right Current", rightLead.getOutputCurrent());
-      }
-      public void autoDrive(double power, double turn)
-      {
-        diffDrive.arcadeDrive(-power, turn, false);
-      }
-
+      
       public void updateDashboard(){
         SmartDashboard.putNumber("Left Lead", this.leftLead.getOutputCurrent());
         SmartDashboard.putNumber("Left Lead Faults", this.leftLead.getFaults());
@@ -158,6 +119,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Right Follow1 Faults", this.rightFollow1.getFaults());
         SmartDashboard.putNumber("Right Follow2", this.rightFollow2.getOutputCurrent());
         SmartDashboard.putNumber("Right Follow2 Faults", this.rightFollow2.getFaults());
+
+        SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
+        SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
       }
 
       
