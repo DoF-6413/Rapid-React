@@ -37,7 +37,7 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);
     intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
     intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
-    
+
     intakeLeftActuator.setSmartCurrentLimit(10);
     intakeRightActuator.setSmartCurrentLimit(10);
     leftActuatorEncoder = intakeLeftActuator.getEncoder();
@@ -46,10 +46,10 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeLeftActuator.setOpenLoopRampRate(0.5);
     intakeRightActuator.setOpenLoopRampRate(0.5);
   }
-  
+
   // Spins Intake Motor
   public void spinMotor() {
-    
+
     intakeSpinner.set(0.5); // runs the motor at the speed set in constants% power
 
   }
@@ -73,7 +73,7 @@ public class IntakeSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Encoder Left Actuator", leftActuatorEncoder.getPosition());
   }
 
-  public double currentRightActuatorPosition(){
+  public double currentRightActuatorPosition() {
     return rightActuatorEncoder.getPosition();
   }
 
@@ -82,10 +82,11 @@ public class IntakeSubsystem extends SubsystemBase {
    * 
    * @return Encoder Value of Left Actuator (-39 - 2)
    */
-  
-  public double currentLeftActuatorPosition(){
+
+  public double currentLeftActuatorPosition() {
     return leftActuatorEncoder.getPosition();
   }
+
   public void stopActuators() {
     stopRightActuator();
     stopLeftActuator();
@@ -102,14 +103,14 @@ public class IntakeSubsystem extends SubsystemBase {
     armPosition();
   }
 
-  public void setAllActuatorsUp(double speed){
+  public void setAllActuatorsUp(double speed) {
     setLeftActuatorUp(speed);
     setRightActuatorUp(speed);
   }
 
   public void setRightActuatorUp(double speed) {
-    if (toplimitSwitch.get() || 
-    rightActuatorEncoder.getPosition() <= 2) {
+    if (toplimitSwitch.get() ||
+        rightActuatorEncoder.getPosition() <= 2) {
       // We are going up and top limit is tripped so stop
       intakeRightActuator.set(0);
     } else {
@@ -120,8 +121,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setLeftActuatorUp(double speed) {
-    if (toplimitSwitch.get() || 
-    leftActuatorEncoder.getPosition() >= -2) {
+    if (toplimitSwitch.get() ||
+        leftActuatorEncoder.getPosition() >= -2) {
       // We are going up and top limit is tripped so stop
       intakeLeftActuator.set(0);
     } else {
@@ -131,17 +132,19 @@ public class IntakeSubsystem extends SubsystemBase {
     armPosition();
   }
 
-  public void setAllActuatorsDown(double speed){
+  public void setAllActuatorsDown(double speed) {
     setLeftActuatorDown(speed);
     setRightActuatorDown(speed);
   }
 
-  /** Brings Right Actuator Down
+  /**
+   * Brings Right Actuator Down
+   * 
    * @param speed -Value the actuator moves at (0-1)
    */
   public void setRightActuatorDown(double speed) {
-    if (bottomlimitSwitch.get()||
-    rightActuatorEncoder.getPosition() >= 39) {
+    if (bottomlimitSwitch.get() ||
+        rightActuatorEncoder.getPosition() >= 39) {
       // We are going down and bottom limit is tripped so stop
       intakeRightActuator.set(0);
       down = true;
@@ -154,8 +157,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setLeftActuatorDown(double speed) {
-    if (bottomlimitSwitch.get()||
-    leftActuatorEncoder.getPosition() <= -39) {
+    if (bottomlimitSwitch.get() ||
+        leftActuatorEncoder.getPosition() <= -39) {
       // We are going down and bottom limit is tripped so stop
 
       intakeLeftActuator.set(0);
@@ -166,10 +169,11 @@ public class IntakeSubsystem extends SubsystemBase {
     armPosition();
   }
 
- public void climbingCurrentLimit(){
-  intakeLeftActuator.setSmartCurrentLimit(20);
-  intakeRightActuator.setSmartCurrentLimit(20);
- }
+  public void climbingCurrentLimit() {
+    intakeLeftActuator.setSmartCurrentLimit(20);
+    intakeRightActuator.setSmartCurrentLimit(20);
+  }
+
   public static boolean getLeftTriggerActive() {
     return (RobotContainer.m_driverXbox.getLeftTriggerAxis() > 0);
   }
@@ -178,25 +182,26 @@ public class IntakeSubsystem extends SubsystemBase {
     return (RobotContainer.m_driverXbox.getRightTriggerAxis() > 0);
   }
 
-  /*function
-  getlimitswitch
-  return  true
-  else
-  return false
-  */
+  /*
+   * function
+   * getlimitswitch
+   * return true
+   * else
+   * return false
+   */
 
-  public boolean isDown(){
+  public boolean isDown() {
     return bottomlimitSwitch.get() ? true : false;
   }
   // TODO: Create a function that moves the aucuator 90 degrees to drop intake
   // system
 
-  public void brakeToCoast(){
+  public void brakeToCoast() {
     intakeLeftActuator.setIdleMode(CANSparkMax.IdleMode.kCoast);
     intakeRightActuator.setIdleMode(CANSparkMax.IdleMode.kCoast);
   }
 
-  public void coastToBrake(){
+  public void coastToBrake() {
     intakeLeftActuator.setIdleMode(CANSparkMax.IdleMode.kBrake);
     intakeRightActuator.setIdleMode(CANSparkMax.IdleMode.kBrake);
   }

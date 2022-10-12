@@ -6,37 +6,51 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.GyroSubsystem;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+/**
+ * Does Climb Routine to put robot from Mid bar to High bar
+ * Note: This assumes the robot is on the mid bar
+ */
 public class EndGameClimbHigh extends SequentialCommandGroup {
   /** Creates a new EndGameClimbHigh. */
-  public EndGameClimbHigh() {
+  private ClimberSubsystem m_climberSubsystem;
+  private IntakeSubsystem m_intakeSubsystem;
+  private GyroSubsystem m_gyroSubsystem;
+
+  public EndGameClimbHigh(ClimberSubsystem climber, IntakeSubsystem intake, GyroSubsystem gyro) {
+    m_climberSubsystem = climber;
+    m_intakeSubsystem = intake;
+    m_gyroSubsystem = gyro;
+    addRequirements(m_climberSubsystem, m_intakeSubsystem);
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+
     addCommands(
-      new TiltTo(-40),
-      new ClimberGoTo(49), 
-      new TiltTo(-30),
-      new ClimberGoTo(40),
-      //NOW CONNECTED AT TWO POINTS
-      //BOTTOM COMMAND RELEASES FROM MID BAR
-      new ClimberGoTo(30),
-      parallel( new ClimberGoTo(18), new IntakeGoTo(-15)),
-      new IntakeGoTo(-4),
-      new ClimberGoTo(0),
-      new IntakeGoTo(-2),
-      new WaitCommand(0.5),
-      new ClimberGoTo(7)
-     
+        // Tips Robot Back to Attach to High Bar
+        new TiltTo(-40, m_intakeSubsystem, m_gyroSubsystem),
+        new ClimberGoTo(49, m_climberSubsystem),
+        new TiltTo(-30, m_intakeSubsystem, m_gyroSubsystem),
+        new ClimberGoTo(40, m_climberSubsystem),
+        // NOW CONNECTED AT TWO POINTS
+        // BOTTOM COMMAND RELEASES FROM MID BAR
+        new ClimberGoTo(30, m_climberSubsystem),
+        parallel(new ClimberGoTo(18, m_climberSubsystem), new IntakeGoTo(-15, m_intakeSubsystem)),
+        new IntakeGoTo(-4, m_intakeSubsystem),
+        // Now attach intake to high bar
+        new ClimberGoTo(0, m_climberSubsystem),
+        new IntakeGoTo(-2, m_intakeSubsystem),
+        new WaitCommand(0.5),
+        new ClimberGoTo(7, m_climberSubsystem)
+
     );
   }
+
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_intakeSubsystem.stopActuators();
-    RobotContainer.m_climberSubsystem.stop();
+    m_intakeSubsystem.stopActuators();
+    m_climberSubsystem.stop();
   }
 }

@@ -47,6 +47,6 @@ public class ActuatorDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotContainer.m_intakeSubsystem.isDown() == true;
+    return m_intakeSubsystem.isDown() == true;
   }
 }

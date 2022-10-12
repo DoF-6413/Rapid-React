@@ -6,28 +6,34 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+/**
+ * Climb routine that brings robot from the ground onto mid bar.
+ * Note: This command requires the intake to be all the way up, the climber
+ * above the mid bar.
+ */
 public class EndGameClimbMid extends SequentialCommandGroup {
+  private ClimberSubsystem m_climberSubsystem;
+  private IntakeSubsystem m_intakeSubsystem;
+
   /** Creates a new EndGameClimbMid. */
-  public EndGameClimbMid() {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+  public EndGameClimbMid(ClimberSubsystem climber, IntakeSubsystem intake) {
+    m_climberSubsystem = climber;
+    m_intakeSubsystem = intake;
+    addRequirements(m_climberSubsystem, m_intakeSubsystem);
+
     addCommands(
-      new ClimberGoTo(0),
-      new IntakeGoTo(-2),
-      new WaitCommand(0.5),
-      new ClimberGoTo(8)
-      //MID BAR JUST INTAKE ACTUATORS
-    );
+        new ClimberGoTo(0, m_climberSubsystem),
+        new IntakeGoTo(-2, m_intakeSubsystem),
+        new WaitCommand(0.5),
+        new ClimberGoTo(8, m_climberSubsystem));
   }
+
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_intakeSubsystem.stopActuators();
-    RobotContainer.m_climberSubsystem.stop();
+    m_intakeSubsystem.stopActuators();
+    m_climberSubsystem.stop();
   }
 }
-

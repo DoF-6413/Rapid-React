@@ -5,17 +5,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.IntakeSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class IntakeGoTo extends SequentialCommandGroup {
   /** Creates a new IntakeGoTo. */
-  public IntakeGoTo(double endpoint) {
+  public IntakeGoTo(double endpoint, IntakeSubsystem intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      parallel(new leftIntakeGoTo(endpoint), new rightIntakeGoTo(endpoint))
+      parallel(new leftIntakeGoTo(endpoint, intake), new rightIntakeGoTo(endpoint, intake))
     );
   }
 }

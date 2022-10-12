@@ -20,22 +20,22 @@ public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new Climber. */
 
   TalonFX climberMotor = new TalonFX(Constants.ClimberID);
+
   public ClimberSubsystem() {
-    
+
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.statorCurrLimit.enable = true;
     config.statorCurrLimit.currentLimit = 50;
-    climberMotor.configAllSettings(config); 
-  
-  }
- 
+    climberMotor.configAllSettings(config);
 
-  public void goDownManual(double speed){
+  }
+
+  public void goDownManual(double speed) {
     climberMotor.set(TalonFXControlMode.PercentOutput, speed);
     climberPosition();
   }
 
-  public void goUpManual(double speed){
+  public void goUpManual(double speed) {
     climberMotor.set(TalonFXControlMode.PercentOutput, speed);
     climberPosition();
   }
@@ -46,8 +46,8 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void climberPosition() {
-    SmartDashboard.putNumber("Climber Encoder", climberMotor.getSelectedSensorPosition()/6380);   
-    SmartDashboard.putNumber("Climber Current", climberMotor.getStatorCurrent());   
+    SmartDashboard.putNumber("Climber Encoder", climberMotor.getSelectedSensorPosition() / 6380);
+    SmartDashboard.putNumber("Climber Current", climberMotor.getStatorCurrent());
   }
 
   @Override
@@ -55,21 +55,21 @@ public class ClimberSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public double getCurrentPosition(){
-    return climberMotor.getSelectedSensorPosition()/6380;
-  }
-  
-  public void setCurrentLimit(double Current){
-    TalonFXConfiguration config = new TalonFXConfiguration();
-    config.statorCurrLimit.currentLimit = Current;
-    climberMotor.configAllSettings(config); 
+  public double getCurrentPosition() {
+    return climberMotor.getSelectedSensorPosition() / 6380;
   }
 
-  public void setPosition(){
+  public void setCurrentLimit(double Current) {
+    TalonFXConfiguration config = new TalonFXConfiguration();
+    config.statorCurrLimit.currentLimit = Current;
+    climberMotor.configAllSettings(config);
+  }
+
+  public void setPosition() {
     climberMotor.setSelectedSensorPosition(0);
   }
 
-  public double currentDrawed(){
+  public double currentDrawed() {
     return climberMotor.getStatorCurrent();
   }
 
