@@ -10,17 +10,14 @@ import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+/** This command doesn't work, needs to be refined */
 public class LimelightShootLow extends SequentialCommandGroup {
   /** Creates a new LimelightShootLow. */
   public LimelightShootLow(LimelightSubsystem light, IndexerSubsystem index, ShooterSubsystem shoot, DrivetrainSubsystem drive) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new LimelightUpDown(drive, light), 
-      new LimelightLeftRight(drive, light),
+    addCommands( 
+      new LimelightAim(drive, light),
       new ShootTeleopLow(shoot, index)
     );
   }
