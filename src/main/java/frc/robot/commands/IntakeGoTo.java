@@ -15,8 +15,10 @@ public class IntakeGoTo extends SequentialCommandGroup {
   public IntakeGoTo(double endpoint, IntakeSubsystem intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      parallel(new leftIntakeGoTo(endpoint, intake), new rightIntakeGoTo(endpoint, intake))
-    );
+
+    //Note: Cannot have same subsystem requirments used in parallel commands.
+    // addCommands(
+      // parallel(new leftIntakeGoTo(endpoint, intake), new rightIntakeGoTo(endpoint, intake))
+    // );
   }
 }

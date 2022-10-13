@@ -47,6 +47,7 @@ public class LimelightAim extends CommandBase {
 
       if (m_LimelightSubsystem.getTx() > Constants.limelightXMax) {
         rightStick = 0.5;
+    
       } else if (m_LimelightSubsystem.getTx() < Constants.limelightXMin) {
         rightStick = -0.5;
       } 
