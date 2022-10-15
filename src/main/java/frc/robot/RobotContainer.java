@@ -155,7 +155,7 @@ public class RobotContainer {
     // Trigger Button Left Bumper (L1) = Runs Shooter Subsystem at 2000 R P M
     new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value)
         .whenHeld(
-            new LimelightShootLow(m_LimelightSubsystem, m_indexerSubsystem, m_shooterSubsystem, m_drivetrainSubsystem))
+            new ShootTeleopLow(m_shooterSubsystem, m_indexerSubsystem))
         .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
         .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
@@ -169,7 +169,9 @@ public class RobotContainer {
 
     // Runs the endgame climb mid routine, used to hook onto mid bar
     rightTrigger
-        .whenActive(new EndGameClimbMid(m_climberSubsystem, m_intakeSubsystem));
+        .whenActive(new ShootTeleopHigh(m_shooterSubsystem,m_indexerSubsystem))
+        .whenInactive((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
+        .whenInactive((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
     // runs the endgame high routine, used to hook onto high and traverse bar
     leftTrigger
