@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
-
+import frc.robot.subsystems.ShooterSubsystem;
 /**
  * This command moves the robot left and right utill in ideal angle for high
  * goal shot
@@ -20,11 +20,13 @@ public class LimelightAim extends CommandBase {
   private double beginningYPosition;
   private DrivetrainSubsystem m_DrivetrainSubsystem;
   private LimelightSubsystem m_LimelightSubsystem;
+  private ShooterSubsystem m_ShooterSubsystem;
 
-  public LimelightAim(DrivetrainSubsystem drivetrainSubsystem, LimelightSubsystem limelightSubsystem) {
+  public LimelightAim(DrivetrainSubsystem drivetrainSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_DrivetrainSubsystem = drivetrainSubsystem;
     m_LimelightSubsystem = limelightSubsystem;
+    m_ShooterSubsystem = shooterSubsystem;
     addRequirements(m_DrivetrainSubsystem);
     addRequirements(m_LimelightSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -60,7 +62,6 @@ public class LimelightAim extends CommandBase {
 
       m_DrivetrainSubsystem.setRaw(leftStick, rightStick);
     } // if hasTarget
-
   }
 
   // Called once the command ends or is interrupted

@@ -12,8 +12,12 @@ public class LimelightShootHigh extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new LimelightAim(drive, light),
+      //Aims Limelight to Ideal Shoot Position
+      //Note: Should ramp up shooter and move indexer back so it does not accidentally shoot
+      new LimelightAim(drive, light, shoot),
+      //move indexer forward and disable
       new ShootTeleopHigh(shoot, index)
+
     );
   }
 }
