@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 /**
@@ -21,12 +22,14 @@ public class LimelightAim extends CommandBase {
   private DrivetrainSubsystem m_DrivetrainSubsystem;
   private LimelightSubsystem m_LimelightSubsystem;
   private ShooterSubsystem m_ShooterSubsystem;
+  private IndexerSubsystem m_IndexerSubsystem;
 
-  public LimelightAim(DrivetrainSubsystem drivetrainSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem) {
+  public LimelightAim(DrivetrainSubsystem drivetrainSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, IndexerSubsystem indexerSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_DrivetrainSubsystem = drivetrainSubsystem;
     m_LimelightSubsystem = limelightSubsystem;
     m_ShooterSubsystem = shooterSubsystem;
+    m_IndexerSubsystem = indexerSubsystem;
     addRequirements(m_DrivetrainSubsystem);
     addRequirements(m_LimelightSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -38,6 +41,7 @@ public class LimelightAim extends CommandBase {
     m_DrivetrainSubsystem.setRaw(0.0, 0.0);
     beginningXPosition = m_LimelightSubsystem.getTx();
     beginningYPosition = m_LimelightSubsystem.getTy();
+    new LimelightPrep(m_IndexerSubsystem, m_ShooterSubsystem);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
