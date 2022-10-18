@@ -10,21 +10,22 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+/**
+ * Runs indexer back to give the shooter time to ramp up, then runs indexer
+ * forwards to shoot
+ * Note: Assumed to run parralel with ShootHigh Command
+ */
 public class IndexerTeleop extends SequentialCommandGroup {
   /** Creates a new IndexerTeleop. */
   public IndexerTeleop(IndexerSubsystem index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new InstantCommand(() -> index.spinBack()),
-      new WaitCommand(Constants.indexerWaitTime),
-      new InstantCommand(() -> index.spinMotor()),
-      new WaitCommand(Constants.oneSecond),
-      new InstantCommand(()-> index.stopMotor())
-    // this continues running in low hub
+        new InstantCommand(() -> index.spinBack()),
+        new WaitCommand(Constants.indexerWaitTime),
+        new InstantCommand(() -> index.spinMotor()),
+        new WaitCommand(Constants.oneSecond),
+        new InstantCommand(() -> index.stopMotor())
     );
   }
 }

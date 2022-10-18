@@ -3,9 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 
 public final class Constants {
     //Ports
@@ -79,8 +76,8 @@ public final class Constants {
         final public static double kShooterTolerance = 1.0;
         final public static double kShooterDerivativeTolerance = 0.01;
         //Shooter Speeds
-        final public static double lowerHubSpeed = 2300;
-        final public static double upperHubSpeed = 4000;
+        final public static double lowerHubSpeed = 1500;
+        final public static double upperHubSpeed = 2800;
         
     //Gyro Contants
         final public static boolean K_GYRO_REVERSED = false;

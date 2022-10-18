@@ -6,17 +6,18 @@ import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 /** Shoots High after positioning using limelight */
-public class LimelightShootHigh extends SequentialCommandGroup {
+public class LLAimAndShoot extends SequentialCommandGroup {
   /** Creates a new LimelightShoot. */
-  public LimelightShootHigh(LimelightSubsystem light, IndexerSubsystem index, ShooterSubsystem shoot, DrivetrainSubsystem drive) {
+  public LLAimAndShoot(LimelightSubsystem light, IndexerSubsystem index, ShooterSubsystem shoot, DrivetrainSubsystem drive) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new LimelightPrep(index,shoot),
       //Aims Limelight to Ideal Shoot Position
       //Note: Should ramp up shooter and move indexer back so it does not accidentally shoot
-      new LimelightAim(drive, light, shoot, index),
+      new LimelightAim(drive, light),
       //move indexer forward and disable
-      new LimelightPost(index, shoot)
+      new LimelightShoot(index, shoot)
 
     );
   }

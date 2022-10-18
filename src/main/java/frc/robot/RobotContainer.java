@@ -69,8 +69,6 @@ public class RobotContainer {
 
   private final Command m_autoLowIntake = new AutoLowIntake(m_drivetrainSubsystem, m_shooterSubsystem,
       m_indexerSubsystem, m_intakeSubsystem);
-
-  private final Command m_spin = new spin(m_drivetrainSubsystem, m_gyroSubsystem);
   // Intake Subsystem
   public SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -163,7 +161,7 @@ public class RobotContainer {
 
     new JoystickButton(m_xbox, XboxController.Button.kRightBumper.value)
         .whenHeld(
-            new LimelightShootHigh(m_LimelightSubsystem, m_indexerSubsystem, m_shooterSubsystem, m_drivetrainSubsystem))
+            new LLAimAndShoot(m_LimelightSubsystem, m_indexerSubsystem, m_shooterSubsystem, m_drivetrainSubsystem))
         .whenReleased((new InstantCommand(() -> m_shooterSubsystem.disable(), m_shooterSubsystem)))
         .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
 
@@ -186,7 +184,6 @@ public class RobotContainer {
     m_chooser.addOption("Low Goal", m_autoLowGoal);
     m_chooser.addOption("Just Move", m_autoMove);
     m_chooser.addOption("Push Away", m_autoPush);
-    m_chooser.addOption("Spin", m_spin);
     SmartDashboard.putData(m_chooser);
     m_LimelightSubsystem.getTx();
     m_LimelightSubsystem.getTy();
