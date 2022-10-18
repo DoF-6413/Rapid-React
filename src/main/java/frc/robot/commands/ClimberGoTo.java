@@ -7,18 +7,21 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.Constants;
 
-/** This Command sets the Climber to a specific encoder value (0-49, Bottom to Top) */
+/** This Command sets the Climber to a specific encoder value at the given speed
+ * Note: All Speed Values should be Positive, Enpoint Values not Negative
+ */
 public class ClimberGoTo extends CommandBase {
   /** Creates a new ClimberFullRetract. */
-  private double endpoint;
+  private double m_endpoint;
   private double startpoint;
+  private double m_speed;
   private ClimberSubsystem m_climberSubsystem;
 
-  public ClimberGoTo(double Endpoint, ClimberSubsystem climber) {
+  public ClimberGoTo(double endpoint, double speed, ClimberSubsystem climber) {
     // Use addRequirements() here to declare subsystem dependencies.
-    endpoint = Endpoint;
+    m_endpoint = endpoint;
+    m_speed = speed;
     m_climberSubsystem = climber;
     addRequirements(m_climberSubsystem);
   }
@@ -33,10 +36,10 @@ public class ClimberGoTo extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_climberSubsystem.getCurrentPosition() > endpoint) {
-      m_climberSubsystem.goDownManual(Constants.climberSpeedDown);
-    } else if (m_climberSubsystem.getCurrentPosition() < endpoint) {
-      m_climberSubsystem.goUpManual(Constants.climberSpeedUp);
+    if (m_climberSubsystem.getCurrentPosition() > m_endpoint) {
+      m_climberSubsystem.goDownManual(-m_speed);
+    } else if (m_climberSubsystem.getCurrentPosition() < m_endpoint) {
+      m_climberSubsystem.goUpManual(m_speed);
     } else {
       m_climberSubsystem.stop();
     }
@@ -51,10 +54,10 @@ public class ClimberGoTo extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    SmartDashboard.putNumber("cmdEndpoint", endpoint);
+    SmartDashboard.putNumber("cmdendpoint", m_endpoint);
     SmartDashboard.putNumber("cmdStartpoint", startpoint);
 
-    return (startpoint > endpoint) ? m_climberSubsystem.getCurrentPosition() <= endpoint
-        : m_climberSubsystem.getCurrentPosition() >= endpoint;
+    return (startpoint > m_endpoint) ? m_climberSubsystem.getCurrentPosition() <= m_endpoint
+        : m_climberSubsystem.getCurrentPosition() >= m_endpoint;
   }
 }

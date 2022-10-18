@@ -33,9 +33,10 @@ public final class Constants {
         final public static int IndexerID = 12;
         
         //Climber CAN ID
-        final public static int ClimberID = 13;
-
-
+        final public static int[] ClimberID = new int[] {13, 14, 15};
+        final public static int k_topLiftMotor = 0;
+        final public static int k_bottomLiftMotor = 1;
+        final public static int k_stingerMotor = 2;
     //Intake Constants
         //Intake Speeds
             // Sets Intake Forward (To Shooter) Speed (Currently 50%)
@@ -60,13 +61,17 @@ public final class Constants {
 
     //Climber Constants
         //Sets Auto Climber Speed Up
-        final public static double climberSpeedUp = 0.6;
+        final public static double k_climberMaxUp = 0.6;
         //Sets Auto Climber Speed Down
-        final public static double climberSpeedDown = -0.6;
+        final public static double k_climberMaxDown = -0.6;
         //Sets Manual Climber Speed Up
-        final public static double manualClimberSpeedUp = 0.5;
+        final public static double k_climberMinUp = 0.5;
         //Sets Manual Climber Speed Down
-        final public static double manualClimberSpeedDown = -0.5;
+        final public static double k_climberMinDown = -0.5;
+        //Sets Climber Current Limit
+        final public static int k_climberCurrentLimit = 80;
+        //Climber Top Position
+        final public static int k_climberTop = 49; // TODO: Update Value
 
     //Shooter Contants
         //Shooter PID
