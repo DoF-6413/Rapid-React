@@ -91,4 +91,12 @@ public class ClimberSubsystem extends SubsystemBase {
   public static boolean getRightTriggerActive() {
     return (RobotContainer.m_xbox.getRightTriggerAxis() > 0);
   }
+
+  public void runStingerMotor() {
+    stingerMotor.set(Constants.k_stingerSpeed);
+  }
+
+  public void stopStingerMotor() {
+    stingerMotor.set(Constants.k_stopStinger);
+  }
 }

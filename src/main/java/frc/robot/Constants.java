@@ -72,6 +72,11 @@ public final class Constants {
         final public static int k_climberCurrentLimit = 80;
         //Climber Top Position
         final public static int k_climberTop = 49; // TODO: Update Value
+        //Stinger speed
+        final public static double k_stingerSpeed = 1;
+        //Stop stinger
+        final public static double k_stopStinger = 0;
+
 
     //Shooter Contants
         //Shooter PID

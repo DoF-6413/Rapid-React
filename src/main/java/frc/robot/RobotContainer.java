@@ -107,7 +107,7 @@ public class RobotContainer {
         // Button Nearest XYAB Buttons
         // Begin Climb Code
         new JoystickButton(m_xbox, XboxController.Button.kStart.value)
-        .whenPressed(new BeginClimb(m_climberSubsystem));
+        .whenPressed(new BeginClimb(m_climberSubsystem, m_intakeSubsystem));
         
         // Button Nearest D-Pad
         // End Climb Code

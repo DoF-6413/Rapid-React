@@ -193,7 +193,9 @@ public class IntakeSubsystem extends SubsystemBase {
   }
   // TODO: Create a function that moves the aucuator 90 degrees to drop intake
   // system
-
+  public boolean isUp() {
+    return toplimitSwitch.get() ? true : false;
+  }
   public void brakeToCoast() {
     intakeLeftActuator.setIdleMode(CANSparkMax.IdleMode.kCoast);
     intakeRightActuator.setIdleMode(CANSparkMax.IdleMode.kCoast);
