@@ -5,8 +5,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
-
+import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 /**
  * Run Climber to Put the Robot on Traversal Bar
@@ -23,21 +26,13 @@ public class EndClimb extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
     addCommands(
-        // Tips Robot Back to Attach to High Bar
-        // new TiltTo(-40, m_intakeSubsystem, m_gyroSubsystem),
-        // new ClimberGoTo(49, m_climberSubsystem),
-        // new TiltTo(-30, m_intakeSubsystem, m_gyroSubsystem),
-        // new ClimberGoTo(40, m_climberSubsystem),
-        // // NOW CONNECTED AT TWO POINTS
-        // // BOTTOM COMMAND RELEASES FROM MID BAR
-        // new ClimberGoTo(30, m_climberSubsystem),
-        // parallel(new ClimberGoTo(18, m_climberSubsystem), new IntakeGoTo(-15, m_intakeSubsystem)),
-        // new IntakeGoTo(-4, m_intakeSubsystem),
-        // // Now attach intake to high bar
-        // new ClimberGoTo(0, m_climberSubsystem),
-        // new IntakeGoTo(-2, m_intakeSubsystem),
-        // new WaitCommand(0.5),
-        // new ClimberGoTo(7, m_climberSubsystem)
+      new InstantCommand(() -> m_climberSubsystem.runStingerMotor()),
+       new WaitCommand(Constants.oneSecond),
+       new InstantCommand(() -> m_climberSubsystem.stopStingerMotor()),
+       new ClimberGoTo(Constants.k_climberBottom, Constants.k_climberMaxDown ,  m_climberSubsystem),
+       new InstantCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMaxUp)),
+       new WaitCommand(Constants.oneSecond), //TODO: Change time
+       new InstantCommand(() -> m_climberSubsystem.stop())
 
     );
   }
