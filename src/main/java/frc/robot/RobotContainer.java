@@ -116,7 +116,12 @@ public class RobotContainer {
         
         // Button A = Climber Up
         new JoystickButton(m_xbox, XboxController.Button.kA.value)
-        .whenPressed(new ClimberGoTo(Constants.k_climberTop, Constants.k_climberMaxUp, m_climberSubsystem));
+        .whenPressed
+        (
+        //     new RunCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMinUp),
+        // m_climberSubsystem))
+        // .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
+            new ClimberGoTo(Constants.k_climberTop, Constants.k_climberMaxUp, m_climberSubsystem));
         
         // Buttom B = Climber Down
         new JoystickButton(m_xbox, XboxController.Button.kB.value)
@@ -140,7 +145,12 @@ public class RobotContainer {
             .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
         
         // Left Bumper (L1) = Not Used
-                        
+        new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value)
+        .whenHeld(
+            new RunCommand(() -> m_climberSubsystem.runStingerMotor(),
+            m_climberSubsystem))
+            .whenReleased(new RunCommand(() -> m_climberSubsystem.stopStingerMotor(), m_climberSubsystem));
+
         // Right Bumper (R1) = Runs Limelight Shoot
         
         new JoystickButton(m_xbox, XboxController.Button.kRightBumper.value)

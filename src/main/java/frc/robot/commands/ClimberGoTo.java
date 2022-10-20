@@ -31,6 +31,9 @@ public class ClimberGoTo extends CommandBase {
   public void initialize() {
     startpoint = m_climberSubsystem.getCurrentPosition();
     m_climberSubsystem.stop();
+    SmartDashboard.putNumber("climber Endpoint", m_endpoint);
+    SmartDashboard.putNumber("climber speed", m_speed);
+    System.out.println("running initialize");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,12 +46,15 @@ public class ClimberGoTo extends CommandBase {
     } else {
       m_climberSubsystem.stop();
     }
+
+    System.out.println("running execute");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_climberSubsystem.stop();
+    System.out.println("ENDDDDDDDDD");
   }
 
   // Returns true when the command should end.

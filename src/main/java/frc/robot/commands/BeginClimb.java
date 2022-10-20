@@ -25,10 +25,10 @@ public class BeginClimb extends SequentialCommandGroup {
 
     addCommands(
        new ActuatorUp(m_intakeSubsystem),
-       new InstantCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMaxUp)),
-       new WaitCommand(Constants.oneSecond),
-       new InstantCommand(() -> m_climberSubsystem.stop()),
-       new WaitCommand(Constants.oneSecond),
+      //  new InstantCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMaxUp)),
+      //  new WaitCommand(Constants.oneSecond),
+      //  new InstantCommand(() -> m_climberSubsystem.stop()),
+      //  new WaitCommand(Constants.oneSecond),
        new ClimberGoTo(Constants.k_climberTop, Constants.k_climberMaxUp ,  m_climberSubsystem)
         );
 

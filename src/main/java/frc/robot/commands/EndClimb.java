@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 /**
@@ -29,10 +28,10 @@ public class EndClimb extends SequentialCommandGroup {
       new InstantCommand(() -> m_climberSubsystem.runStingerMotor()),
        new WaitCommand(Constants.oneSecond),
        new InstantCommand(() -> m_climberSubsystem.stopStingerMotor()),
-       new ClimberGoTo(Constants.k_climberBottom, Constants.k_climberMaxDown ,  m_climberSubsystem),
-       new InstantCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMaxUp)),
-       new WaitCommand(Constants.oneSecond), //TODO: Change time
-       new InstantCommand(() -> m_climberSubsystem.stop())
+       new ClimberGoTo(Constants.k_climberBottom, Constants.k_climberMaxUp ,  m_climberSubsystem)
+      //  new InstantCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMaxUp)),
+      //  new WaitCommand(Constants.oneSecond), //TODO: Change time
+      //  new InstantCommand(() -> m_climberSubsystem.stop())
 
     );
   }

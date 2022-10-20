@@ -71,7 +71,7 @@ public final class Constants {
         //Sets Climber Current Limit
         final public static int k_climberCurrentLimit = 80;
         //Climber Top Position
-        final public static int k_climberTop = 49; // TODO: Update Value
+        final public static double k_climberTop = 21.5; // TODO: Update Value
         //Climber Bottom Position
         final public static int k_climberBottom = 0; // TODO: Update Value
         //Stinger speed
@@ -130,8 +130,8 @@ public final class Constants {
             final public static double circOfWheelToWheel = wheelToWheel/12 /2 * 2 * Math.PI;
 
         //Limelight Min and Max Sweet Spot Values
-        public static final double limelightYMax = 11;
-        public static final double limelightYMin = 8;
+        public static final double limelightYMax = 15;
+        public static final double limelightYMin = 11;
 
         public static final double limelightXMax = 3;
         public static final double limelightXMin = -3;

@@ -30,12 +30,13 @@ public class ClimberSubsystem extends SubsystemBase {
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.statorCurrLimit.enable = true;
     config.statorCurrLimit.currentLimit = Constants.k_climberCurrentLimit;
-    
     topLiftMotor = new TalonFX(Constants.ClimberID[Constants.k_topLiftMotor]);
     bottomLiftMotor = new TalonFX(Constants.ClimberID[Constants.k_bottomLiftMotor]);
     topLiftMotor.configAllSettings(config);
     bottomLiftMotor.configAllSettings(config);
     bottomLiftMotor.follow(topLiftMotor);
+    bottomLiftMotor.setInverted(true);
+    topLiftMotor.setInverted(true);
 
     stingerMotor =  new CANSparkMax(Constants.ClimberID[Constants.k_stingerMotor], MotorType.kBrushless);
   }
