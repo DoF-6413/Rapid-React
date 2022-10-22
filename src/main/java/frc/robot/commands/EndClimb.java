@@ -25,10 +25,10 @@ public class EndClimb extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
     addCommands(
+      new ClimberGoTo(Constants.k_climberBottom, Constants.k_climberMaxUp ,  m_climberSubsystem),
       new InstantCommand(() -> m_climberSubsystem.runStingerMotor()),
        new WaitCommand(Constants.oneSecond),
-       new InstantCommand(() -> m_climberSubsystem.stopStingerMotor()),
-       new ClimberGoTo(Constants.k_climberBottom, Constants.k_climberMaxUp ,  m_climberSubsystem)
+       new InstantCommand(() -> m_climberSubsystem.stopStingerMotor())
       //  new InstantCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMaxUp)),
       //  new WaitCommand(Constants.oneSecond), //TODO: Change time
       //  new InstantCommand(() -> m_climberSubsystem.stop())

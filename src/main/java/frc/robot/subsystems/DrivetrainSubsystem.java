@@ -106,22 +106,22 @@ public class DrivetrainSubsystem extends SubsystemBase {
     
       
       public void updateDashboard(){
-        SmartDashboard.putNumber("Left Lead", this.leftLead.getOutputCurrent());
-        SmartDashboard.putNumber("Left Lead Faults", this.leftLead.getFaults());
-        SmartDashboard.putNumber("Left Follow1", this.leftFollow1.getOutputCurrent());
-        SmartDashboard.putNumber("Left Follow1 Faults", this.leftFollow1.getFaults());
-        SmartDashboard.putNumber("Left Follow2", this.leftFollow2.getOutputCurrent());
-        SmartDashboard.putNumber("Left Follow2 Faults", this.leftFollow2.getFaults());
+        // SmartDashboard.putNumber("Left Lead", this.leftLead.getOutputCurrent());
+        // SmartDashboard.putNumber("Left Lead Faults", this.leftLead.getFaults());
+        // SmartDashboard.putNumber("Left Follow1", this.leftFollow1.getOutputCurrent());
+        // SmartDashboard.putNumber("Left Follow1 Faults", this.leftFollow1.getFaults());
+        // SmartDashboard.putNumber("Left Follow2", this.leftFollow2.getOutputCurrent());
+        // SmartDashboard.putNumber("Left Follow2 Faults", this.leftFollow2.getFaults());
 
-        SmartDashboard.putNumber("Right Lead", this.rightLead.getOutputCurrent());
-        SmartDashboard.putNumber("Right Lead Faults", this.rightLead.getFaults());
-        SmartDashboard.putNumber("Right Follow1", this.rightFollow1.getOutputCurrent());
-        SmartDashboard.putNumber("Right Follow1 Faults", this.rightFollow1.getFaults());
-        SmartDashboard.putNumber("Right Follow2", this.rightFollow2.getOutputCurrent());
-        SmartDashboard.putNumber("Right Follow2 Faults", this.rightFollow2.getFaults());
+        // SmartDashboard.putNumber("Right Lead", this.rightLead.getOutputCurrent());
+        // SmartDashboard.putNumber("Right Lead Faults", this.rightLead.getFaults());
+        // SmartDashboard.putNumber("Right Follow1", this.rightFollow1.getOutputCurrent());
+        // SmartDashboard.putNumber("Right Follow1 Faults", this.rightFollow1.getFaults());
+        // SmartDashboard.putNumber("Right Follow2", this.rightFollow2.getOutputCurrent());
+        // SmartDashboard.putNumber("Right Follow2 Faults", this.rightFollow2.getFaults());
 
-        SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
-        SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
+        // SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
+        // SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
       }
 
       

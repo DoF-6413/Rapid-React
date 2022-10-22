@@ -35,8 +35,8 @@ public class ClimberSubsystem extends SubsystemBase {
     topLiftMotor.configAllSettings(config);
     bottomLiftMotor.configAllSettings(config);
     bottomLiftMotor.follow(topLiftMotor);
-    bottomLiftMotor.setInverted(true);
-    topLiftMotor.setInverted(true);
+    bottomLiftMotor.setInverted(false);
+    topLiftMotor.setInverted(false);
 
     stingerMotor =  new CANSparkMax(Constants.ClimberID[Constants.k_stingerMotor], MotorType.kBrushless);
   }
