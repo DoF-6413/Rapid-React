@@ -29,7 +29,7 @@ public class ClimberSubsystem extends SubsystemBase {
     
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.statorCurrLimit.enable = true;
-    config.statorCurrLimit.currentLimit = Constants.k_climberCurrentLimit;
+    config.statorCurrLimit.currentLimit = Constants.k_climberHighestCurrentLimit;
     topLiftMotor = new TalonFX(Constants.ClimberID[Constants.k_topLiftMotor]);
     bottomLiftMotor = new TalonFX(Constants.ClimberID[Constants.k_bottomLiftMotor]);
     topLiftMotor.configAllSettings(config);
@@ -78,7 +78,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void setPosition() {
-    topLiftMotor.setSelectedSensorPosition(0);
+    topLiftMotor.setSelectedSensorPosition(Constants.k_climberBottom);
   }
 
   public double currentDrawed() {
@@ -86,11 +86,11 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public static boolean getLeftTriggerActive() {
-    return (RobotContainer.m_xbox.getLeftTriggerAxis() > 0);
+    return (RobotContainer.m_auxXbox.getLeftTriggerAxis() > 0);
   }
 
   public static boolean getRightTriggerActive() {
-    return (RobotContainer.m_xbox.getRightTriggerAxis() > 0);
+    return (RobotContainer.m_auxXbox.getRightTriggerAxis() > 0);
   }
 
   public void runStingerMotor() {
@@ -98,6 +98,6 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void stopStingerMotor() {
-    stingerMotor.set(Constants.k_stopStinger);
+    stingerMotor.set(Constants.k_stopMotor);
   }
 }

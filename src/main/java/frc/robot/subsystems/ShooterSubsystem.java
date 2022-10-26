@@ -19,7 +19,7 @@ public class ShooterSubsystem extends PIDSubsystem {
 
   public ShooterSubsystem() {
     super(new PIDController(Constants.kP, Constants.kI, Constants.kD));
-    getController().setTolerance(50);
+    getController().setTolerance(Constants.k_shooterTolerance);
 
     // SmartDashboard.putNumber("setpoint", m_setpoint);
     rightShooterMotor.setInverted(true);

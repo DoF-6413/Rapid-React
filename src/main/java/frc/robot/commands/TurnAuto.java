@@ -6,6 +6,9 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+
+import com.fasterxml.jackson.databind.deser.std.ContainerDeserializerBase;
+
 import edu.wpi.first.math.controller.PIDController;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.GyroSubsystem;
@@ -26,7 +29,7 @@ public class TurnAuto extends PIDCommand {
         // Set reference to target
         targetAngleDegrees,
         // Pipe output to turn robot
-        output -> drivetrainSubsystem.setRaw(0, output / 180), // divide by 180 to maybe scale angle to be between minus
+        output -> drivetrainSubsystem.setRaw(Constants.k_stopMotor, output / 180), // divide by 180 to maybe scale angle to be between minus
                                                                // 1 and 1
         // Require the drive
         drivetrainSubsystem);
@@ -54,14 +57,14 @@ public class TurnAuto extends PIDCommand {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrainSubsystem.setRaw(0, (getController().calculate(m_gyroSubsystem.getAngle()) / 100));
+    m_drivetrainSubsystem.setRaw(Constants.k_stopMotor, (getController().calculate(m_gyroSubsystem.getAngle()) / 100));
     SmartDashboard.putNumber("Calculate Results", getController().calculate(m_gyroSubsystem.getAngle()));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrainSubsystem.setRaw(0, 0);
+    m_drivetrainSubsystem.setRaw(Constants.k_stopMotor, Constants.k_stopMotor);
   }
 
   // Returns true when the command should end.

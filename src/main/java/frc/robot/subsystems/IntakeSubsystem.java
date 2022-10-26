@@ -22,8 +22,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private RelativeEncoder leftActuatorEncoder;
   private RelativeEncoder rightActuatorEncoder;
 
-  DigitalInput toplimitSwitch = new DigitalInput(0);
-  DigitalInput bottomlimitSwitch = new DigitalInput(1);
+  DigitalInput toplimitSwitch = new DigitalInput(Constants.limitSwitchID[0]);
+  DigitalInput bottomlimitSwitch = new DigitalInput(Constants.limitSwitchID[1]);
 
   boolean down;
 
@@ -36,33 +36,33 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
     intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
 
-    intakeLeftActuator.setSmartCurrentLimit(10);
-    intakeRightActuator.setSmartCurrentLimit(10);
+    intakeLeftActuator.setSmartCurrentLimit(Constants.k_intakeCurrentLimit);
+    intakeRightActuator.setSmartCurrentLimit(Constants.k_intakeCurrentLimit);
     leftActuatorEncoder = intakeLeftActuator.getEncoder();
     rightActuatorEncoder = intakeRightActuator.getEncoder();
 
-    intakeLeftActuator.setOpenLoopRampRate(0.5);
-    intakeRightActuator.setOpenLoopRampRate(0.5);
+    intakeLeftActuator.setOpenLoopRampRate(Constants.k_intakeRampRate);
+    intakeRightActuator.setOpenLoopRampRate(Constants.k_intakeRampRate);
   }
 
   // Spins Intake Motor
   public void spinMotor() {
 
-    intakeSpinner.set(0.5); // runs the motor at the speed set in constants% power
+    intakeSpinner.set(Constants.intakeSpeed); // runs the motor at the speed set in constants% power
 
   }
 
   // Reverses Intake Motor
   public void reverseMotor() {
 
-    intakeSpinner.set(-0.5); // runs the motor at the speed set in constants% power
+    intakeSpinner.set(Constants.reverseIntakeSpeed); // runs the motor at the speed set in constants% power
 
   }
 
   // Stops Intake Motor
   public void stopMotor() {
 
-    intakeSpinner.set(0); // stops the motor (puts it at 0% power)
+    intakeSpinner.set(Constants.k_stopMotor); // stops the motor (puts it at 0% power)
 
   }
 
@@ -92,12 +92,12 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void stopLeftActuator() {
-    intakeLeftActuator.set(0);
+    intakeLeftActuator.set(Constants.k_stopMotor);
     armPosition();
   }
 
   public void stopRightActuator() {
-    intakeRightActuator.set(0);
+    intakeRightActuator.set(Constants.k_stopMotor);
     armPosition();
   }
 
@@ -110,7 +110,7 @@ public class IntakeSubsystem extends SubsystemBase {
     if (toplimitSwitch.get() ||
         rightActuatorEncoder.getPosition() <= 2) {
       // We are going up and top limit is tripped so stop
-      intakeRightActuator.set(0);
+      intakeRightActuator.set(Constants.k_stopMotor);
     } else {
       // We are going up but top limit is not tripped so go at commanded speed
       intakeRightActuator.set(-speed);
@@ -122,7 +122,7 @@ public class IntakeSubsystem extends SubsystemBase {
     if (toplimitSwitch.get() ||
         leftActuatorEncoder.getPosition() >= -2) {
       // We are going up and top limit is tripped so stop
-      intakeLeftActuator.set(0);
+      intakeLeftActuator.set(Constants.k_stopMotor);
     } else {
       // We are going up but top limit is not tripped so go at commanded speed
       intakeLeftActuator.set(speed);
@@ -144,7 +144,7 @@ public class IntakeSubsystem extends SubsystemBase {
     if (bottomlimitSwitch.get() ||
         rightActuatorEncoder.getPosition() >= 39) {
       // We are going down and bottom limit is tripped so stop
-      intakeRightActuator.set(0);
+      intakeRightActuator.set(Constants.k_stopMotor);
       down = true;
     } else {
       // We are going down but bottom limit is not tripped so go at commanded speed
@@ -159,17 +159,12 @@ public class IntakeSubsystem extends SubsystemBase {
         leftActuatorEncoder.getPosition() <= -39) {
       // We are going down and bottom limit is tripped so stop
 
-      intakeLeftActuator.set(0);
+      intakeLeftActuator.set(Constants.k_stopMotor);
     } else {
       // We are going down but bottom limit is not tripped so go at commanded speed
       intakeLeftActuator.set(-speed);
     }
     armPosition();
-  }
-
-  public void climbingCurrentLimit() {
-    intakeLeftActuator.setSmartCurrentLimit(20);
-    intakeRightActuator.setSmartCurrentLimit(20);
   }
 
   public static boolean getLeftTriggerActive() {

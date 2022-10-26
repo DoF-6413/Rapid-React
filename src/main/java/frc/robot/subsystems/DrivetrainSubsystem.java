@@ -100,8 +100,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
       public void resetEncoderValue() {
-        encoderLeftLead.setPosition(0);
-        encoderRightLead.setPosition(0);
+        encoderLeftLead.setPosition(Constants.k_drivetrainStart);
+        encoderRightLead.setPosition(Constants.k_drivetrainStart);
     }
     
       

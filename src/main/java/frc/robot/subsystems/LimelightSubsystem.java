@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -31,16 +32,16 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
   public double getTx() {
-    return table.getEntry("tx").getDouble(0);
+    return table.getEntry("tx").getDouble(Constants.k_defaultReturn);
   }
 
   public double getTy() {
-    return table.getEntry("ty").getDouble(0);
+    return table.getEntry("ty").getDouble(Constants.k_defaultReturn);
   }
 
   public boolean hasTarget() {
 
-    return ( table.getEntry("tv").getDouble(0) != 0.0f );
+    return ( table.getEntry("tv").getDouble(Constants.k_defaultReturn) != 0.0f );
   
   }
 

@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
 
@@ -14,8 +15,6 @@ public class ActuatorUp extends CommandBase {
   boolean up;
 
   private final IntakeSubsystem m_intakeSubsystem;
-
-  // DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
   public ActuatorUp(IntakeSubsystem intake) {
     m_intakeSubsystem = intake;
@@ -32,7 +31,7 @@ public class ActuatorUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intakeSubsystem.setAllActuatorsUp(0.4);
+    m_intakeSubsystem.setAllActuatorsUp(Constants.actuatorsSpeed);
     
   }
   

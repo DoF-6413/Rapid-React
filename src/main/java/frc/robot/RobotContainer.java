@@ -41,12 +41,12 @@ public class RobotContainer {
     public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
 
     // XBOX Contoller Defs (For intake and Climber)
-    public static XboxController m_driverXbox = new XboxController(0);
-    public static XboxController m_xbox = new XboxController(1);
+    public static XboxController m_driverXbox = new XboxController(Constants.driverXboxPort);
+    public static XboxController m_auxXbox = new XboxController(Constants.auxXboxPort);
     public Trigger driverLeftTrigger = new Trigger(() -> IntakeSubsystem.getLeftTriggerActive());
     public Trigger driverRightTrigger = new Trigger(() -> IntakeSubsystem.getRightTriggerActive());
-    public Trigger leftTrigger = new Trigger(() -> ClimberSubsystem.getLeftTriggerActive());
-    public Trigger rightTrigger = new Trigger(() -> ClimberSubsystem.getRightTriggerActive());
+    public Trigger auxLeftTrigger = new Trigger(() -> ClimberSubsystem.getLeftTriggerActive());
+    public Trigger auxRightTrigger = new Trigger(() -> ClimberSubsystem.getRightTriggerActive());
 
     // Different Autos
     private final Command m_autoHighIntake = new AutoHighIntake(m_drivetrainSubsystem, m_shooterSubsystem,
@@ -102,20 +102,20 @@ public class RobotContainer {
             .whenInactive(new InstantCommand(() -> m_intakeSubsystem.stopMotor(), m_intakeSubsystem))
             .whenInactive(new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem));
                 
-        /********************************************** * Co-Pilot Controls Below********************************************************** */
+        /********************************************** *Aux Controls Below********************************************************** */
         
         // Button Nearest XYAB Buttons
         // Begin Climb Code
-        new JoystickButton(m_xbox, XboxController.Button.kStart.value)
+        new JoystickButton(m_auxXbox, XboxController.Button.kStart.value)
         .whenPressed(new BeginClimb(m_climberSubsystem, m_intakeSubsystem));
         
         // Button Nearest D-Pad
         // End Climb Code
-        new JoystickButton(m_xbox, XboxController.Button.kBack.value)
+        new JoystickButton(m_auxXbox, XboxController.Button.kBack.value)
         .whenPressed(new EndClimb(m_climberSubsystem));
         
         // Button A = Climber Up
-        new JoystickButton(m_xbox, XboxController.Button.kA.value)
+        new JoystickButton(m_auxXbox, XboxController.Button.kA.value)
         .whenPressed
         (
             new RunCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMinUp),
@@ -124,28 +124,28 @@ public class RobotContainer {
             // new ClimberGoTo(Constants.k_climberTop, Constants.k_climberMaxUp, m_climberSubsystem));
         
         // Buttom B = Climber Down
-        new JoystickButton(m_xbox, XboxController.Button.kB.value)
+        new JoystickButton(m_auxXbox, XboxController.Button.kB.value)
         .whenPressed(
             new RunCommand(() -> m_climberSubsystem.goDownManual(Constants.k_climberMinDown),
             m_climberSubsystem))
             .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
         
         // Button Y = Brings Intake Up
-        new JoystickButton(m_xbox, XboxController.Button.kY.value)
+        new JoystickButton(m_auxXbox, XboxController.Button.kY.value)
         .whenPressed(
             new RunCommand(() -> m_intakeSubsystem.setAllActuatorsUp(Constants.actuatorsSpeed),
             m_intakeSubsystem))
             .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
            
         // Button X = Brings Intake Down
-        new JoystickButton(m_xbox, XboxController.Button.kX.value)
+        new JoystickButton(m_auxXbox, XboxController.Button.kX.value)
         .whenPressed(
             new RunCommand(() -> m_intakeSubsystem.setAllActuatorsDown(Constants.actuatorsSpeed),
             m_intakeSubsystem))
             .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
         
         // Left Bumper (L1) = Not Used
-        new JoystickButton(m_xbox, XboxController.Button.kLeftBumper.value)
+        new JoystickButton(m_auxXbox, XboxController.Button.kLeftBumper.value)
         .whenPressed(
             new RunCommand(() -> m_climberSubsystem.runStingerMotor(),
             m_climberSubsystem))
@@ -153,7 +153,7 @@ public class RobotContainer {
 
         // Right Bumper (R1) = Runs Limelight Shoot
         
-        new JoystickButton(m_xbox, XboxController.Button.kRightBumper.value)
+        new JoystickButton(m_auxXbox, XboxController.Button.kRightBumper.value)
         .whenHeld(
             new LLAimAndShoot(m_LimelightSubsystem, m_indexerSubsystem, m_shooterSubsystem,
                                 m_drivetrainSubsystem))
@@ -161,12 +161,12 @@ public class RobotContainer {
                                 .whenReleased((new InstantCommand(() -> m_indexerSubsystem.stopMotor(), m_indexerSubsystem)));
                                 
         // Right Trigger = Manual Shoot High
-        rightTrigger
+        auxRightTrigger
         .whenActive(new ShootTeleopHigh(m_shooterSubsystem, m_indexerSubsystem));
         
                                 
         // Left Trigger = Manual Shoot Low
-        leftTrigger
+        auxLeftTrigger
             .whenActive( new ShootTeleopLow(m_shooterSubsystem, m_indexerSubsystem));
            
         

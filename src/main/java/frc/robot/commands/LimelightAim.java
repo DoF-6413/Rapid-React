@@ -32,7 +32,7 @@ public class LimelightAim extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_DrivetrainSubsystem.setRaw(0.0, 0.0);
+    m_DrivetrainSubsystem.setRaw(Constants.k_stopMotor, Constants.k_stopMotor);
     beginningXPosition = m_LimelightSubsystem.getTx();
     beginningYPosition = m_LimelightSubsystem.getTy();
     
@@ -42,20 +42,20 @@ public class LimelightAim extends CommandBase {
   @Override
   public void execute() {
     if (m_LimelightSubsystem.hasTarget()) {
-      double leftStick = 0.0;
-      double rightStick = 0.0;
+      double leftStick = Constants.k_stopMotor;
+      double rightStick = Constants.k_stopMotor;
 
-      if (m_LimelightSubsystem.getTx() > Constants.limelightXMax) {
-        rightStick = 0.5;
+      if (m_LimelightSubsystem.getTx() > Constants.k_limelightXMax) {
+        rightStick = Constants.k_autoDriveForwardSpeed;
     
-      } else if (m_LimelightSubsystem.getTx() < Constants.limelightXMin) {
-        rightStick = -0.5;
+      } else if (m_LimelightSubsystem.getTx() < Constants.k_limelightXMin) {
+        rightStick = Constants.k_autoDriveBackwardsSpeed;
       } 
 
-      if (m_LimelightSubsystem.getTy() > Constants.limelightYMax) {
-        leftStick = 0.5;
-      } else if (m_LimelightSubsystem.getTy() < Constants.limelightYMin) {
-        leftStick = -0.5;
+      if (m_LimelightSubsystem.getTy() > Constants.k_limelightYMax) {
+        leftStick = Constants.k_autoDriveForwardSpeed;
+      } else if (m_LimelightSubsystem.getTy() < Constants.k_limelightYMin) {
+        leftStick = Constants.k_autoDriveBackwardsSpeed;
       }
 
       m_DrivetrainSubsystem.setRaw(leftStick, rightStick);
@@ -65,19 +65,19 @@ public class LimelightAim extends CommandBase {
   // Called once the command ends or is interrupted
   @Override
   public void end(boolean interrupted) {
-    m_DrivetrainSubsystem.setRaw(0.0, 0.0);
+    m_DrivetrainSubsystem.setRaw(Constants.k_stopMotor, Constants.k_stopMotor);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-Boolean xDone =  (beginningXPosition > Constants.limelightXMax) ?
-       m_LimelightSubsystem.getTx() <= Constants.limelightXMax
-      : m_LimelightSubsystem.getTx() >= Constants.limelightXMin;
+Boolean xDone =  (beginningXPosition > Constants.k_limelightXMax) ?
+       m_LimelightSubsystem.getTx() <= Constants.k_limelightXMax
+      : m_LimelightSubsystem.getTx() >= Constants.k_limelightXMin;
 
-      Boolean yDone = (beginningYPosition > Constants.limelightYMax ) ? 
-      m_LimelightSubsystem.getTy() <= Constants.limelightYMax :
-      m_LimelightSubsystem.getTy() >= Constants.limelightYMin;
+      Boolean yDone = (beginningYPosition > Constants.k_limelightYMax ) ? 
+      m_LimelightSubsystem.getTy() <= Constants.k_limelightYMax :
+      m_LimelightSubsystem.getTy() >= Constants.k_limelightYMin;
 
       return ( xDone && yDone );
   }

@@ -21,13 +21,13 @@ public class ClimberReset extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_climberSubsystem.setCurrentLimit(20);
+    m_climberSubsystem.setCurrentLimit(Constants.k_climberLowestCurrentLimit);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climberSubsystem.goDownManual(-0.3);
+    m_climberSubsystem.goDownManual(Constants.k_climberMinDown);
   }
 
   // Called once the command ends or is interrupted.
@@ -35,7 +35,7 @@ public class ClimberReset extends CommandBase {
   public void end(boolean interrupted) {
     m_climberSubsystem.setPosition();
     m_climberSubsystem.stop();
-    m_climberSubsystem.setCurrentLimit(Constants.k_climberCurrentLimit);
+    m_climberSubsystem.setCurrentLimit(Constants.k_climberHighestCurrentLimit);
   }
 
   // Returns true when the command should end.
