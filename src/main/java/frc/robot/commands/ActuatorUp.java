@@ -4,41 +4,46 @@
 
 package frc.robot.commands;
 
-import com.revrobotics.CANSparkMax;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import frc.robot.Constants;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class CoastToBrake extends CommandBase {
-  /** Creates a new brakeToCoast. */
-  public CoastToBrake() {
-    // Use addRequirements() here to declare subsystem dependencies.
+
+
+public class ActuatorUp extends CommandBase {
+  /** Creates a new ActuatorDown. */
+  boolean up;
+
+  private final IntakeSubsystem m_intakeSubsystem;
+
+  public ActuatorUp(IntakeSubsystem intake) {
+    m_intakeSubsystem = intake;
+    addRequirements(m_intakeSubsystem);// Use addRequirements() here to declare subsystem dependencies.
+ 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_intakeSubsystem.intakeLeftActuator.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    RobotContainer.m_intakeSubsystem.intakeRightActuator.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    m_intakeSubsystem.setAllActuatorsUp(Constants.actuatorsSpeed);
+    
   }
-
+  
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    m_intakeSubsystem.stopActuators();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (RobotContainer.m_intakeSubsystem.intakeLeftActuator.getIdleMode() == CANSparkMax.IdleMode.kBrake) &&
-    (RobotContainer.m_intakeSubsystem.intakeRightActuator.getIdleMode() == CANSparkMax.IdleMode.kBrake);
-
+    return m_intakeSubsystem.isUp() == true;
   }
 }

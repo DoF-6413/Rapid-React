@@ -5,14 +5,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import frc.robot.subsystems.GyroSubsystem;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import frc.robot.subsystems.GyroSubsystem;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 
 //CANSPark imports
 import com.revrobotics.CANSparkMax;
@@ -41,12 +34,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
     double LeftStick;
     
     private DifferentialDrive diffDrive;
-
-    private final DifferentialDriveOdometry m_odometry;
     
-    private final GyroSubsystem m_gyroSubsystem = new GyroSubsystem();
-    private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
-    
+    /** 
+     * This is the Drivetrain Subsystem 
+    */
     public DrivetrainSubsystem() {
         // Initializes left motors in default constructor
         leftLead = new CANSparkMax(Constants.leftDeviceID[0], MotorType.kBrushless);
@@ -84,17 +75,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightLead.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow1.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rightFollow2.setIdleMode(CANSparkMax.IdleMode.kBrake);
-
-        leftLead.setSmartCurrentLimit( 9 );
-        rightLead.setSmartCurrentLimit( 9 );
-
-        // TODO: test ramping with drivetrain (Need driveteam to see how they like it) 
-        //might need more custimization (Slower when stoping, faster when starting)
-        //leftLead.setOpenLoopRampRate(0.5);
-        //rightLead.setOpenLoopRampRate(0.5);
-        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(this.getHeading()));
-        
-        
+         
     }
     
     /**
@@ -106,72 +87,42 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public void setRaw(double rightStick, double leftStick) {
 
         diffDrive.arcadeDrive(-(rightStick), (leftStick)*Constants.turningScale);
-        printEncoderStatus();
+        updateDashboard();
     }
     
 
-    /*
-     * to switch to tank drive uncomment this and place inside of set raw
-     * diffDrive.tankDrive(-leftStick.getY(), -rightStick.getY());
-     * parameters to pass into setRaw method
-     */
 
-    public void printStatus(Double joystickLeftInput, Double joystickRightInput) {
-        SmartDashboard.putNumber("Joystick Left input = ", joystickLeftInput);
-        SmartDashboard.putNumber("Joystick Right input = ", joystickRightInput);
-    }
-
-    public void printEncoderStatus() {
-        SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
-        SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
-    }
-
+    
     public double getAvgEncocderDistance() {
         double averageEncoderDistance = (encoderLeftLead.getPosition() + encoderRightLead.getPosition())/2.0 ;
         System.out.println ("averageEncoderDistance" + averageEncoderDistance);
         return averageEncoderDistance;
     }
 
-    public double LeftEncoderDistance(){
-        double leftEncoderDistance = (encoderLeftLead.getPosition());
-        System.out.println ("leftEncoderDistance" + leftEncoderDistance);
-        return leftEncoderDistance;
+      public void resetEncoderValue() {
+        encoderLeftLead.setPosition(Constants.k_drivetrainStart);
+        encoderRightLead.setPosition(Constants.k_drivetrainStart);
     }
-
-    public double RightEncoderDistance(){
-        double rightEncoderDistance = (encoderLeftLead.getPosition());
-        System.out.println ("rightEncoderDistance" + rightEncoderDistance);
-        return rightEncoderDistance;
-    }
-
-    public void resetEncoderValue() {
-        encoderLeftLead.setPosition(0);
-        encoderRightLead.setPosition(0);
-    }
-
-   
     
-      /**
-       * Get gyro heading between -180 to 180.
-       * Uses Math.IEEEremainder to get range of -180 to 180 --> dividend - (divisor * Math.Round(dividend / divisor)).
-       * @return the robot's heading in degrees.
-       */
-      public double getHeading()
-      {
-        return Math.IEEEremainder(m_gyroSubsystem.getAngle(), 360) * (Constants.K_GYRO_REVERSED ? -1.0 : 1.0);
-      }
-    
+      
+      public void updateDashboard(){
+        // SmartDashboard.putNumber("Left Lead", this.leftLead.getOutputCurrent());
+        // SmartDashboard.putNumber("Left Lead Faults", this.leftLead.getFaults());
+        // SmartDashboard.putNumber("Left Follow1", this.leftFollow1.getOutputCurrent());
+        // SmartDashboard.putNumber("Left Follow1 Faults", this.leftFollow1.getFaults());
+        // SmartDashboard.putNumber("Left Follow2", this.leftFollow2.getOutputCurrent());
+        // SmartDashboard.putNumber("Left Follow2 Faults", this.leftFollow2.getFaults());
 
-      public void current(){
-        SmartDashboard.putNumber("Left Current", leftLead.getOutputCurrent());
-        SmartDashboard.putNumber("Right Current", rightLead.getOutputCurrent());
-      }
-      public void autoDrive(double power, double turn)
-      {
-        diffDrive.arcadeDrive(-power, turn, false);
+        // SmartDashboard.putNumber("Right Lead", this.rightLead.getOutputCurrent());
+        // SmartDashboard.putNumber("Right Lead Faults", this.rightLead.getFaults());
+        // SmartDashboard.putNumber("Right Follow1", this.rightFollow1.getOutputCurrent());
+        // SmartDashboard.putNumber("Right Follow1 Faults", this.rightFollow1.getFaults());
+        // SmartDashboard.putNumber("Right Follow2", this.rightFollow2.getOutputCurrent());
+        // SmartDashboard.putNumber("Right Follow2 Faults", this.rightFollow2.getFaults());
+
+        // SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
+        // SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
       }
 
-      public void setShooterPosition(){
-
-      }
+      
 }

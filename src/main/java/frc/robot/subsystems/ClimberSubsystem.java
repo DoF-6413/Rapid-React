@@ -8,75 +8,96 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 
+/**
+ * This is the climber subsystem
+ */
 public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new Climber. */
-  private double Position;
-  TalonFX climberMotor = new TalonFX(Constants.ClimberID);
+
+  TalonFX topLiftMotor;
+  TalonFX bottomLiftMotor;
+  CANSparkMax stingerMotor;
+
   public ClimberSubsystem() {
     
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.statorCurrLimit.enable = true;
-    config.statorCurrLimit.currentLimit = 50;
-    climberMotor.configAllSettings(config); 
-    Position = climberMotor.getSelectedSensorPosition()/6380;
-  }
- 
+    config.statorCurrLimit.currentLimit = Constants.k_climberHighestCurrentLimit;
+    topLiftMotor = new TalonFX(Constants.ClimberID[Constants.k_topLiftMotor]);
+    bottomLiftMotor = new TalonFX(Constants.ClimberID[Constants.k_bottomLiftMotor]);
+    topLiftMotor.configAllSettings(config);
+    bottomLiftMotor.configAllSettings(config);
+    bottomLiftMotor.follow(topLiftMotor);
+    bottomLiftMotor.setInverted(false);
+    topLiftMotor.setInverted(false);
 
-  public void goDownManual(double speed){
-    climberMotor.set(TalonFXControlMode.PercentOutput, speed);
-    climberPosition();
+    stingerMotor =  new CANSparkMax(Constants.ClimberID[Constants.k_stingerMotor], MotorType.kBrushless);
   }
 
-  public void goUpManual(double speed){
-    climberMotor.set(TalonFXControlMode.PercentOutput, speed);
-    climberPosition();
+  public void goDownManual(double speed) {
+    topLiftMotor.set(TalonFXControlMode.PercentOutput, speed);
+    
+  }
+
+  public void goUpManual(double speed) {
+    topLiftMotor.set(TalonFXControlMode.PercentOutput, speed);
+    
   }
 
   public void stop() {
-    climberMotor.set(TalonFXControlMode.PercentOutput, 0); // runs the motor at 0% power
-    climberPosition();
+    topLiftMotor.set(TalonFXControlMode.PercentOutput, 0); // runs the motor at 0% power
+    
   }
 
-  public void climberPosition() {
-    SmartDashboard.putNumber("Climber Encoder", climberMotor.getSelectedSensorPosition()/6380);   
-    SmartDashboard.putNumber("Climber Current", climberMotor.getStatorCurrent());   
-    Position = climberMotor.getSelectedSensorPosition()/6380;
+  public void updateDashboard() {
+    SmartDashboard.putNumber("Climber Encoder", topLiftMotor.getSelectedSensorPosition() / 6380);
+    SmartDashboard.putNumber("Climber Current", topLiftMotor.getStatorCurrent());
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    updateDashboard();
   }
 
-  public double getCurrentPosition(){
-    return climberMotor.getSelectedSensorPosition()/6380;
+  public double getCurrentPosition() {
+    return topLiftMotor.getSelectedSensorPosition() / 6380;
   }
-  
-  public void setCurrentLimit(double Current){
+
+  public void setCurrentLimit(double Current) {
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.statorCurrLimit.currentLimit = Current;
-    climberMotor.configAllSettings(config); 
+    topLiftMotor.configAllSettings(config);
   }
 
-  public void setPosition(){
-    climberMotor.setSelectedSensorPosition(0);
+  public void setPosition() {
+    topLiftMotor.setSelectedSensorPosition(Constants.k_climberBottom);
   }
 
-  public double currentDrawed(){
-    return climberMotor.getStatorCurrent();
+  public double currentDrawed() {
+    return topLiftMotor.getStatorCurrent();
   }
 
   public static boolean getLeftTriggerActive() {
-    return (RobotContainer.m_xbox.getLeftTriggerAxis() > 0);
+    return (RobotContainer.m_auxXbox.getLeftTriggerAxis() > 0);
   }
 
   public static boolean getRightTriggerActive() {
-    return (RobotContainer.m_xbox.getRightTriggerAxis() > 0);
+    return (RobotContainer.m_auxXbox.getRightTriggerAxis() > 0);
+  }
+
+  public void runStingerMotor() {
+    stingerMotor.set(Constants.k_stingerSpeed);
+  }
+
+  public void stopStingerMotor() {
+    stingerMotor.set(Constants.k_stopMotor);
   }
 }

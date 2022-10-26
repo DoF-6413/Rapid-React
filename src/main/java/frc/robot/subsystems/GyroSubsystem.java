@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class GyroSubsystem extends SubsystemBase {
   AHRS gyro;
-  /** Creates a new SmartDashboardSubsystem. */
+  /** This is the gyro subsystem */
   public GyroSubsystem() {
 
     gyro = new AHRS(SPI.Port.kMXP);

@@ -6,26 +6,22 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.IndexerSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
-
-/**
- * Runs indexer back to give the shooter time to ramp up, then runs indexer
- * forwards to shoot
- * Note: Assumed to run parralel with ShootHigh Command
- */
-public class IndexerTeleop extends SequentialCommandGroup {
-  /** Creates a new IndexerTeleop. */
-  public IndexerTeleop(IndexerSubsystem index) {
+/**Command Responsible for Getting the Indexer and Shooter Ready to Shoot */
+public class LimelightPrep extends SequentialCommandGroup {
+  /** Creates a new LimelightPrep. */
+  public LimelightPrep(IndexerSubsystem index, ShooterSubsystem shoot) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new InstantCommand(() -> index.spinBack()),
-        new WaitCommand(Constants.indexerWaitTime),
-        new InstantCommand(() -> index.spinMotor()),
-        new WaitCommand(Constants.oneSecond),
-        new InstantCommand(() -> index.stopMotor())
+      new InstantCommand(() -> index.spinBack()),
+      new WaitCommand(Constants.indexerWaitTime),
+      new InstantCommand(()-> index.stopMotor()),
+      new InstantCommand( () -> shoot.setSetpoint(Constants.upperHubSpeed)),
+      new InstantCommand(() -> shoot.enable())
     );
   }
 }

@@ -5,13 +5,11 @@ import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.*;
 
 //CANSpark imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkMax.SoftLimitDirection;
 
 public class IntakeSubsystem extends SubsystemBase {
 
@@ -24,8 +22,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private RelativeEncoder leftActuatorEncoder;
   private RelativeEncoder rightActuatorEncoder;
 
-  DigitalInput toplimitSwitch = new DigitalInput(0);
-  DigitalInput bottomlimitSwitch = new DigitalInput(1);
+  DigitalInput toplimitSwitch = new DigitalInput(Constants.limitSwitchID[0]);
+  DigitalInput bottomlimitSwitch = new DigitalInput(Constants.limitSwitchID[1]);
 
   boolean down;
 
@@ -37,34 +35,34 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeLeftActuator = new CANSparkMax(Constants.intakeDeviceID[0], MotorType.kBrushless);
     intakeRightActuator = new CANSparkMax(Constants.intakeDeviceID[1], MotorType.kBrushless);
     intakeSpinner = new CANSparkMax(Constants.intakeDeviceID[2], MotorType.kBrushless);
-    
-    intakeLeftActuator.setSmartCurrentLimit(10);
-    intakeRightActuator.setSmartCurrentLimit(10);
+
+    intakeLeftActuator.setSmartCurrentLimit(Constants.k_intakeCurrentLimit);
+    intakeRightActuator.setSmartCurrentLimit(Constants.k_intakeCurrentLimit);
     leftActuatorEncoder = intakeLeftActuator.getEncoder();
     rightActuatorEncoder = intakeRightActuator.getEncoder();
 
-    intakeLeftActuator.setOpenLoopRampRate(0.5);
-    intakeRightActuator.setOpenLoopRampRate(0.5);
+    intakeLeftActuator.setOpenLoopRampRate(Constants.k_intakeRampRate);
+    intakeRightActuator.setOpenLoopRampRate(Constants.k_intakeRampRate);
   }
-  
+
   // Spins Intake Motor
   public void spinMotor() {
-    
-    intakeSpinner.set(0.5); // runs the motor at the speed set in constants% power
+
+    intakeSpinner.set(Constants.intakeSpeed); // runs the motor at the speed set in constants% power
 
   }
 
   // Reverses Intake Motor
   public void reverseMotor() {
 
-    intakeSpinner.set(-0.5); // runs the motor at the speed set in constants% power
+    intakeSpinner.set(Constants.reverseIntakeSpeed); // runs the motor at the speed set in constants% power
 
   }
 
   // Stops Intake Motor
   public void stopMotor() {
 
-    intakeSpinner.set(0); // stops the motor (puts it at 0% power)
+    intakeSpinner.set(Constants.k_stopMotor); // stops the motor (puts it at 0% power)
 
   }
 
@@ -73,7 +71,7 @@ public class IntakeSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Encoder Left Actuator", leftActuatorEncoder.getPosition());
   }
 
-  public double currentRightActuatorPosition(){
+  public double currentRightActuatorPosition() {
     return rightActuatorEncoder.getPosition();
   }
 
@@ -82,10 +80,11 @@ public class IntakeSubsystem extends SubsystemBase {
    * 
    * @return Encoder Value of Left Actuator (-39 - 2)
    */
-  
-  public double currentLeftActuatorPosition(){
+
+  public double currentLeftActuatorPosition() {
     return leftActuatorEncoder.getPosition();
   }
+
   public void stopActuators() {
     stopRightActuator();
     stopLeftActuator();
@@ -93,25 +92,25 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void stopLeftActuator() {
-    intakeLeftActuator.set(0);
+    intakeLeftActuator.set(Constants.k_stopMotor);
     armPosition();
   }
 
   public void stopRightActuator() {
-    intakeRightActuator.set(0);
+    intakeRightActuator.set(Constants.k_stopMotor);
     armPosition();
   }
 
-  public void setAllActuatorsUp(double speed){
+  public void setAllActuatorsUp(double speed) {
     setLeftActuatorUp(speed);
     setRightActuatorUp(speed);
   }
 
   public void setRightActuatorUp(double speed) {
-    if (toplimitSwitch.get() || 
-    rightActuatorEncoder.getPosition() <= 2) {
+    if (toplimitSwitch.get() ||
+        rightActuatorEncoder.getPosition() <= 2) {
       // We are going up and top limit is tripped so stop
-      intakeRightActuator.set(0);
+      intakeRightActuator.set(Constants.k_stopMotor);
     } else {
       // We are going up but top limit is not tripped so go at commanded speed
       intakeRightActuator.set(-speed);
@@ -120,10 +119,10 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setLeftActuatorUp(double speed) {
-    if (toplimitSwitch.get() || 
-    leftActuatorEncoder.getPosition() >= -2) {
+    if (toplimitSwitch.get() ||
+        leftActuatorEncoder.getPosition() >= -2) {
       // We are going up and top limit is tripped so stop
-      intakeLeftActuator.set(0);
+      intakeLeftActuator.set(Constants.k_stopMotor);
     } else {
       // We are going up but top limit is not tripped so go at commanded speed
       intakeLeftActuator.set(speed);
@@ -131,19 +130,21 @@ public class IntakeSubsystem extends SubsystemBase {
     armPosition();
   }
 
-  public void setAllActuatorsDown(double speed){
+  public void setAllActuatorsDown(double speed) {
     setLeftActuatorDown(speed);
     setRightActuatorDown(speed);
   }
 
-  /** Brings Right Actuator Down
+  /**
+   * Brings Right Actuator Down
+   * 
    * @param speed -Value the actuator moves at (0-1)
    */
   public void setRightActuatorDown(double speed) {
-    if (bottomlimitSwitch.get()||
-    rightActuatorEncoder.getPosition() >= 39) {
+    if (bottomlimitSwitch.get() ||
+        rightActuatorEncoder.getPosition() >= 39) {
       // We are going down and bottom limit is tripped so stop
-      intakeRightActuator.set(0);
+      intakeRightActuator.set(Constants.k_stopMotor);
       down = true;
     } else {
       // We are going down but bottom limit is not tripped so go at commanded speed
@@ -154,11 +155,11 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setLeftActuatorDown(double speed) {
-    if (bottomlimitSwitch.get()||
-    leftActuatorEncoder.getPosition() <= -39) {
+    if (bottomlimitSwitch.get() ||
+        leftActuatorEncoder.getPosition() <= -39) {
       // We are going down and bottom limit is tripped so stop
 
-      intakeLeftActuator.set(0);
+      intakeLeftActuator.set(Constants.k_stopMotor);
     } else {
       // We are going down but bottom limit is not tripped so go at commanded speed
       intakeLeftActuator.set(-speed);
@@ -166,10 +167,6 @@ public class IntakeSubsystem extends SubsystemBase {
     armPosition();
   }
 
- public void climbingCurrentLimit(){
-  intakeLeftActuator.setSmartCurrentLimit(20);
-  intakeRightActuator.setSmartCurrentLimit(20);
- }
   public static boolean getLeftTriggerActive() {
     return (RobotContainer.m_driverXbox.getLeftTriggerAxis() > 0);
   }
@@ -178,25 +175,28 @@ public class IntakeSubsystem extends SubsystemBase {
     return (RobotContainer.m_driverXbox.getRightTriggerAxis() > 0);
   }
 
-  /*function
-  getlimitswitch
-  return  true
-  else
-  return false
-  */
+  /*
+   * function
+   * getlimitswitch
+   * return true
+   * else
+   * return false
+   */
 
-  public boolean isDown(){
+  public boolean isDown() {
     return bottomlimitSwitch.get() ? true : false;
   }
   // TODO: Create a function that moves the aucuator 90 degrees to drop intake
   // system
-
-  public void brakeToCoast(){
+  public boolean isUp() {
+    return toplimitSwitch.get() ? true : false;
+  }
+  public void brakeToCoast() {
     intakeLeftActuator.setIdleMode(CANSparkMax.IdleMode.kCoast);
     intakeRightActuator.setIdleMode(CANSparkMax.IdleMode.kCoast);
   }
 
-  public void coastToBrake(){
+  public void coastToBrake() {
     intakeLeftActuator.setIdleMode(CANSparkMax.IdleMode.kBrake);
     intakeRightActuator.setIdleMode(CANSparkMax.IdleMode.kBrake);
   }

@@ -5,73 +5,65 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class LimelightSubsystem extends SubsystemBase {
   /** Creates a new LimelightSubsystem. */
-  public LimelightSubsystem() {}
-  
+  public LimelightSubsystem() {
+  }
+
   // current LedMode, 0= on, 1 = off
   private int CurMode = 0;
-  
+
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
   @Override
   public void periodic() {
-    NetworkTableEntry ty = table.getEntry("ty");
-    double y = ty.getDouble(0);
-    SmartDashboard.putNumber("LimelightY", y);
+    double ty = this.getTy();
+    double tx = this.getTx();
+    boolean tv = this.hasTarget();
+    SmartDashboard.putNumber("LLx", tx);
+    SmartDashboard.putNumber("LLy", ty);
+    SmartDashboard.putBoolean("LLv", tv);
     // This method will be called once per scheduler run
   }
-  public double getTx ()
-  {
-    NetworkTableEntry tx = table.getEntry("tx");
-    double x = tx.getDouble(0);
-    SmartDashboard.putNumber("LimelightX", x);
-    return x;
+
+  public double getTx() {
+    return table.getEntry("tx").getDouble(Constants.k_defaultReturn);
   }
 
-  public double getTy ()
-  {
-    NetworkTableEntry ty = table.getEntry("ty"); 
-    double y = ty.getDouble(0);
-    
-     return y;
+  public double getTy() {
+    return table.getEntry("ty").getDouble(Constants.k_defaultReturn);
   }
 
-  public boolean hasTarget ()
-  {
-    boolean targetSeen = (table.getEntry("tv").getDouble(0) == 0);
-    SmartDashboard.putBoolean("LimelightY", targetSeen);
-     return targetSeen;
+  public boolean hasTarget() {
+
+    return ( table.getEntry("tv").getDouble(Constants.k_defaultReturn) != 0.0f );
+  
   }
 
-  public void ledOFF()
-  {
+  public void ledOFF() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
   }
 
-  public void ledON()
-  {
+  public void ledON() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
   }
 
-  public void toggleLED()
-  {
-    if (CurMode == 0)
-    { 
+  public void toggleLED() {
+    if (CurMode == 0) {
       ledON();
-      CurMode=1;
+      CurMode = 1;
     } else {
       ledOFF();
-      CurMode =0;
+      CurMode = 0;
     }
   }
 
-  public void limelightReadong (){
+  public void limelightReadong() {
     System.out.println("MOVING TO" + hasTarget());
   }
 }

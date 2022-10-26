@@ -5,10 +5,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
+import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
-import edu.wpi.first.wpilibj.DigitalInput;
+
 
 
 public class ActuatorDown extends CommandBase {
@@ -16,8 +15,6 @@ public class ActuatorDown extends CommandBase {
   boolean down;
 
   private final IntakeSubsystem m_intakeSubsystem;
-
-  // DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
   public ActuatorDown(IntakeSubsystem intake) {
     m_intakeSubsystem = intake;
@@ -34,7 +31,7 @@ public class ActuatorDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intakeSubsystem.setAllActuatorsDown(0.4);
+    m_intakeSubsystem.setAllActuatorsDown(Constants.actuatorsSpeed);
     
   }
   
@@ -47,6 +44,6 @@ public class ActuatorDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotContainer.m_intakeSubsystem.isDown() == true;
+    return m_intakeSubsystem.isDown() == true;
   }
 }

@@ -33,15 +33,15 @@ public class MoveCommand extends CommandBase {
     
     if (goesForward) {
       if (m_DrivetrainSubsystem.getAvgEncocderDistance() < toDistance)
-        m_DrivetrainSubsystem.setRaw(-0.5, 0);
+        m_DrivetrainSubsystem.setRaw(Constants.k_autoDriveBackwardsSpeed, Constants.k_stopMotor);
       else{
-        m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+        m_DrivetrainSubsystem.setRaw(Constants.k_stopMotor, Constants.k_stopMotor);
       }
     } else if (!goesForward) {
       if (m_DrivetrainSubsystem.getAvgEncocderDistance() > toDistance)
-        m_DrivetrainSubsystem.setRaw(0.5, 0);
+        m_DrivetrainSubsystem.setRaw(Constants.k_autoDriveForwardSpeed, Constants.k_stopMotor);
     } else {
-      m_DrivetrainSubsystem.setRaw(0.00, 0.00);
+      m_DrivetrainSubsystem.setRaw(Constants.k_stopMotor, Constants.k_stopMotor);
 
     }
   }
@@ -49,7 +49,7 @@ public class MoveCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_DrivetrainSubsystem.setRaw(0.00, 0.0);
+    m_DrivetrainSubsystem.setRaw(Constants.k_stopMotor, Constants.k_stopMotor);
   }
 
   // Returns true when the command should end.
