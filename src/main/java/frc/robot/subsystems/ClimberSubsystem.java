@@ -13,6 +13,7 @@ import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.DigitalInput;
 //import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 
 /**
@@ -24,6 +25,8 @@ public class ClimberSubsystem extends SubsystemBase {
   TalonFX topLiftMotor;
   TalonFX bottomLiftMotor;
   CANSparkMax stingerMotor;
+  DigitalInput toplimitSwitch;
+  DigitalInput bottomlimitSwitch;
 
   public ClimberSubsystem() {
     
@@ -39,16 +42,25 @@ public class ClimberSubsystem extends SubsystemBase {
     topLiftMotor.setInverted(false);
 
     stingerMotor =  new CANSparkMax(Constants.ClimberID[Constants.k_stingerMotor], MotorType.kBrushless);
+
+    toplimitSwitch = new DigitalInput(Constants.limitSwitchID[2]); //TODO: Double check these values
+    bottomlimitSwitch = new DigitalInput(Constants.limitSwitchID[3]); //TODO: Double check these values
   }
 
   public void goDownManual(double speed) {
-    topLiftMotor.set(TalonFXControlMode.PercentOutput, speed);
-    
+    if(bottomlimitSwitch.get()==false){
+      topLiftMotor.set(TalonFXControlMode.PercentOutput, speed);
+    }else{
+      this.stop();
+    }
   }
 
   public void goUpManual(double speed) {
-    topLiftMotor.set(TalonFXControlMode.PercentOutput, speed);
-    
+    if(toplimitSwitch.get()==false){
+      topLiftMotor.set(TalonFXControlMode.PercentOutput, speed);
+    }else{
+      this.stop();
+    }
   }
 
   public void stop() {
@@ -99,5 +111,9 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void stopStingerMotor() {
     stingerMotor.set(Constants.k_stopMotor);
+  }
+
+  public boolean getBottomLimitSwitch(){
+    return bottomlimitSwitch.get();
   }
 }

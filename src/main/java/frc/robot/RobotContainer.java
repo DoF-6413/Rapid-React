@@ -118,7 +118,7 @@ public class RobotContainer {
         new JoystickButton(m_auxXbox, XboxController.Button.kA.value)
         .whenPressed
         (
-            new RunCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMinUp),
+            new RunCommand(() -> m_climberSubsystem.goUpManual(Constants.k_climberMaxUp),
         m_climberSubsystem))
         .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
             // new ClimberGoTo(Constants.k_climberTop, Constants.k_climberMaxUp, m_climberSubsystem));
@@ -126,7 +126,7 @@ public class RobotContainer {
         // Buttom B = Climber Down
         new JoystickButton(m_auxXbox, XboxController.Button.kB.value)
         .whenPressed(
-            new RunCommand(() -> m_climberSubsystem.goDownManual(Constants.k_climberMinDown),
+            new RunCommand(() -> m_climberSubsystem.goDownManual(Constants.k_climberMaxDown),
             m_climberSubsystem))
             .whenReleased(new RunCommand(() -> m_climberSubsystem.stop(), m_climberSubsystem));
         
