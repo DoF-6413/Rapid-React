@@ -25,7 +25,6 @@ public class ClimberSubsystem extends SubsystemBase {
   TalonFX topLiftMotor;
   TalonFX bottomLiftMotor;
   CANSparkMax stingerMotor;
-  DigitalInput toplimitSwitch;
   DigitalInput bottomlimitSwitch;
 
   public ClimberSubsystem() {
@@ -43,8 +42,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
     stingerMotor =  new CANSparkMax(Constants.ClimberID[Constants.k_stingerMotor], MotorType.kBrushless);
 
-    toplimitSwitch = new DigitalInput(Constants.limitSwitchID[2]); //TODO: Double check these values
-    bottomlimitSwitch = new DigitalInput(Constants.limitSwitchID[3]); //TODO: Double check these values
+    
+    bottomlimitSwitch = new DigitalInput(Constants.limitSwitchID[2]); 
   }
 
   public void goDownManual(double speed) {
@@ -56,11 +55,8 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void goUpManual(double speed) {
-    if(toplimitSwitch.get()==false){
+  
       topLiftMotor.set(TalonFXControlMode.PercentOutput, speed);
-    }else{
-      this.stop();
-    }
   }
 
   public void stop() {
