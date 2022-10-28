@@ -101,8 +101,8 @@ public final class Constants {
     
     //Drivetrain Constants
         //Drivetrain PID (Only used for turning in autonomous)
-        public static final double K_CHASSIS_TURN_P = 0.8;
-        public static final double K_CHASSIS_TURN_I = 0.55;
+        public static final double K_CHASSIS_TURN_P = 2;
+        public static final double K_CHASSIS_TURN_I = 0.0;
         public static final double K_CHASSIS_TURN_D = 0;
         public static final double K_TURN_TOLERANCE_DEG = 2;
         public static final double K_TURN_RATE_TOLERANCE_DEG_PER_SEC = 2;
@@ -115,11 +115,11 @@ public final class Constants {
         //Drivetrain Start Position
         public static final double k_drivetrainStart = 0;
         //Drivetrain 3 Ball First Turn Angle
-        public static final double k_firstTurnAuto = 45;
+        public static final double k_firstTurnAuto = 90;
         //Drivetrain 3 Ball First Turn Angle
-        public static final double k_secondTurnAuto = -45;
+        public static final double k_secondTurnAuto = -90;
         //Drivetrain 3 ball auto distance
-        public static final int k_moveThreeBall = 3;
+        public static final int k_moveThreeBall = -6;
 
     //Auto Values
         // shooter run times in seconds

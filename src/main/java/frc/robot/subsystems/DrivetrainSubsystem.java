@@ -120,8 +120,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         // SmartDashboard.putNumber("Right Follow2", this.rightFollow2.getOutputCurrent());
         // SmartDashboard.putNumber("Right Follow2 Faults", this.rightFollow2.getFaults());
 
-        // SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
-        // SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
+        SmartDashboard.putNumber("Encoder Left Lead", encoderLeftLead.getPosition());
+        SmartDashboard.putNumber("Encoder Right Lead", encoderRightLead.getPosition());
       }
 
       

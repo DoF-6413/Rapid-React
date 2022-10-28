@@ -7,12 +7,15 @@ package frc.robot.commands.AutoCommands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.TurnAuto;
 import frc.robot.Constants;
+import frc.robot.commands.LLAimAndShoot;
+import frc.robot.commands.LimelightShoot;
 import frc.robot.commands.MoveCommand;
 import frc.robot.commands.PickupCommmand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.GyroSubsystem;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -20,16 +23,17 @@ import frc.robot.subsystems.ShooterSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ThreeBallAuto extends SequentialCommandGroup {
   /** Creates a new ThreeBallAuto. */
-  public ThreeBallAuto(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index, IntakeSubsystem intake, GyroSubsystem gyro
+  public ThreeBallAuto(DrivetrainSubsystem drive, ShooterSubsystem shoot, IndexerSubsystem Index, IntakeSubsystem intake, GyroSubsystem gyro, LimelightSubsystem light
   ) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new WAutoHighIntake(drive, shoot, Index, intake),
       new TurnAuto(drive, gyro, Constants.k_firstTurnAuto),
-      new PickupCommmand(intake),
       new MoveCommand(drive, Constants.k_moveThreeBall, false),
-      new TurnAuto(drive, gyro, Constants.k_secondTurnAuto)
+      new PickupCommmand(intake),
+      new TurnAuto(drive, gyro, Constants.k_secondTurnAuto),
+      new LLAimAndShoot(light, Index, shoot, drive)
     );
   }
 }
