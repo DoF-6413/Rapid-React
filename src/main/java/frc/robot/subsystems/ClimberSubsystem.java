@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -32,10 +33,16 @@ public class ClimberSubsystem extends SubsystemBase {
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.statorCurrLimit.enable = true;
     config.statorCurrLimit.currentLimit = Constants.k_climberHighestCurrentLimit;
+    
     topLiftMotor = new TalonFX(Constants.ClimberID[Constants.k_topLiftMotor]);
     bottomLiftMotor = new TalonFX(Constants.ClimberID[Constants.k_bottomLiftMotor]);
+
+    topLiftMotor.setNeutralMode(NeutralMode.Brake);
+    bottomLiftMotor.setNeutralMode(NeutralMode.Brake);
+
     topLiftMotor.configAllSettings(config);
     bottomLiftMotor.configAllSettings(config);
+
     bottomLiftMotor.follow(topLiftMotor);
     bottomLiftMotor.setInverted(false);
     topLiftMotor.setInverted(false);
