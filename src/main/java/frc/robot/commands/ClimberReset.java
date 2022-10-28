@@ -41,6 +41,6 @@ public class ClimberReset extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (m_climberSubsystem.currentDrawed() > 30);
+    return (m_climberSubsystem.currentDrawed() > 30 || m_climberSubsystem.getBottomLimitSwitch());
   }
 }

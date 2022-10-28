@@ -36,7 +36,7 @@ public final class Constants {
         final public static int k_stingerMotor = 2;
 
         //Limit Switch (Digial Input) IDs 
-        final public static int[] limitSwitchID = new int[] {0, 1, 2, 3};
+        final public static int[] limitSwitchID = new int[] {0, 1, 2};
     //Intake Constants
         //Intake Speeds
             // Sets Intake Forward (To Shooter) Speed (Currently 50%)
