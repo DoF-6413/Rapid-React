@@ -114,6 +114,12 @@ public final class Constants {
         public static final double k_autoDriveBackwardsSpeed = -0.5;
         //Drivetrain Start Position
         public static final double k_drivetrainStart = 0;
+        //Drivetrain 3 Ball First Turn Angle
+        public static final double k_firstTurnAuto = 45;
+        //Drivetrain 3 Ball First Turn Angle
+        public static final double k_secondTurnAuto = -45;
+        //Drivetrain 3 ball auto distance
+        public static final int k_moveThreeBall = 3;
 
     //Auto Values
         // shooter run times in seconds
