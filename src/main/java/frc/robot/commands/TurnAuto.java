@@ -70,8 +70,25 @@ public class TurnAuto extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    System.out
-        .println("Is Finished Return " + getController().atSetpoint() + " setpoint " + getController().getSetpoint());
-    return getController().atSetpoint();
+    // System.out
+    //     .println("Is Finished Return " + getController().atSetpoint() + " setpoint " + getController().getSetpoint());
+    // return getController().atSetpoint();
+
+    if (
+            (
+              (m_gyroSubsystem.getAngle() >= getController().getSetpoint()) &
+              (m_gyroSubsystem.getAngle() <= (getController().getSetpoint() + Constants.K_TURN_TOLERANCE_DEG))
+            ) ||
+            (
+              (m_gyroSubsystem.getAngle() >= getController().getSetpoint()) &
+              (m_gyroSubsystem.getAngle() <= (getController().getSetpoint() - Constants.K_TURN_TOLERANCE_DEG))
+            )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+
+    
   }
 }
