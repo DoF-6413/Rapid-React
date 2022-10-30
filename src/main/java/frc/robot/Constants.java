@@ -65,9 +65,9 @@ public final class Constants {
 
     //Climber Constants
         //Sets Auto Climber Speed Up
-        final public static double k_climberMaxUp = 0.6;
+        final public static double k_climberMaxUp = 1;
         //Sets Auto Climber Speed Down
-        final public static double k_climberMaxDown = -0.6;
+        final public static double k_climberMaxDown = -1;
         //Sets Manual Climber Speed Up
         final public static double k_climberMinUp = 0.3;
         //Sets Manual Climber Speed Down
@@ -115,7 +115,7 @@ public final class Constants {
         //Drivetrain Start Position
         public static final double k_drivetrainStart = 0;
         //Drivetrain 3 Ball First Turn Angle
-        public static final double k_firstTurnAuto = 90;
+        public static final double k_firstTurnAuto = 98;
         //Drivetrain 3 Ball First Turn Angle
         public static final double k_secondTurnAuto = -67;
         //Drivetrain 3 ball auto distance
