@@ -107,19 +107,21 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setRightActuatorUp(double speed) {
-    if (toplimitSwitch.get() ||
-        rightActuatorEncoder.getPosition() <= 2) {
-      // We are going up and top limit is tripped so stop
-      intakeRightActuator.set(Constants.k_stopMotor);
-    } else {
-      // We are going up but top limit is not tripped so go at commanded speed
-      intakeRightActuator.set(-speed);
-    }
-    armPosition();
+    if (
+    rightActuatorEncoder.getPosition() <= 2) {
+  // We are going up and top limit is tripped so stop
+  intakeRightActuator.set(Constants.k_stopMotor);
+} else {
+  // We are going up but top limit is not tripped so go at commanded speed
+  intakeRightActuator.set(-speed);
+}
+armPosition();
+      System.out.println("Actuator Right Up");
+   
   }
 
   public void setLeftActuatorUp(double speed) {
-    if (toplimitSwitch.get() ||
+    if (
         leftActuatorEncoder.getPosition() >= -2) {
       // We are going up and top limit is tripped so stop
       intakeLeftActuator.set(Constants.k_stopMotor);
@@ -127,6 +129,7 @@ public class IntakeSubsystem extends SubsystemBase {
       // We are going up but top limit is not tripped so go at commanded speed
       intakeLeftActuator.set(speed);
     }
+      System.out.println("Actuators Left Up");
     armPosition();
   }
 
@@ -141,22 +144,23 @@ public class IntakeSubsystem extends SubsystemBase {
    * @param speed -Value the actuator moves at (0-1)
    */
   public void setRightActuatorDown(double speed) {
-    if (bottomlimitSwitch.get() ||
-        rightActuatorEncoder.getPosition() >= 39) {
-      // We are going down and bottom limit is tripped so stop
-      intakeRightActuator.set(Constants.k_stopMotor);
-      down = true;
-    } else {
-      // We are going down but bottom limit is not tripped so go at commanded speed
-      intakeRightActuator.set(speed);
-      down = false;
-    }
-    armPosition();
+    if (
+    rightActuatorEncoder.getPosition() >= 30) {
+  // We are going down and bottom limit is tripped so stop
+  intakeRightActuator.set(Constants.k_stopMotor);
+  down = true;
+} else {
+  // We are going down but bottom limit is not tripped so go at commanded speed
+  intakeRightActuator.set(speed);
+  down = false;
+}
+armPosition();
+     
   }
 
   public void setLeftActuatorDown(double speed) {
-    if (bottomlimitSwitch.get() ||
-        leftActuatorEncoder.getPosition() <= -39) {
+    if (
+        leftActuatorEncoder.getPosition() <= -30) {
       // We are going down and bottom limit is tripped so stop
 
       intakeLeftActuator.set(Constants.k_stopMotor);
@@ -164,7 +168,8 @@ public class IntakeSubsystem extends SubsystemBase {
       // We are going down but bottom limit is not tripped so go at commanded speed
       intakeLeftActuator.set(-speed);
     }
-    armPosition();
+  
+   
   }
 
   public static boolean getLeftTriggerActive() {
@@ -175,6 +180,16 @@ public class IntakeSubsystem extends SubsystemBase {
     return (RobotContainer.m_driverXbox.getRightTriggerAxis() > 0);
   }
 
+
+  public double rightActuatorPosition(){
+    return rightActuatorEncoder.getPosition();
+  }
+
+  public double leftActuatorPosition(){
+    return leftActuatorEncoder.getPosition();
+  }
+
+  
   /*
    * function
    * getlimitswitch
@@ -186,7 +201,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public boolean isDown() {
     return bottomlimitSwitch.get() ? true : false;
   }
-  // TODO: Create a function that moves the aucuator 90 degrees to drop intake
+  // TODO: Craate a function that moves the aucuator 90 degrees to drop intake
   // system
   public boolean isUp() {
     return toplimitSwitch.get() ? true : false;

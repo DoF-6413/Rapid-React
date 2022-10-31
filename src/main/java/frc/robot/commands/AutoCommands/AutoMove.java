@@ -19,7 +19,6 @@ public class AutoMove extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ActuatorDown(intake),
       new MoveCommand(drive, -7, false)
     );
   }

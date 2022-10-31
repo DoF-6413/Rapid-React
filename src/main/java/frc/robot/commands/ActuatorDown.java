@@ -12,7 +12,6 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class ActuatorDown extends CommandBase {
   /** Creates a new ActuatorDown. */
-  boolean down;
 
   private final IntakeSubsystem m_intakeSubsystem;
 
@@ -44,6 +43,6 @@ public class ActuatorDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_intakeSubsystem.isDown() == true;
+    return m_intakeSubsystem.leftActuatorPosition() <= -28;
   }
 }

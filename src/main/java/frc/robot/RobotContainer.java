@@ -148,7 +148,7 @@ public class RobotContainer {
             .whenReleased(new RunCommand(() -> m_intakeSubsystem.stopActuators(), m_intakeSubsystem));
         
         // Left Bumper (L1) = Not Used
-        new JoystickButton(m_auxXbox, XboxController.Button.kLeftBumper.value)
+        new JoystickButton(m_auxXbox, XboxController.Button.kBack.value)
         .whenPressed(
             new RunCommand(() -> m_climberSubsystem.runStingerMotor(),
             m_climberSubsystem))
