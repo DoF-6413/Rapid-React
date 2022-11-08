@@ -115,7 +115,7 @@ public final class Constants {
         //Drivetrain Start Position
         public static final double k_drivetrainStart = 0;
         //Drivetrain 3 Ball First Turn Angle
-        public static final double k_firstTurnAuto = 98;
+        public static final double k_firstTurnAuto = 96;
         //Drivetrain 3 Ball First Turn Angle
         public static final double k_secondTurnAuto = -67;
         //Drivetrain 3 ball auto distance
@@ -149,8 +149,8 @@ public final class Constants {
             final public static double circOfWheelToWheel = wheelToWheel/12 /2 * 2 * Math.PI;
 
         //Limelight Min and Max Sweet Spot Values
-        public static final double k_limelightYMax = 11;
-        public static final double k_limelightYMin = 7;
+        public static final double k_limelightYMax = 17;
+        public static final double k_limelightYMin = 13;
 
         public static final double k_limelightXMax = 3;
         public static final double k_limelightXMin = -3;

@@ -29,9 +29,9 @@ public class ThreeBallAuto extends SequentialCommandGroup {
     addCommands(
       new WAutoHighIntake(drive, shoot, Index, intake),
       new TurnAuto(drive, gyro, Constants.k_firstTurnAuto),
-      new MoveCommand(drive, Constants.k_moveThreeBall, false),
+      parallel (new MoveCommand(drive, Constants.k_moveThreeBall, false), new PickupCommmand(intake)),
       new PickupCommmand(intake),
-      new TurnAuto(drive, gyro, Constants.k_secondTurnAuto),
+      parallel (new TurnAuto(drive, gyro, Constants.k_secondTurnAuto), new PickupCommmand(intake)),
       new LLAimAndShoot(light, Index, shoot, drive)
     );
   }
