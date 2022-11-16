@@ -5,21 +5,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoPush extends SequentialCommandGroup {
-  /** Creates a new AutoMove. */
-  public AutoPush(DrivetrainSubsystem drive, IntakeSubsystem intake) {
+public class ToggleLimelight extends SequentialCommandGroup {
+  /** Creates a new ToggleLimelight. */
+  public ToggleLimelight(LimelightSubsystem light) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ActuatorDown(intake),
-      parallel(new MoveCommand(drive, -7, false),
-      new PushAway(intake))
+      
+     new InstantCommand(() -> light.toggleLED())
     );
   }
 }

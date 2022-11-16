@@ -10,13 +10,13 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 
 
-public class ActuatorDown extends CommandBase {
+public class ActuatorUp extends CommandBase {
   /** Creates a new ActuatorDown. */
-  boolean down;
+  boolean up;
 
   private final IntakeSubsystem m_intakeSubsystem;
 
-  public ActuatorDown(IntakeSubsystem intake) {
+  public ActuatorUp(IntakeSubsystem intake) {
     m_intakeSubsystem = intake;
     addRequirements(m_intakeSubsystem);// Use addRequirements() here to declare subsystem dependencies.
  
@@ -31,7 +31,7 @@ public class ActuatorDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intakeSubsystem.setAllActuatorsDown(Constants.actuatorsSpeed);
+    m_intakeSubsystem.setAllActuatorsUp(Constants.actuatorsSpeed);
     
   }
   
@@ -44,6 +44,6 @@ public class ActuatorDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_intakeSubsystem.isDown() == true;
+    return m_intakeSubsystem.isUp() == true;
   }
 }

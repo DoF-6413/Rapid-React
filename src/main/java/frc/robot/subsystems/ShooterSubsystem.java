@@ -13,13 +13,13 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 public class ShooterSubsystem extends PIDSubsystem {
-  private TalonFX leftShooterMotor = new TalonFX(Constants.shooterID[0]); // creates a new TalonFX with ID 0
+  private TalonFX leftShooterMotor = new TalonFX(Constants.shooterID[1]); // creates a new TalonFX with ID 0
   private double m_setpoint = 2000;
-  private TalonFX rightShooterMotor = new TalonFX(Constants.shooterID[1]);
+  private TalonFX rightShooterMotor = new TalonFX(Constants.shooterID[0]);
 
   public ShooterSubsystem() {
     super(new PIDController(Constants.kP, Constants.kI, Constants.kD));
-    getController().setTolerance(50);
+    getController().setTolerance(Constants.k_shooterTolerance);
 
     // SmartDashboard.putNumber("setpoint", m_setpoint);
     rightShooterMotor.setInverted(true);

@@ -9,19 +9,25 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+/** Runs Shooter for 4 Seconds at Low Hub RPM
+ * Note: Assumed to run parralel with IndexerTeleop Command
+ */
 public class ShootLow extends SequentialCommandGroup {
   /** Creates a new Shoot. */
+  private ShooterSubsystem m_Shooter;
   public ShootLow(ShooterSubsystem shoot) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    m_Shooter = shoot;
     addCommands( 
-      new InstantCommand( () -> shoot.setSetpoint(2000)),
+      new InstantCommand( () -> shoot.setSetpoint(Constants.lowerHubSpeed)),
       new InstantCommand(() -> shoot.enable()),
       new WaitCommand(Constants.twoAndHalfSeconds),
       new InstantCommand(() -> shoot.disable())
       ); 
+  }
+  @Override
+  public void end(boolean interrupted) {
+    m_Shooter.disable();
   }
 }
