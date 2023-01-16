@@ -4,7 +4,8 @@
 ## How to Access Code
 First Open Git Bash
 
-- Type in eval "$(ssh-agent -s)" && ssh-add ~/.ssh/[name]_key
+- Type in 
+	- >  eval "$(ssh-agent -s)" && ssh-add ~/.ssh/[name]_key
 - CD Into your Repo
 	- Open File Explorer
 	- Open Folder you are trying to Access
@@ -57,3 +58,26 @@ chore-[name]:
 - Branch Name is all Lowercase
 - Make Chore Branches off of the Dev Branch
 - Mainly used by mentor or lead
+
+## Useful Git Bash Commands
+- git add .
+	- stages all code to prepare for commit and push
+- git commit -m "[Insert Message Here]" 
+	- Saves code locally with a msg of what was done to the code
+- git push
+	- Pushes Code to the Cloud
+- git fetch
+	- tells laptop their are new changes
+- git pull
+	- puts new changes on laptop 
+	- git pull does git fetch
+- git pull origin Dev
+	- pulls changes from Dev
+- git checkout [branch name]
+	- Changes your branch
+- git checkout -b [branchname]
+	- Creates new branch off of current branch
+- git branch
+	- Shows all branches that have been pulled on laptop
+- git branch --all
+	- Shows all branches since last fetch
